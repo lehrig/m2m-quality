@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleRDBMS:RdbmsSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SimpleRDBMS="http://m2m.upb.de/SimpleRDBMS/1.0" xsi:schemaLocation="http://m2m.upb.de/SimpleRDBMS/1.0 ../../metamodel/UML2RDBMS/SimpleRDBMS.ecore" rdbmsName="myPackage" id="_mIxA0N-iEeGFFoAXnGSdrQ">
+  <rdbmsTable rdbmsName="Library" id="_mIyO8N-iEeGFFoAXnGSdrQ">
+    <rdbmsColumn rdbmsName="Library_tid" id="_mIzdEN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsKey="_mIxA0d-iEeGFFoAXnGSdrQ"/>
+    <rdbmsColumn rdbmsName="Library_LibraryToMedium_Medium_tid" id="_mI_DQN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsForeignKey="_mI-cMN-iEeGFFoAXnGSdrQ"/>
+    <rdbmsForeignKey rdbmsName="Library_LibraryToMedium_Medium" id="_mI-cMN-iEeGFFoAXnGSdrQ" rdbmsRefersTo="_mI0EIN-iEeGFFoAXnGSdrQ" rdbmsColumn="_mI_DQN-iEeGFFoAXnGSdrQ"/>
+    <rdbmsKey rdbmsName="Library_pk" id="_mIxA0d-iEeGFFoAXnGSdrQ" rdbmsColumn="_mIzdEN-iEeGFFoAXnGSdrQ"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Medium" id="_mI0rMN-iEeGFFoAXnGSdrQ">
+    <rdbmsColumn rdbmsName="Medium_author_name" id="_mI3HcN-iEeGFFoAXnGSdrQ" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Medium_tid" id="_mI48oN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsKey="_mI0EIN-iEeGFFoAXnGSdrQ"/>
+    <rdbmsKey rdbmsName="Medium_pk" id="_mI0EIN-iEeGFFoAXnGSdrQ" rdbmsColumn="_mI48oN-iEeGFFoAXnGSdrQ" rdbmsRefersToOpposite="_mI-cMN-iEeGFFoAXnGSdrQ"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="DVD" id="_mJEi0N-iEeGFFoAXnGSdrQ">
+    <rdbmsColumn rdbmsName="DVD_author_name" id="_mJJbUN-iEeGFFoAXnGSdrQ" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="DVD_tid" id="_mJPh8N-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsKey="_mJDUsN-iEeGFFoAXnGSdrQ"/>
+    <rdbmsKey rdbmsName="DVD_pk" id="_mJDUsN-iEeGFFoAXnGSdrQ" rdbmsColumn="_mJPh8N-iEeGFFoAXnGSdrQ"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Book" id="_mJcWQN-iEeGFFoAXnGSdrQ">
+    <rdbmsColumn rdbmsName="Book_numberOfPages" id="_mJdkYN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER"/>
+    <rdbmsColumn rdbmsName="Book_author_name" id="_mJvRMN-iEeGFFoAXnGSdrQ" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Book_tid" id="_mJ0JsN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsKey="_mJQJAN-iEeGFFoAXnGSdrQ"/>
+    <rdbmsKey rdbmsName="Book_pk" id="_mJQJAN-iEeGFFoAXnGSdrQ" rdbmsColumn="_mJ0JsN-iEeGFFoAXnGSdrQ"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Author" id="_mJ1-4N-iEeGFFoAXnGSdrQ">
+    <rdbmsColumn rdbmsName="Author_name" id="_mJ3NAN-iEeGFFoAXnGSdrQ" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Author_tid" id="_mJ4bIN-iEeGFFoAXnGSdrQ" rdbmsType="NUMBER" rdbmsKey="_mJ1X0N-iEeGFFoAXnGSdrQ"/>
+    <rdbmsKey rdbmsName="Author_pk" id="_mJ1X0N-iEeGFFoAXnGSdrQ" rdbmsColumn="_mJ4bIN-iEeGFFoAXnGSdrQ"/>
+  </rdbmsTable>
+</SimpleRDBMS:RdbmsSchema>

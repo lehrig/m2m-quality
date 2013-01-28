@@ -1,0 +1,128 @@
+transformation Uml2Rdb(in uml:UML,out rdbms:RDBMS);
+
+modeltype UML uses SimpleUML('http://m2m.upb.de/SimpleUML/1.0');
+modeltype RDBMS uses SimpleRDBMS('http://m2m.upb.de/SimpleRDBMS/1.0');
+
+-- defining intermediate data to reference leaf attributes that may
+-- appear when struct data types are used
+intermediate class LeafAttribute {
+	name:String; 
+	kind:String; 
+	attr:UML::UmlAttribute;
+}; 
+intermediate property UML::UmlClass::leafAttributes : Sequence(LeafAttribute);
+
+-- defining specific helpers
+
+query UML::UmlAssociation::isPersistent() : Boolean {
+	return (self.umlSource.umlKind='Persistent' and self.umlDestination.umlKind='Persistent');
+}
+
+-- defining the default entry point for the module 
+-- first the tables are created from classes, then the tables are 
+-- updated with the foreign keys implied by the associations
+
+main() {
+	uml.objects()[UmlPackage]->map packageToSchema();
+}
+
+-- maps a package to a schema
+mapping UmlPackage::packageToSchema() : RdbmsSchema 
+	when {not self.umlName.startsWith("_")}
+{
+	rdbmsName := self.umlName; 
+	rdbmsTable := self.umlOwnedElement[UmlClass]->map class2table(); -- first pass
+	rdbmsTable += self.umlOwnedElement[UmlAssociation]->map asso2table(); -- second pass
+}
+
+-- maps a class to a table, with a column per flattened leaf attribute
+mapping UmlClass::class2table () : RdbmsTable
+	when {self.umlKind='Persistent';}
+{
+	init { -- performs any needed intialization
+		self.leafAttributes := self.umlAttribute
+			->map attr2LeafAttrs("","").flatten(); // ->flatten();
+	} -- population section for the table
+	rdbmsName := self.umlName;
+	rdbmsColumn := self.map class2Columns(self.umlName+"_");
+	rdbmsColumn += object RdbmsColumn {
+			rdbmsName := self.umlName+"_tid";
+			rdbmsType := 'NUMBER';
+			rdbmsKey := object RdbmsKey {
+					rdbmsName := self.umlName+"_pk";
+					rdbmsOwner := result;
+				}
+		};
+} 
+
+-- Mapping that creates the intermediate leaf attributes data.
+mapping UmlAttribute::attr2LeafAttrs (in prefix:String,in pkind:String) 
+: Sequence(LeafAttribute) {
+	init { 
+		var k := if pkind="" then self.umlKind else pkind endif; 
+		result :=
+			if self.umlType.oclIsKindOf(UmlPrimitiveDataType) 
+			then -- creates a sequence with a LeafAttribute instance
+				Sequence { 
+					object LeafAttribute {attr:=self;name:=prefix+self.umlName;kind:=k;}
+				} 
+			else self.umlType.oclAsType(UmlClass).umlAttribute
+				->map attr2LeafAttrs(self.umlName+"_",k).flatten()
+			endif;
+	}
+}
+
+-- Mapping that recursively creates columns corresponding to 
+-- (1) class attributes and (2) inherited class attributes
+mapping UmlClass::class2Columns (in prefix:String): OrderedSet(RdbmsColumn) { 
+	init{
+		var selfColumns : OrderedSet(RdbmsColumn) := 
+			self.leafAttributes.map leafAttr2OrdinaryColumn(prefix)
+			->flatten()->asOrderedSet();
+			
+		var superColumns : OrderedSet(RdbmsColumn) := 
+			self.umlGeneral.map class2Columns(prefix)
+			->flatten()->asOrderedSet();
+			
+		result := selfColumns->union(superColumns)->asOrderedSet();
+	}
+}
+
+-- Mapping that creates an ordinary column from a leaf attribute
+mapping LeafAttribute::leafAttr2OrdinaryColumn (in prefix:String): RdbmsColumn { 
+	rdbmsName := prefix+self.name; 
+	rdbmsKind := self.kind; 
+	rdbmsType := primitiveTypeToSqlType(self.attr.umlType.umlName);
+}
+
+-- Query to map from UML primitive Types to SQL Types
+query primitiveTypeToSqlType (typename : String) : String {
+	return if typename = 'INTEGER' then
+		    'NUMBER'
+		  else
+		    if typename = 'BOOLEAN' then
+		      'BOOLEAN'
+		    else
+		      'VARCHAR'
+		    endif
+		  endif
+}
+
+-- mapping to update a Table with new columns of foreign keys
+mapping UmlAssociation::asso2table() : RdbmsTable
+	when {self.isPersistent();}
+{
+	init {result := self.umlSource.resolveone(RdbmsTable);}
+	rdbmsForeignKey := self.map asso2ForeignKey(); 
+	rdbmsColumn += object RdbmsColumn {
+			rdbmsName := self.umlSource.umlName + '_' + self.umlName + '_' + self.umlDestination.umlName+"_tid";
+			rdbmsType := 'NUMBER';
+			rdbmsForeignKey := result.rdbmsForeignKey;
+		};
+}
+
+-- mapping to build the foreign keys
+mapping UmlAssociation::asso2ForeignKey() : RdbmsForeignKey { 
+	rdbmsName := self.umlSource.umlName + '_' + self.umlName + '_' + self.umlDestination.umlName; 
+	rdbmsRefersTo := self.umlDestination.resolveone(RdbmsTable).rdbmsKey->any(true); 
+}

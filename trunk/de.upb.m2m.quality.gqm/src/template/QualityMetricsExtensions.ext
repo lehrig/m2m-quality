@@ -1,0 +1,13 @@
+import QualityMetrics;
+
+Integer getValue(String name, Metrics metrics) :
+	let vals = metrics.SimpleMetrics.select(m|m.Metric == name):
+		if vals.size == 0 then -999999999
+		else vals.first().Value
+;
+
+Real getAverage(String name, Metrics metrics) :
+	let vals = metrics.AggregatedIntegerMetrics.select(m|m.Metric == name):
+		if vals.size == 0 then -999999999.0
+		else vals.first().Average
+;

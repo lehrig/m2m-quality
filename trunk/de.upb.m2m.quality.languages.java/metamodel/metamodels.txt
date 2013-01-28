@@ -1,0 +1,4 @@
+Source of the metamodels:
+- java.ecore : org.eclipse.gmt.modisco.java
+- QualityMetrics.ecore : http://www.win.tue.nl/~mamstel/ATL/ATL_Metrics_Tool.zip
+						( http://www.win.tue.nl/~mamstel/experiments.html )

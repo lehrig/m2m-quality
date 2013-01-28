@@ -1,0 +1,54 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a refinement that transforms each square to a 
+ * block which contains a circle.
+ * 
+ * Implementation time: 10 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule4" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule4(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every square and replace 
+	 * it by a block containing a circle.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var squares = copy[RootBlock].allSubobjectsOfKind(Square);
+		squares[Square]
+			->forEach(square) {
+				new Block(square);
+				target.removeElement(square);
+			}
+	}
+	
+	/**
+	 * Constructor for creating a new block by using information from a given
+	 * square. It also nests a generated circle into its model elements.
+	 * @param square The square to be used as a template
+	 */
+	constructor Block::Block(square : Square) {
+		name := square.name;
+		block := square.block;
+		inArrow := square.inArrow;
+		outArrow := square.outArrow;
+		modelElement := Set{new Circle(result)};
+	}
+	
+	/**
+	 * Constructor for creating a new circle which is nested into the given
+	 * block.
+	 * @param block The block to which the circle is nested to
+	 */
+	constructor Circle::Circle(block : Block) {
+		name := "generated circle";
+		result.block := block;
+	}
+}

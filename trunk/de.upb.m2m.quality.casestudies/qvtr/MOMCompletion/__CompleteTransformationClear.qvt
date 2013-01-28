@@ -1,0 +1,1363 @@
+/***** TODO
+* Middleware anhand von ID - Assembly + AllocationContext erstellen?
+* Internal States
+* Marshalling + DeMarshalling
+END: TODO *****/
+
+
+transformation PCM_Completion (source : pcm, target : pcm, annotation : MessagingAnnotation) {
+
+	/************************************************************************/
+	/*Queries for simple functionality not contained in standard - ocl / qvt*/
+	/************************************************************************/
+			
+	/* Check if a String ends with a given Substring */
+	query stringEndsWith(string : String, sub:String) : Boolean {
+		let start : Integer = string.size() - sub.size() + 1 in
+            start > 0 and string.substring(start, string.size()) = sub
+	}		
+
+	/* Query zum Bauen eines Strings aus einer Zahl (z.B. für Consumer Pool)
+	query toString(zahl : Integer) : String { 
+        OrderedSet{1000000, 10000, 1000, 100, 10, 1}->iterate(
+            denominator : Integer;
+            s : String = ''|
+            let numberAsString : String = OrderedSet{
+                    '0','1','2','3','4','5','6','7','8','9'
+                }->at(zahl.div(denominator).mod(10) + 1) -- leider Buggy (div. wird nicht als Schlüsselwort erkannt)
+            in
+                if s='' and numberAsString = '0' then
+                    s
+                else
+                    s.concat(numberAsString)
+                endif
+        )
+    }
+	*/
+
+	/*******************************************************************/
+	/*Queries used to express dependencies or to find required elements*/
+	/*******************************************************************/
+
+	/* check if a given AssemblyConnector form the source-model is annotated by comparing ids */
+	query isAnnotated (assemblyConnector : pcm::core::composition::AssemblyConnector) : Boolean {
+		MessagingAnnotation::AnnotatedAssemblyConnector.allInstances()
+			->exists(annotation | annotation.id = assemblyConnector.id)
+	} 
+	
+	query isPrimitiveDataType (datatype : pcm::repository::DataType) : Boolean {
+		pcm::repository::Repository.allInstances()->exists(rep | rep.id = '_Ls3VgHv_Edub45jJKtm_Dg' and
+																rep.datatypes_Repository->includes(datatype))
+	}
+	/* Return String as Datatype from PrimitiveTypesRepository */
+	query getDataTypeString() : pcm::repository::PrimitiveDataType {
+		pcm::repository::PrimitiveDataType.allInstances()->any(pdt | pdt.type = pcm::repository::PrimitiveTypeEnum::STRING)
+	}
+	
+	/* Find required interface for a given AssemblyConnector ( in source model ) */
+	query findInterfaceFromAssemblyConnector ( assemblyConnector : pcm::core::composition::AssemblyConnector ) : pcm::repository::Interface {
+		assemblyConnector.providedRole_AssemblyConnector.providedInterface__ProvidedRole
+	}
+	
+	/* Return Middleware Repository with ID: _wEVuUBSSEd6TVOU2cbWPnQ */
+	query getMiddlewareRepository() : pcm::repository::Repository {
+		pcm::repository::Repository.allInstances()->any(rep | rep.id = '_wEVuUBSSEd6TVOU2cbWPnQ')
+	}
+	
+	/* Return Middleware Components specified by given string */
+	query getMiddlewareComponent(name : String): pcm::repository::BasicComponent {
+		if name = 'sender' then pcm::repository::BasicComponent.allInstances()
+									->any(comp | comp.id = '_CCzfABSTEd6TVOU2cbWPnQ')
+			else if name = 'messagingSystem' then pcm::repository::BasicComponent.allInstances()
+									->any(comp | comp.id = '_CXeugBSTEd6TVOU2cbWPnQ')
+				else if name = 'receiver' then pcm::repository::BasicComponent.allInstances()
+									->any(comp | comp.id = '_CqqwQBSTEd6TVOU2cbWPnQ')
+				else pcm::repository::BasicComponent.allInstances()->any(false)
+				endif 
+			endif 
+		endif
+	}
+	
+	/* Return Middleware Interfaces specified by given string */
+	query getMiddlewareInterface(name : String): pcm::repository::Interface {
+		if name = 'imarshalling' then pcm::repository::Interface.allInstances()
+									->any(interf | interf.id = '_Mh6iMBSTEd6TVOU2cbWPnQ')
+			else if name = 'senderInterface' then pcm::repository::Interface.allInstances()
+									->any(interf | interf.id = '_NhAAoBSTEd6TVOU2cbWPnQ')
+				else if name = 'imom' then pcm::repository::Interface.allInstances()
+									->any(interf | interf.id = '_Oj8rYBSTEd6TVOU2cbWPnQ')
+					else if name = 'ireceiver' then pcm::repository::Interface.allInstances()
+									->any(interf | interf.id = '_PmS5MBSTEd6TVOU2cbWPnQ')
+					else pcm::repository::Interface.allInstances()->any(false)
+					endif 
+				endif 
+			endif
+		endif
+	}
+	
+	/* Return MiddlewareSignature for a given Interface and an AnnotationElement */
+	query getMiddlewareSignature(interface : pcm::repository::Interface, 
+									annotation : MessagingAnnotation::AnnotatedAssemblyConnector) : pcm::repository::Signature {
+		interface.signatures__Interface->any(sig | 
+				stringEndsWith(sig.serviceName, annotation.channel + annotation.durableSubscriber + annotation.deliveryType))
+	}
+
+	/* Return Middleware ProvidedRoles specified by given string*/
+	query getMiddlewareProvidedRoles(name : String) : pcm::repository::ProvidedRole {
+		if name = 'senderIMarshalling' then pcm::repository::ProvidedRole.allInstances()->any(provRole | provRole.id = '_lfZ6gBSTEd6TVOU2cbWPnQ')
+			else if name = 'senderISender' then pcm::repository::ProvidedRole.allInstances()->any(provRole | provRole.id = '_ReWJsChMEd6HXYtQkXMjhQ')
+				else if name = 'messagingSystemIMom' then pcm::repository::ProvidedRole.allInstances()->any(provRole | provRole.id = '_Nqig4ChMEd6HXYtQkXMjhQ')
+					else if name = 'receiverIReceiver' then pcm::repository::ProvidedRole.allInstances()->any(provRole | provRole.id = '_PwNz8ChMEd6HXYtQkXMjhQ')
+						else if name = 'receiverIMarshalling' then pcm::repository::ProvidedRole.allInstances()->any(provRole | provRole.id = '_PwNz8ChMEd6HXYtQkXMjhQ')
+						else pcm::repository::ProvidedRole.allInstances()->any(false)
+						endif
+					endif
+				endif
+			endif
+		endif
+	}
+	
+	/* Return Assembly Context for given MiddlewareComponent */
+	query getMiddlewareAssemblyContext(component : String) : pcm::core::composition::AssemblyContext {
+		if component = 'sender' then pcm::core::composition::AssemblyContext.allInstances()
+									->any(ac | ac.id = '_-60LsFgwEd6ylssW214-FA')
+			else if component = 'messagingSystem' then pcm::core::composition::AssemblyContext.allInstances()
+									->any(ac | ac.id = '_Anfv8FgxEd6ylssW214-FA')
+				else if component = 'receiver' then pcm::core::composition::AssemblyContext.allInstances()
+									->any(ac | ac.id = '_BUZ5QFgxEd6ylssW214-FA')
+				else pcm::core::composition::AssemblyContext.allInstances()->any(false)
+				endif 
+			endif 
+		endif
+	}	
+
+	/* Return ResourceContainer the Middleware is deployed on */
+	query getMiddlewareResourceContainer() : pcm::resourceenvironment::ResourceContainer {
+		pcm::resourceenvironment::ResourceContainer.allInstances()->any(rc | rc.id = '_B_yOAVgwEd6ylssW214-FA')
+	}
+	
+	/* Return ResourceContainer for the sender copmonent of a given AssemblyConnector */
+	query getSenderResourceContainer(annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector) :
+																	 pcm::resourceenvironment::ResourceContainer {
+		pcm::resourceenvironment::ResourceContainer.allInstances()->any(rc | 
+			pcm::allocation::AllocationContext.allInstances()->exists(allocationContext | 
+				allocationContext.resourceContainer_AllocationContext = rc and 
+				annotatedAssemblyConnector.requiringAssemblyContext_AssemblyConnector = allocationContext.assemblyContext_AllocationContext))
+	}
+	
+	/* Return ResourceContainer for the receiver copmonent of a given AssemblyConnector */
+	query getReceiverResourceContainer(annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector) :
+																		 pcm::resourceenvironment::ResourceContainer {
+		pcm::resourceenvironment::ResourceContainer.allInstances()->any(rc | 
+			pcm::allocation::AllocationContext.allInstances()->exists(allocationContext | 
+				allocationContext.resourceContainer_AllocationContext = rc and 
+				annotatedAssemblyConnector.providingAssemblyContext_AssemblyConnector = allocationContext.assemblyContext_AllocationContext))
+	}
+	
+	
+	
+	/************************************************************************************/
+	/*Queries needed to calculate message size depending on called signatures parameters*/
+	/************************************************************************************/
+			
+
+	/* Select "in" parameters of a signature */
+	query p_in(sig : pcm::repository::Signature) : OrderedSet(pcm::repository::Parameter) {
+		sig.parameters__Signature->select(p|
+			p.modifier__Parameter <> pcm::repository::ParameterModifier::out)
+	}
+	
+	/* Select a Signatures "out" parameters */
+	query p_out(sig : pcm::repository::Signature) : OrderedSet(pcm::repository::Parameter) {
+		sig.parameters__Signature->select(p|
+			p.modifier__Parameter = pcm::repository::ParameterModifier::inout or
+			p.modifier__Parameter = pcm::repository::ParameterModifier::out)
+	}
+
+	query counter(t:pcm::repository::PrimitiveDataType, t2:pcm::repository::DataType, prefix:String,
+			 stringcheck :pcm::repository::PrimitiveDataType ) : String {
+		if t2.oclIsTypeOf(pcm::repository::PrimitiveDataType) then
+			counterPrimitive(t,t2.oclAsType(pcm::repository::PrimitiveDataType),prefix, stringcheck)
+		else if t2.oclIsTypeOf(pcm::repository::CollectionDataType) then
+				counterCollection(t, t2.oclAsType(pcm::repository::CollectionDataType), prefix, stringcheck)
+			else if t2.oclIsTypeOf(pcm::repository::CompositeDataType) then 
+					counterComposition(t, t2.oclAsType(pcm::repository::CompositeDataType), prefix, stringcheck)
+				else 'noType'
+				endif
+			endif
+		endif
+			
+	}
+
+	/* Check if single datatypes are equal to each other */
+	query counterPrimitive(t1:pcm::repository::PrimitiveDataType, t2:pcm::repository::PrimitiveDataType, prefix:String, 
+			stringcheck : pcm::repository::PrimitiveDataType) : String { -- Veränderung 1
+		if t1 = t2 then '1' else '0' endif -- return "1" if equal
+	}
+
+	/* Check datatype for a collection (multiple elements of one datatype) */
+	query counterCollection(t1:pcm::repository::PrimitiveDataType, t2:pcm::repository::CollectionDataType,
+			prefix:String, stringcheck : pcm::repository::PrimitiveDataType) : String {
+		if t1 = stringcheck then -- treat Strings as special case
+			'(' + prefix + '.NUMBER_OF_ELEMENTS * ' + prefix + '.INNER.BYTESIZE * ' +  
+			counter(t1,t2.innerType_CollectionDataType, prefix+'.INNER', stringcheck) -- ... equal datatypes
+			+ ')' 
+		else '(' + prefix + '.NUMBER_OF_ELEMENTS * '  -- return "x" for x Elements and... 
+		    + counter(t1,t2.innerType_CollectionDataType, prefix+'.INNER', stringcheck) -- ... equal datatypes
+			+ ')'
+		endif 
+	--	else '0' 
+		--endif
+	}
+
+	/* Check for a collection of elements with (possibly) different datatypes */
+	query counterComposition(t:pcm::repository::PrimitiveDataType, t2:pcm::repository::CompositeDataType,
+			prefix:String, stringcheck : pcm::repository::PrimitiveDataType) : String {
+		t2.innerDeclaration_CompositeDataType ->iterate(innerDT; result = '0'|  
+			--if t = innerDT.datatype_InnerDeclaration  then -- if a collection of needed datatype is contained...
+				result + '+'  
+				+ counter(t,innerDT.datatype_InnerDeclaration,prefix+'.'+innerDT.entityName,stringcheck) -- ... return number of equal datatypes
+			--else result
+			)--endif)
+	}
+	
+	query number(sig:pcm::repository::Signature, direction:pcm::repository::ParameterModifier, t:pcm::repository::PrimitiveDataType,
+			stringcheck : pcm::repository::PrimitiveDataType) : String{  
+		if direction = pcm::repository::ParameterModifier::none then -- HIER NUR MODIFIZIERT, DA "in" ATM NICHT AKZEPTIERT WIRD
+			p_in(sig)->iterate(p; result = '0'|
+				result + '+' + counter(t,p.datatype__Parameter, p.parameterName, stringcheck))
+			
+		else 
+			p_out(sig)->iterate(p; result = '0'|
+			result + '+' + counter(t,p.datatype__Parameter,p.parameterName,stringcheck)) +
+			if sig.returntype__Signature.oclIsUndefined() then			
+				-- Treat the return type as special OUT parameter
+				counter(t,sig.returntype__Signature,'RETURN', stringcheck)
+			else ''
+			endif
+		endif
+	}
+		
+	
+	/**********************************************************************/
+	/******************* Create Elements for Completion *******************/
+	/**********************************************************************/
+	
+	/*** Create IFoo' using original IFoo ***/
+	top relation CreateMarshalledIFoo {
+		iFooEntityName : ecore::EString;
+		
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};		
+		
+		checkonly domain source originalIFoo : pcm::repository::Interface{
+			entityName = iFooEntityName,
+			signatures__Interface = originalIFooSignature : pcm::repository::Signature{
+			}
+		};
+		enforce domain target marshalledIFoo : pcm::repository::Interface{
+			entityName = 'Marshalled' + iFooEntityName,
+			signatures__Interface = marshalledIFooSignature : pcm::repository::Signature{
+			}
+		};
+		
+		checkonly domain target IFoo : pcm::repository::Interface{ -- needed to ensure a second copy will be created
+		};
+		when {
+			isAnnotated(annotatedAssemblyConnector);
+			originalIFoo = findInterfaceFromAssemblyConnector(annotatedAssemblyConnector);--MarkOriginalIFoo(annotatedAssemblyConnector, OriginalIFoo);
+			Mark_repository_Interface(originalIFoo, IFoo);--MarkIFoo(annotatedAssemblyConnector, IFoo);
+		}
+		where {
+			MarkMarshalledIFoo(annotatedAssemblyConnector, marshalledIFoo);
+			CopyIFooSignature(annotatedAssemblyConnector, originalIFooSignature, marshalledIFooSignature);
+		}
+	}
+	
+	relation CopyIFooSignature {
+		signatureName : ecore::EString;
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};
+
+		checkonly domain source originalIFooSignature : pcm::repository::Signature{
+				serviceName = signatureName,
+				parameters__Signature = originalIFooSignatureParameter : pcm::repository::Parameter{
+				}
+		};
+		enforce domain target marshalledIFooSignature : pcm::repository::Signature{
+				serviceName = signatureName,
+				parameters__Signature = marshalledIFooSignatureParameter : pcm::repository::Parameter{
+				}
+		};
+		where {
+			CopyIFooSignatureParameter(annotatedAssemblyConnector, originalIFooSignatureParameter, marshalledIFooSignatureParameter);
+			CopyIFooSignatureParameterPrimitiveDatatype(annotatedAssemblyConnector, originalIFooSignatureParameter, marshalledIFooSignatureParameter);
+			CompleteMarshalledIFooSignature(annotatedAssemblyConnector, marshalledIFooSignature); -- add parameter "stream" to each Signature of IFoo'
+		}
+	}
+	
+	/* Copy the original interfaces datatype */
+	relation CopyIFooSignatureParameter {
+		ParameterName  :  ecore::EString;
+
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};
+
+		checkonly domain source sourceParameter : pcm::repository::Parameter{
+			parameterName = ParameterName,
+			datatype__Parameter = sourceDatatype : pcm::repository::DataType{
+			}	
+		};
+		enforce domain target targetParameter : pcm::repository::Parameter{
+			parameterName = ParameterName,
+			datatype__Parameter = copiedDatatype : pcm::repository::DataType{
+			}	
+		};
+		when {
+			Mark_repository_DataType(sourceDatatype, copiedDatatype);
+		}
+	}
+	
+	/* If parameters datatype is a PrimitiveDatatype it needs a special treatment because the PrimitiveDatatypeRepository is not copied */
+	relation CopyIFooSignatureParameterPrimitiveDatatype {
+		parameter_Name  :  ecore::EString;
+
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};
+
+		checkonly domain source sourceParameter : pcm::repository::Parameter{
+			parameterName = parameter_Name,
+			datatype__Parameter = datatype : pcm::repository::PrimitiveDataType{
+			}	
+		};
+		enforce domain target targetParameter : pcm::repository::Parameter{
+			parameterName = parameter_Name,
+			-- Refere to PrimitiveDatatypes given in PrimitiveTypesRepository and used in originial interface 
+			datatype__Parameter = datatype : pcm::repository::PrimitiveDataType{
+			}	
+		};
+	}
+	
+	relation CompleteMarshalledIFooSignature {
+	
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};
+		enforce domain target marshalledIFooSignature : pcm::repository::Signature{
+			parameters__Signature = marhsalledIFooSignatureStreamParameter : pcm::repository::Parameter{
+				parameterName = 'stream',
+				datatype__Parameter = parameterPrimitiveDataType : pcm::repository::PrimitiveDataType {
+				}
+			}
+		};
+		when {
+			parameterPrimitiveDataType = getDataTypeString();
+		}
+	}
+	
+	relation MarkMarshalledIFoo {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		};
+		checkonly domain target marshalledIFoo : pcm::repository::Interface{
+		};
+	}
+	
+
+	/*** consumerPool Interface ***/
+	top relation CreateConsumerPoolInterface {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		}; 
+		enforce domain target consumerPoolInterface : pcm::repository::Interface{
+			entityName = 'consumerPoolInterface',
+			signatures__Interface = getConsumer : pcm::repository::Signature{
+				serviceName='getConsumer'
+			},
+			signatures__Interface = returnConsumer : pcm::repository::Signature{
+				serviceName='returnConsumer'
+			}
+		};	
+		when {
+			isAnnotated(annotatedAssemblyConnector);
+		}
+		where {
+			MarkConsumerPoolSignatures(annotatedAssemblyConnector, getConsumer, returnConsumer);
+		}
+	}
+	
+	relation MarkConsumerPoolSignatures {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{};
+		checkonly domain target consumerPoolInterfaceGetConsumer : pcm::repository::Signature{};
+		checkonly domain target consumerPoolInterfaceReturnConsumer : pcm::repository::Signature{};
+	}
+	
+
+	/*** Adapter Components ***/
+	top relation CreateAdapterComponents {  
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		}; 
+
+		enforce domain target marshalling : pcm::repository::BasicComponent{ -- marshalling Component
+			entityName = 'Marshalling',
+			providedRoles_InterfaceProvidingEntity = marshallingProvidedIFoo : pcm::repository::ProvidedRole {
+				entityName = 'Provided_IFoo_Marshalling',
+				providedInterface__ProvidedRole = IFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = marshallingRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+				entityName = 'Required_MarshalledIFoo_Marshalling',
+				requiredInterface__RequiredRole = marshalledIFoo : pcm::repository::Interface{}
+			},
+			requiredRoles_InterfaceRequiringEntity = marshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+				entityName = 'Required_IMarshalling_Marshalling',
+				requiredInterface__RequiredRole = marshallingInterface : pcm::repository::Interface{}
+			}
+		};
+		enforce domain target senderAdapter : pcm::repository::BasicComponent { -- sender Adapter Component
+			entityName = 'SenderAdapter',
+			providedRoles_InterfaceProvidingEntity = senderAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole {
+				entityName = 'Provided_MarshalledIFoo_SenderAdapter',
+				providedInterface__ProvidedRole = marshalledIFoo : pcm::repository::Interface{}
+			},
+			requiredRoles_InterfaceRequiringEntity = senderAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+				entityName = 'Required_MarshalledIFoo_SenderAdapter',
+				requiredInterface__RequiredRole = marshalledIFoo : pcm::repository::Interface{}
+			},
+			requiredRoles_InterfaceRequiringEntity = senderAdapterRequiredISender : pcm::repository::RequiredRole{
+				entityName = 'Required_ISender_SenderAdapter',
+				requiredInterface__RequiredRole = senderInterface : pcm::repository::Interface{}
+			}
+		};
+		enforce domain target momAdapter : pcm::repository::BasicComponent{ -- Messageoriented Middleware Component
+			entityName = 'MOMAdapter',
+			providedRoles_InterfaceProvidingEntity = momAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole {
+				entityName = 'Provided_MarshalledIFoo_MOMAdapter',
+				providedInterface__ProvidedRole = marshalledIFoo : pcm::repository::Interface {
+				}
+			},
+			requiredRoles_InterfaceRequiringEntity = momAdapterRequiredMarshalledIFoo  : pcm::repository::RequiredRole {
+				entityName = 'Required_MarshalledIFoo_MOMAdapter',
+				requiredInterface__RequiredRole = marshalledIFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = momAdapterRequiredIMom : pcm::repository::RequiredRole {
+				entityName = 'Required_IMom_MOMAdapter',
+				requiredInterface__RequiredRole = momInterface : pcm::repository::Interface {}
+			}
+		};
+		enforce domain target receiverAdapter : pcm::repository::BasicComponent { -- receiver Adapter Component
+			entityName = 'ReceiverAdapter',
+			providedRoles_InterfaceProvidingEntity = receiverAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole {
+				entityName = 'Provided_MarshalledIFoo_ReceiverAdapter',
+				providedInterface__ProvidedRole = marshalledIFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = receiverAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+				entityName = 'Required_MarshalledIFoo_ReceiverAdapter',
+				requiredInterface__RequiredRole = marshalledIFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = receiverAdapterRequiredIReceiver : pcm::repository::RequiredRole{
+				entityName = 'Required_IReceiver_ReceiverAdapter',
+				requiredInterface__RequiredRole = receiverInterface : pcm::repository::Interface{}
+			},
+			requiredRoles_InterfaceRequiringEntity = receiverAdapterRequiredIConsumerPool : pcm::repository::RequiredRole{
+				entityName = 'Required_IConsumerPool_ReceiverAdapter',
+				requiredInterface__RequiredRole = consumerPoolInterface : pcm::repository::Interface{}
+			}
+			
+		};
+		enforce domain target deMarshalling : pcm::repository::BasicComponent{ -- marshalling Component
+			entityName = 'DeMarshalling',
+			providedRoles_InterfaceProvidingEntity = deMarshallingProvidedMarshalledIFoo : pcm::repository::ProvidedRole {
+				entityName = 'Provided_MarshalledIFoo_DeMarshalling',
+				providedInterface__ProvidedRole = marshalledIFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = deMarshallingRequiredIFoo : pcm::repository::RequiredRole {
+				entityName = 'Required_IFoo_DeMarshalling',
+				requiredInterface__RequiredRole = IFoo : pcm::repository::Interface {}
+			},
+			requiredRoles_InterfaceRequiringEntity = deMarshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+				entityName = 'Required_IMarshalling_DeMarshalling',
+				requiredInterface__RequiredRole = marshallingInterface : pcm::repository::Interface{}
+			}
+		};
+		enforce domain target consumerPool : pcm::repository::BasicComponent{ -- consumerPool
+			entityName = 'ConsumerPool',
+			providedRoles_InterfaceProvidingEntity = consumerPoolProvidedIConsumerPool : pcm::repository::ProvidedRole {
+				entityName = 'Provided_IConsumerPool_ConsumerPool',
+				providedInterface__ProvidedRole = consumerPoolInterface : pcm::repository::Interface {}
+			},
+			passiveResource_BasicComponent = pool : pcm::repository::PassiveResource {
+				entityName = 'ConsumerPoolPool',
+				capacity_PassiveResource = kapazitaet : pcm::core::PCMRandomVariable {
+					specification = '1'
+				}
+			}
+		};
+		when { -- First the interfaces need to be created
+			isAnnotated(annotatedAssemblyConnector);
+			Mark_repository_Interface(findInterfaceFromAssemblyConnector(annotatedAssemblyConnector), IFoo);--MarkIFoo(annotatedAssemblyConnector, IFoo);
+			MarkMarshalledIFoo(annotatedAssemblyConnector, marshalledIFoo);
+			
+			Mark_repository_Interface(getMiddlewareInterface('imarshalling'), marshallingInterface);
+			Mark_repository_Interface(getMiddlewareInterface('senderInterface'), senderInterface);
+			Mark_repository_Interface(getMiddlewareInterface('imom'), momInterface);
+			Mark_repository_Interface(getMiddlewareInterface('ireceiver'), receiverInterface);
+			
+			CreateConsumerPoolInterface(annotatedAssemblyConnector, consumerPoolInterface);		
+		}
+		where { -- Mark created components
+			MarkAdapterProvidedRoles(annotatedAssemblyConnector, marshallingProvidedIFoo, senderAdapterProvidedMarshalledIFoo, 
+					momAdapterProvidedMarshalledIFoo, receiverAdapterProvidedMarshalledIFoo, deMarshallingProvidedMarshalledIFoo, 
+						consumerPoolProvidedIConsumerPool);
+			MarkAdapterRequiredRoles(annotatedAssemblyConnector, marshallingRequiredIMarshalling, marshallingRequiredMarshalledIFoo,
+					senderAdapterRequiredISender, senderAdapterRequiredMarshalledIFoo,
+						momAdapterRequiredIMom, momAdapterRequiredMarshalledIFoo,
+							 receiverAdapterRequiredIReceiver, receiverAdapterRequiredIConsumerPool,
+							 	 receiverAdapterRequiredMarshalledIFoo, deMarshallingRequiredIMarshalling, 
+							 	 	deMarshallingRequiredIFoo);
+			MarkConsumerPool(annotatedAssemblyConnector, consumerPool);
+			MarkConsumerPoolPool(annotatedAssemblyConnector, pool);
+		}	
+	}
+	
+	relation MarkAdapterRequiredRoles {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		}; 
+
+		checkonly domain target marshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+		};
+		checkonly domain target marshallingRequiredMarshalledIFoo : pcm::repository::RequiredRole{
+		};
+		checkonly domain target senderAdapterRequiredISender : pcm::repository::RequiredRole{
+		};
+		checkonly domain target senderAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{
+		};
+		checkonly domain target momAdapterRequiredIMom : pcm::repository::RequiredRole{
+		};
+		checkonly domain target momAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{
+		};
+		checkonly domain target receiverAdapterRequiredIReceiver : pcm::repository::RequiredRole{
+		};
+		checkonly domain target receiverAdapterRequiredIConsumerPool : pcm::repository::RequiredRole{
+		};
+		checkonly domain target receiverAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{
+		};
+		checkonly domain target deMarshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+		};
+		checkonly domain target deMarshallingRequiredIFoo : pcm::repository::RequiredRole{
+		};
+	}
+	
+	relation MarkAdapterProvidedRoles {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+		}; 
+
+		checkonly domain target marshallingProvidedIFoo : pcm::repository::ProvidedRole{
+		};
+		checkonly domain target senderAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{
+		};
+		checkonly domain target momAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{
+		};
+		checkonly domain target receiverAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{
+		};
+		checkonly domain target deMarshallingProvidedMarshalledIFoo : pcm::repository::ProvidedRole{
+		};
+		checkonly domain target consumerPoolProvidedIConsumerPool : pcm::repository::ProvidedRole{
+		};
+	}
+	
+	relation MarkConsumerPool {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{
+		};
+		
+		checkonly domain target consumerPool : pcm::repository::BasicComponent {
+		};
+	}
+	
+	relation MarkConsumerPoolPool {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{
+		};
+		
+		checkonly domain target consumerPoolPool : pcm::repository::PassiveResource {
+		};
+	}
+		
+	/*** Create SEFFs for AdapterComponents ***/
+	top relation CreateAdapterSEFFs{
+		annotatedAssemblyConnectorID : ecore::EString; --ID specified in the annotaion		
+	
+		
+		checkonly domain source ptr : pcm::repository::Repository { -- PrimitiveTypesRepository
+			id = '_Ls3VgHv_Edub45jJKtm_Dg',
+			datatypes_Repository = pdtINT:pcm::repository::PrimitiveDataType {
+				type = pcm::repository::PrimitiveTypeEnum::INT
+			},
+			datatypes_Repository = pdtSTRING:pcm::repository::PrimitiveDataType {
+				type = pcm::repository::PrimitiveTypeEnum::STRING
+			}
+		};
+		checkonly domain target consumerPool : pcm::repository::BasicComponent{
+		};
+		
+		checkonly domain target marshallingRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+		};
+		checkonly domain target marshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+		};
+		checkonly domain target deMarshallingRequiredIMarshalling : pcm::repository::RequiredRole{
+		};
+		checkonly domain target deMarshallingRequiredIFoo : pcm::repository::RequiredRole {
+		};
+	
+		checkonly domain annotation annotationElement : MessagingAnnotation::AnnotatedAssemblyConnector {
+			id = annotatedAssemblyConnectorID
+		};
+		
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+			id = annotatedAssemblyConnectorID
+		};
+
+		checkonly domain source sourceRepository : pcm::repository::Repository{
+			interfaces__Repository = originalIFoo : pcm::repository::Interface{
+				signatures__Interface = originalIFooSignature : pcm::repository::Signature{
+				}
+			}
+		};
+		checkonly domain target marshalledIFoo : pcm::repository::Interface{
+			signatures__Interface = marshalledIFooService : pcm::repository::Signature{
+			}
+		};
+
+		---- COMPONENTS WITH SEFFs ----
+		enforce domain target marshalling : pcm::repository::BasicComponent{
+			
+			
+			serviceEffectSpecifications__BasicComponent = marshallingSEFF : pcm::seff::ResourceDemandingSEFF{
+				
+				describedService__SEFF = originalIFooSignature : pcm::repository::Signature{},
+				
+				steps_Behaviour = marshallingStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = callIMarshalling : pcm::seff::ExternalCallAction{}
+				},
+				
+				/* Call Middleware */
+				steps_Behaviour = callIMarshalling : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = marshallingStartAction,							
+					successor_AbstractAction = marshallingStopAction : pcm::seff::StopAction{},
+					-- Called Signature (uses marker relation)				
+					calledService_ExternalService = senderInterfacePreparePublishing : pcm::repository::Signature {  
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = marshallingRequiredIMarshalling : pcm::repository::RequiredRole {
+					},
+					-- Variable Usage
+					inputParameterUsages_ExternalCallAction = iMarshallingVariableUsage : pcm::parameter::VariableUsage{
+						variableCharacterisation_VariableUsage = iMarshallingVariableCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = iMarshallingStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = '4*(' + number(originalIFooSignature, -- Int
+								 								pcm::repository::ParameterModifier::none, 
+								 								pdtINT, 
+								 								pdtSTRING )  +
+								 								 ') + '+
+								 				 '8*(' + number(originalIFooSignature, -- "String"
+								 								pcm::repository::ParameterModifier::none, 
+								 								pdtSTRING,
+								 								pdtSTRING
+								 						) /*hier*/ +')'
+							}
+						},
+						namedReference_VariableUsage = iMarshallingVariableReference : stoex::VariableReference {
+							referenceName = 'message'
+						}
+					}
+				},
+				steps_Behaviour = marshallingStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = callIMarshalling					
+				}
+			}
+		
+		};
+		enforce domain target senderAdapter : pcm::repository::BasicComponent{
+			
+			serviceEffectSpecifications__BasicComponent = senderAdaptermarshalledIFooServiceDescribingSEFF : pcm::seff::ResourceDemandingSEFF{
+				describedService__SEFF = originalIFooSignature : pcm::repository::Signature{},
+				steps_Behaviour = senderAdapterStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = callISenderPreparePublishing : pcm::seff::ExternalCallAction{
+					}
+				},
+				steps_Behaviour = callISenderPreparePublishing : pcm::seff::ExternalCallAction{
+					entityName = 'senderInterfacePreparePublishing',
+					predecessor_AbstractAction = senderAdapterStartAction,							
+					successor_AbstractAction = asynchronousSimulation : pcm::seff::ForkAction{},
+					-- Called Signature (uses marker relation)				
+					calledService_ExternalService = senderInterfacePreparePublishing : pcm::repository::Signature{ 
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = senderAdapterRequiredISender : pcm::repository::RequiredRole{
+					},
+					-- Variable Usage
+					inputParameterUsages_ExternalCallAction = iSenderPreparePublishingVariableUsage : pcm::parameter::VariableUsage{
+						namedReference_VariableUsage = iSenderPreparePublishingVariableReference : stoex::VariableReference {
+							referenceName = 'message'
+						},
+						variableCharacterisation_VariableUsage = iSenderPreparePublishingVariableCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = iSenderPreparePublishingStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = 'stream.BYTESIZE'
+							}
+						}
+					}
+				},
+				steps_Behaviour = asynchronousSimulation : pcm::seff::ForkAction{	
+					predecessor_AbstractAction = callISenderPreparePublishing,							
+					successor_AbstractAction = senderAdapterStopAction : pcm::seff::StopAction{},
+					-- Asynchronous external call action
+					asynchronousForkedBehaviours_ForkAction = callIMarshalledIFoo : pcm::seff::ForkedBehaviour{
+						steps_Behaviour = forkStartAction : pcm::seff::StartAction{
+							successor_AbstractAction = senderAdapterCallmarshalledIFooService : pcm::seff::ExternalCallAction{}
+						},
+						steps_Behaviour = senderAdapterCallmarshalledIFooService : pcm::seff::ExternalCallAction{
+							entityName = 'marshalledIFooService',
+							predecessor_AbstractAction = forkStartAction,							
+							successor_AbstractAction = forkStopAction : pcm::seff::StopAction{},
+							-- Service Call
+							calledService_ExternalService = marshalledIFooService,
+							-- Calling Required Role (uses marker relation)
+							role_ExternalService = senderAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+							},
+							-- Variable Usage stream.BYTESIZE = stream.BYTESITE
+							inputParameterUsages_ExternalCallAction = iSenderAdaptermarshalledIFooServiceStreamVariableUsage : pcm::parameter::VariableUsage{
+								variableCharacterisation_VariableUsage = iSenderAdaptermarshalledIFooServiceStreamVariableUsageCharacterisation : pcm::parameter::VariableCharacterisation{
+									type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+									specification_VariableCharacterisation = iSenderAdaptermarshalledIFooServiceStreamVariableUsageStreamBYTESIZE : pcm::core::PCMRandomVariable{
+										specification = 'stream.BYTESIZE'
+									}
+								},
+								namedReference_VariableUsage = iSenderAdaptermarshalledIFooServiceStreamVariableUsageVariableReference : stoex::VariableReference {
+									referenceName = 'stream'
+								}
+							}
+						},
+						steps_Behaviour = forkStopAction : pcm::seff::StopAction{
+							predecessor_AbstractAction = senderAdapterCallmarshalledIFooService
+						}
+					}
+				},
+				steps_Behaviour = senderAdapterStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = asynchronousSimulation
+				}
+			}
+		};
+		enforce domain target momAdapter : pcm::repository::BasicComponent{
+			serviceEffectSpecifications__BasicComponent = momAdapterSEFF : pcm::seff::ResourceDemandingSEFF{
+				describedService__SEFF = marshalledIFooService : pcm::repository::Signature{},
+				
+				steps_Behaviour = momAdapterStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = callIMOMProcessMessageTransfer : pcm::seff::ExternalCallAction{}
+				},
+				steps_Behaviour = callIMOMProcessMessageTransfer : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = momAdapterStartAction,							
+					successor_AbstractAction = messagingSystemCallmarshalledIFooService : pcm::seff::ExternalCallAction{},
+					-- Called Signature (uses marker relation)				
+					calledService_ExternalService = iMomProcessMessageTransfer : pcm::repository::Signature { 
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = momAdapterRequiredIMom : pcm::repository::RequiredRole {
+					},
+					-- Variable Usage
+					inputParameterUsages_ExternalCallAction = iMomProcessMessageTransferVariableUsage : pcm::parameter::VariableUsage{
+						variableCharacterisation_VariableUsage = iMomProcessMessageTransferVariableCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = iMomProcessMessageTransferStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = 'stream.BYTESIZE'
+							}
+						},
+						namedReference_VariableUsage = iMomProcessMessageTransferVariableReference : stoex::VariableReference {
+							referenceName = 'message'
+						}
+					}
+				},
+				steps_Behaviour = messagingSystemCallmarshalledIFooService : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = callIMOMProcessMessageTransfer,							
+					successor_AbstractAction = iMOMAdapterStopAction : pcm::seff::StopAction{},
+					-- Called Signature (uses marker relation)
+					calledService_ExternalService = marshalledIFooService,
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = momAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+					},
+					-- Variable Usage stream.BYTESIZE = stream.BYTESITE
+					inputParameterUsages_ExternalCallAction = iMomMarshalledIFooServiceStreamVariableUsage : pcm::parameter::VariableUsage{
+						variableCharacterisation_VariableUsage = iMomMarshalledIFooServiceStreamVariableUsageCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = iMomMarshalledIFooServiceStreamVariableUsageStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = 'stream.BYTESIZE'
+							}
+						},
+						namedReference_VariableUsage = iMomMarshalledIFooServiceStreamVariableUsageVariableReference : stoex::VariableReference {
+							referenceName = 'stream'
+						}
+					}
+				},
+				steps_Behaviour = iMOMAdapterStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = messagingSystemCallmarshalledIFooService						
+				}
+			}
+		
+		};
+		enforce domain target receiverAdapter : pcm::repository::BasicComponent{
+			serviceEffectSpecifications__BasicComponent = receiverAdapterSEFF : pcm::seff::ResourceDemandingSEFF{
+				--Described service
+				describedService__SEFF = marshalledIFooService : pcm::repository::Signature{},
+				-- Action Steps
+				steps_Behaviour = receiverAdapterStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = callIReceiverFinishPublishing : pcm::seff::ExternalCallAction{}
+				},
+				steps_Behaviour = callIReceiverFinishPublishing : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = receiverAdapterStartAction,							
+					successor_AbstractAction = callIConsumerPoolGetConsumer : pcm::seff::ExternalCallAction{},
+					-- Service Call (uses marker relation)
+					calledService_ExternalService = iReceiverFinishPublishing : pcm::repository::Signature{ 
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = receiverAdapterRequiredIReceiver : pcm::repository::RequiredRole {
+					},
+					-- Variable Usage
+					inputParameterUsages_ExternalCallAction = iReceiverFinishPublishingVariableUsage : pcm::parameter::VariableUsage{
+						variableCharacterisation_VariableUsage = finishPublishingVariableCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = finishPublishingStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = 'stream.BYTESIZE'
+							}
+						},
+						namedReference_VariableUsage = iReceiverFinishingVariableReference : stoex::VariableReference {
+							referenceName = 'message'
+						}
+					}
+				},
+				steps_Behaviour = callIConsumerPoolGetConsumer : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = callIReceiverFinishPublishing,							
+					successor_AbstractAction = receiverAdapterCallmarshalledIFooService : pcm::seff::ExternalCallAction{},
+					--Service Call (uses marker relation)
+					calledService_ExternalService = consumerPoolInterfaceGetConsumer : pcm::repository::Signature{ 
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = receiverAdapterRequiredIConsumerPool : pcm::repository::RequiredRole {
+					}
+				},
+				steps_Behaviour = receiverAdapterCallmarshalledIFooService : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = callIConsumerPoolGetConsumer,							
+					successor_AbstractAction = callIConsumerPoolReturnCustomer : pcm::seff::ExternalCallAction{},
+					-- Service Call
+					calledService_ExternalService = marshalledIFooService,
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = receiverAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole {
+					},					
+					-- Variable Usage stream.BYTESIZE = stream.BYTESITE
+					inputParameterUsages_ExternalCallAction = iReceiverAdaptermarshalledIFooServiceStreamVariableUsage : pcm::parameter::VariableUsage{
+						variableCharacterisation_VariableUsage = iReceiverAdaptermarshalledIFooServiceStreamVariableUsageCharacterisation : pcm::parameter::VariableCharacterisation{
+							type = pcm::parameter::VariableCharacterisationType::BYTESIZE,
+							specification_VariableCharacterisation = iReceiverAdaptermarshalledIFooServiceStreamVariableUsageStreamBYTESIZE : pcm::core::PCMRandomVariable{
+								specification = 'stream.BYTESIZE'
+							}
+						},
+						namedReference_VariableUsage = iReceiverAdaptermarshalledIFooServiceStreamVariableUsageVariableReference : stoex::VariableReference {
+							referenceName = 'stream'
+						}
+					}
+				},
+				steps_Behaviour = callIConsumerPoolReturnCustomer : pcm::seff::ExternalCallAction{
+					predecessor_AbstractAction = receiverAdapterCallmarshalledIFooService,							
+					successor_AbstractAction = receiverAdapterStopAction : pcm::seff::StopAction{},
+					--Service Call (uses marker relation)
+					calledService_ExternalService = consumerPoolInterfaceReturnConsumer : pcm::repository::Signature{ 
+					},
+					-- Calling Required Role (uses marker relation)
+					role_ExternalService = receiverAdapterRequiredIConsumerPool : pcm::repository::RequiredRole {
+					}
+					
+				},
+				steps_Behaviour = receiverAdapterStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = callIConsumerPoolReturnCustomer
+				}
+			}
+		};
+		checkonly domain target deMarshalling : pcm::repository::BasicComponent{
+		};
+		
+		when {
+		  MarkAdapterRequiredRoles(annotatedAssemblyConnector, marshallingRequiredIMarshalling, marshallingRequiredMarshalledIFoo,
+					senderAdapterRequiredISender, senderAdapterRequiredMarshalledIFoo,
+						momAdapterRequiredIMom, momAdapterRequiredMarshalledIFoo,
+							 receiverAdapterRequiredIReceiver, receiverAdapterRequiredIConsumerPool, receiverAdapterRequiredMarshalledIFoo,
+							 	deMarshallingRequiredIMarshalling, deMarshallingRequiredIFoo);
+		-- Used Signatures
+		Mark_repository_Signature(getMiddlewareSignature(getMiddlewareInterface('senderInterface'), annotationElement),senderInterfacePreparePublishing );
+		Mark_repository_Signature(getMiddlewareSignature(getMiddlewareInterface('imom'), annotationElement),iMomProcessMessageTransfer );
+		Mark_repository_Signature(getMiddlewareSignature(getMiddlewareInterface('ireceiver'), annotationElement),iReceiverFinishPublishing );
+		
+		
+		MarkConsumerPoolSignatures(annotatedAssemblyConnector, consumerPoolInterfaceGetConsumer, consumerPoolInterfaceReturnConsumer);
+
+		isAnnotated(annotatedAssemblyConnector);
+		CopyIFooSignature(annotatedAssemblyConnector, originalIFooSignature, marshalledIFooService);
+		MarkMarshalledIFoo(annotatedAssemblyConnector, marshalledIFoo);
+
+		CreateAdapterComponents(annotatedAssemblyConnector, marshalling, senderAdapter, momAdapter, receiverAdapter, deMarshalling, consumerPool);
+		}
+	}
+	
+	top relation CreateConsumerPoolSEFF {
+		idd : ecore::EString;
+		
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{
+		id = idd
+		};
+		checkonly domain annotation annotationElement : MessagingAnnotation::AnnotatedAssemblyConnector {
+		id = idd
+		};
+	
+		enforce domain target consumerPool : pcm::repository::BasicComponent{
+		
+		
+			serviceEffectSpecifications__BasicComponent = consumerPoolGetConsumerSEFF :pcm::seff::ResourceDemandingSEFF {
+			
+				describedService__SEFF = consumerPoolInterfaceGetConsumer : pcm::repository::Signature {},
+				steps_Behaviour = getConsumerStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = acquireConsumer : pcm::seff::AcquireAction{}
+				},
+				steps_Behaviour = acquireConsumer : pcm::seff::AcquireAction {
+					predecessor_AbstractAction = getConsumerStartAction : pcm::seff::StartAction{},
+					successor_AbstractAction = getConsumerStopAction : pcm::seff::StopAction{},
+					passiveresource_AcquireAction = consumer : pcm::repository::PassiveResource {}
+				},
+				steps_Behaviour = getConsumerStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = acquireConsumer : pcm::seff::AcquireAction{}
+				}				
+			},	
+			serviceEffectSpecifications__BasicComponent = consumerPoolReturnConsumerSEFF :pcm::seff::ResourceDemandingSEFF {
+				describedService__SEFF = consumerPoolInterfaceReturnConsumer : pcm::repository::Signature {},
+				steps_Behaviour = returnConsumerStartAction : pcm::seff::StartAction{
+					successor_AbstractAction = releaseConsumer : pcm::seff::ReleaseAction{}
+				},
+				steps_Behaviour = releaseConsumer : pcm::seff::ReleaseAction {
+					predecessor_AbstractAction = returnConsumerStartAction : pcm::seff::StartAction{},
+					successor_AbstractAction = returnConsumerStopAction : pcm::seff::StopAction{},
+					passiveResource_ReleaseAction = consumer : pcm::repository::PassiveResource {}
+				},
+				steps_Behaviour = returnConsumerStopAction : pcm::seff::StopAction{
+					predecessor_AbstractAction = releaseConsumer : pcm::seff::ReleaseAction{}
+				}				
+			}			
+		};
+		when {
+			MarkConsumerPool(annotatedAssemblyConnector, consumerPool);
+			MarkConsumerPoolPool(annotatedAssemblyConnector, consumer);
+			MarkConsumerPoolSignatures(annotatedAssemblyConnector, consumerPoolInterfaceGetConsumer, consumerPoolInterfaceReturnConsumer);
+			--Mark_repository_Signature(getMiddlewareSignature(getMiddlewareInterface('senderInterface'),annotationElement), consumerPoolInterfaceGetConsumer);
+		}
+	
+	}
+	
+	
+	/*** Create repository for completion ***/
+	top relation CreateCompletionRepository { 
+		annotatedAssemblyConnectorName : ecore::EString;
+		
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+			entityName = annotatedAssemblyConnectorName
+		};
+	
+		enforce domain target targetRepository : pcm::repository::Repository {
+			entityName = 'messagingCompletionAdapterRepository____' + annotatedAssemblyConnectorName,
+			-- Adapter Components 
+			components__Repository = marshalling : pcm::repository::BasicComponent{},
+			components__Repository = senderAdapter : pcm::repository::BasicComponent{},
+			components__Repository = momAdapter : pcm::repository::BasicComponent{},
+			components__Repository = receiverAdapter : pcm::repository::BasicComponent{},
+			components__Repository = deMarshalling : pcm::repository::BasicComponent{},
+			components__Repository = consumerPool : pcm::repository::BasicComponent{},
+			
+			-- Adapter Interfaces
+			interfaces__Repository = marshalledIFoo : pcm::repository::Interface{},
+			interfaces__Repository = consumerPoolInterface : pcm::repository::Interface{}
+		};
+		
+		
+		when {
+			isAnnotated(annotatedAssemblyConnector);
+			CreateAdapterComponents(annotatedAssemblyConnector, marshalling, senderAdapter, -- will be created
+				momAdapter, receiverAdapter, deMarshalling, consumerPool);
+			CreateConsumerPoolInterface(annotatedAssemblyConnector, consumerPoolInterface);
+			MarkMarshalledIFoo(annotatedAssemblyConnector, marshalledIFoo); -- will be created using the original IFoo
+		}
+	}
+
+
+
+
+	/*** ! Once ! create the special repository for CompletionComponents ***/
+	top relation CreateCompletionComponentRepository {
+		checkonly domain source sourceSystem : pcm::system::System{
+		};
+	
+		enforce domain target completionComponentRepository : completions::CompletionRepository{
+		};
+		where {
+			MarkCompletionComponentRepository ( completionComponentRepository ) ;
+		}
+	}
+
+	relation MarkCompletionComponentRepository {
+		checkonly domain target completionComponentRepository : completions::CompletionRepository{
+		};
+	}	
+	
+	
+/*** Complete the  CompletionRepository by adding a CopmletionComponent ***/
+	top relation CompleteCompletionComponentRepository {
+		annotatedAssemblyConnectorName : ecore::EString;
+		
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+			entityName = annotatedAssemblyConnectorName
+		};
+	
+		enforce domain target completionComponentRepository : completions::CompletionRepository {
+			-- CompletionComponent 
+			completions_CompletionRepository = completionComponent : completions::Completion{
+				entityName = 'CompletionComponent___' + annotatedAssemblyConnectorName,
+				
+			
+				-- Adapter Assembly Contexts
+				assemblyContexts_ComposedStructure = marshallingAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+				assemblyContexts_ComposedStructure = senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+				assemblyContexts_ComposedStructure = momAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+				assemblyContexts_ComposedStructure = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+				assemblyContexts_ComposedStructure = deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+				assemblyContexts_ComposedStructure = consumerPoolAssemblyContext : pcm::core::composition::AssemblyContext{
+				},
+			
+				--Assembly Connectors
+				assemblyConnectors_ComposedStructure = senderToMarshalling : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = marshalligToSenderAdapter : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = senderAdapterToMOMAdapter : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = momAdapterToReceiverAdapter : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = receiverAdapterToDeMarshalling : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = receiverAdapterToConsumerPool : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = deMarshallingToReceiver : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = marshallingToSenderMiddleware : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = senderAdapterToSenderMiddleware : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = momAdapterToMessagingSystem : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = receiverAdapterToReceiverMiddleware : pcm::core::composition::AssemblyConnector{},
+				assemblyConnectors_ComposedStructure = deMarshallingToReceiverMiddleware : pcm::core::composition::AssemblyConnector{}					
+			}
+		};
+		when {
+			isAnnotated(annotatedAssemblyConnector);
+			MarkCompletionComponentRepository( completionComponentRepository );
+			-- Assembly Connectors
+			CreateAssemblyConnectors(annotatedAssemblyConnector, senderToMarshalling, marshalligToSenderAdapter, 
+				senderAdapterToMOMAdapter,	momAdapterToReceiverAdapter, receiverAdapterToDeMarshalling, deMarshallingToReceiver,
+				 marshallingToSenderMiddleware, senderAdapterToSenderMiddleware, momAdapterToMessagingSystem,
+				  receiverAdapterToReceiverMiddleware, deMarshallingToReceiverMiddleware, receiverAdapterToConsumerPool);		
+			
+			CreateAdapterAssemblyContexts(annotatedAssemblyConnector, marshallingAssemblyContext, senderAdapterAssemblyContext, momAdapterAssemblyContext, 
+				receiverAdapterAssemblyContext, deMarshallingAssemblyContext, consumerPoolAssemblyContext); 
+		}
+	}
+	
+	/*** Create AssemblyConnectors ***/	
+	top relation CreateAssemblyConnectors { 
+		annotatedAssemblyConnectorName : ecore::EString;
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{
+			entityName = annotatedAssemblyConnectorName,
+			providedRole_AssemblyConnector = receiverProvidedRole : pcm::repository::ProvidedRole{
+			},
+			providingAssemblyContext_AssemblyConnector = receiverAssemblyContext : pcm::core::composition::AssemblyContext{
+			},
+			requiredRole_AssemblyConnector = senderRequiredRole : pcm::repository::RequiredRole{
+			}, 
+			requiringAssemblyContext_AssemblyConnector = senderAssemblyContext : pcm::core::composition::AssemblyContext{
+			}		
+		};
+		enforce domain target senderToMarshalling : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_Sender <Sender> -> Assembly_Marshalling <Marshalling>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = copiedSenderAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = marshallingAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = copiedSenderRequiredIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = marshallingProvidedIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target marshallingToSenderAdapter : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_Marshalling <Marshalling> -> Assembly_SenderAdapter <SenderAdapter>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = marshallingAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = marshallingRequiredMarshalledIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = senderAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target senderAdapterToMOMAdapter : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_SenderAdapter <SenderAdapter> -> Assembly_MOMAdapter <MOMAdapter>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = momAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = senderAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = momAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target momAdapterToReceiverAdapter : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_MOMAdapter <MOMAdapter> -> Assembly_ReceiverAdapter <RecevierAdapter>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = momAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = momAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = receiverAdapterProvidedMarshalledIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target receiverAdapterToDeMarshalling : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_ReceiverAdapter <ReceiverAdapter> -> Assembly_DeMarshalling <DeMarshalling>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = receiverAdapterRequiredMarshalledIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = deMarshallingProvidedMarshalledIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target deMarshallingToReceiver : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_DeMarshalling <DeMarshalling> -> Assembly_Receiver <Receiver>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = copiedReceiverAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = deMarshallingRequiredIFoo : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = copiedReceiverProvidedIFoo : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target marshallingToSenderMiddleware : pcm::core::composition::AssemblyConnector{
+			entityName='Connector AssemblyMarshalling <Marshalling> -> Assembly_SenderMiddleware <SenderMiddleware>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = marshallingAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = senderMiddlewareAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = marshallingRequiredIMarshalling : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = senderMiddlewareProvidedIMarshalling : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target senderAdapterToSenderMiddleware : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_SenderAdapter <SenderAdapter> -> Assembly_SenderMiddleware <SenderMiddleware>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = senderMiddlewareAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = senderAdapterRequiredISender : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = senderMiddlewareProvidedISender : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target momAdapterToMessagingSystem : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_MOMAdapter <MOMAdapter> -> Assembly_MessagingSystem <MessagingSystem>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = momAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = messagingSystemAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = momAdapterRequiredIMom : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = MessagingSystemProvidedIMom : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target receiverAdapterToReceiverMiddleware : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_RevceiverAdapter <ReceiverAdapter> -> Assembly_ReceiverMiddleware <ReceiverMiddleware>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = receiverMiddlewareAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = receiverAdapterRequiredIReceiver : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = receiverMiddlewareProvidedIReceiver : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target deMarshallingToReceiverMiddleware : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_DeMarshalling <DeMarshalling> -> Assembly_ReceiverMiddleware <ReceiverMiddleware>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = receiverMiddlewareAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = deMarshallingRequiredIMarshalling : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = receiverMiddlewareProvidedIMarshalling : pcm::repository::ProvidedRole{}
+		};
+		enforce domain target receiverAdapterToConsumerPool : pcm::core::composition::AssemblyConnector{
+			entityName='Connector Assembly_RevceiverAdapter <ReceiverAdapter> -> Assembly_ConsumerPool <ConsumerPool>____' + annotatedAssemblyConnectorName,
+			requiringAssemblyContext_AssemblyConnector = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{},		
+			providingAssemblyContext_AssemblyConnector = consumerPoolAssemblyContext : pcm::core::composition::AssemblyContext{},
+			requiredRole_AssemblyConnector = receiverAdapterRequiredIConsumerPool : pcm::repository::RequiredRole{}, 
+			providedRole_AssemblyConnector = consumerPoolProvidedIConsumerPool : pcm::repository::ProvidedRole{}
+		};
+		when{ 
+			isAnnotated(annotatedAssemblyConnector);
+			-- Create links to roles
+			MarkAdapterProvidedRoles(annotatedAssemblyConnector, marshallingProvidedIFoo, senderAdapterProvidedMarshalledIFoo, 
+					momAdapterProvidedMarshalledIFoo, receiverAdapterProvidedMarshalledIFoo, deMarshallingProvidedMarshalledIFoo, 
+						consumerPoolProvidedIConsumerPool);
+			MarkAdapterRequiredRoles(annotatedAssemblyConnector, marshallingRequiredIMarshalling, marshallingRequiredMarshalledIFoo,
+					senderAdapterRequiredISender, senderAdapterRequiredMarshalledIFoo,
+						momAdapterRequiredIMom, momAdapterRequiredMarshalledIFoo,
+							 receiverAdapterRequiredIReceiver, receiverAdapterRequiredIConsumerPool, receiverAdapterRequiredMarshalledIFoo,
+							 	deMarshallingRequiredIMarshalling, deMarshallingRequiredIFoo);
+			
+		}
+	}	
+
+	top relation CreateAdapterAssemblyContexts {
+		annotatedAssemblyConnectorName : ecore::EString;
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+			entityName = annotatedAssemblyConnectorName -- attach name to AssemblyContexts to support finding bugs
+		}; 
+
+		enforce domain target marshallingAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_Marshalling____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = marshalling : pcm::repository::BasicComponent{}
+		};
+		enforce domain target senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_SenderAdapter____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = senderAdapter : pcm::repository::BasicComponent{}
+		};
+		enforce domain target momAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_MOMAdapter____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = momAdapter : pcm::repository::BasicComponent{}
+		};
+		enforce domain target receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_ReceiverAdapter____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = receiverAdapter : pcm::repository::BasicComponent{}
+		};
+		enforce domain target deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_DeMarshalling____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = deMarshalling : pcm::repository::BasicComponent{}
+		};
+		enforce domain target consumerPoolAssemblyContext : pcm::core::composition::AssemblyContext{
+			entityName = 'Assembly_ConsumerPool____' + annotatedAssemblyConnectorName,
+			encapsulatedComponent_AssemblyContext = consumerPool : pcm::repository::BasicComponent{}
+		};
+		
+		when {
+			isAnnotated(annotatedAssemblyConnector);
+			CreateAdapterComponents(annotatedAssemblyConnector, marshalling, senderAdapter, momAdapter, receiverAdapter, deMarshalling, consumerPool);
+		}
+	}
+	
+		/** Complete the Allocation-Element **/
+	top relation CompleteAllocation {
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector{
+		};
+		
+		checkonly domain source originalAllocation : pcm::allocation::Allocation {
+		};
+		
+		enforce domain target copiedAllocation : pcm::allocation::Allocation {
+			allocationContexts_Allocation = marshallingAllocationContext : pcm::allocation::AllocationContext {},
+			allocationContexts_Allocation = senderAdapterAllocationContext : pcm::allocation::AllocationContext {},
+			allocationContexts_Allocation = momAdapterAllocationContext : pcm::allocation::AllocationContext {},
+			allocationContexts_Allocation = receiverAdapterAllocationContext : pcm::allocation::AllocationContext {},
+			allocationContexts_Allocation = deMarshallingAllocationContext : pcm::allocation::AllocationContext {},
+			allocationContexts_Allocation = consumerPoolAllocationContext : pcm::allocation::AllocationContext {}
+		};
+		when {
+			CreateAdapterAllocationContexts(annotatedAssemblyConnector, marshallingAllocationContext, senderAdapterAllocationContext,
+					momAdapterAllocationContext, receiverAdapterAllocationContext, deMarshallingAllocationContext, consumerPoolAllocationContext);
+		}
+	}
+	
+	/** Create Adapter Allocation-Contexts **/
+	top relation CreateAdapterAllocationContexts {
+		annotatedAssemblyConnectorName : ecore::EString;
+	
+		checkonly domain source annotatedAssemblyConnector : pcm::core::composition::AssemblyConnector {
+			entityName = annotatedAssemblyConnectorName
+		};
+		
+		enforce domain target marshallingAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_Marshalling___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = marshallingAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = senderResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		enforce domain target senderAdapterAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_SenderAdapter___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = senderAdapterAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = senderResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		enforce domain target momAdapterAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_MomAdapter___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = momAdapterAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = messagingSystemResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		enforce domain target recevierAdapterAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_ReceiverAdapter___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = receiverAdapterAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = receiverResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		enforce domain target deMarshallingAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_DeMarshalling___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = deMarshallingAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = receiverResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		enforce domain target consumerPoolAllocationContext : pcm::allocation::AllocationContext {
+			entityName = 'Allocation_Assembly_ConsumerPool___' + annotatedAssemblyConnectorName,
+			assemblyContext_AllocationContext = consumerPoolAssemblyContext : pcm::core::composition::AssemblyContext {
+			},
+			resourceContainer_AllocationContext = receiverResourceContainer : pcm::resourceenvironment::ResourceContainer {
+			}
+		};
+		when {
+			CreateAdapterAssemblyContexts( annotatedAssemblyConnector, marshallingAssemblyContext, senderAdapterAssemblyContext, 
+				momAdapterAssemblyContext, receiverAdapterAssemblyContext, deMarshallingAssemblyContext, consumerPoolAssemblyContext);
+			}
+	}
+	
+	relation Mark_repository_Interface {
+
+		checkonly domain source sourceInterface:pcm::repository::Interface{
+		};
+
+		checkonly domain target targetInterface:pcm::repository::Interface{
+		};
+		where {
+			Mark_entity_Entity(sourceInterface, targetInterface);
+		}
+	}
+	
+	relation Mark_repository_DataType {
+
+		checkonly domain source sourceDataType:pcm::repository::DataType{
+		};
+
+		checkonly domain target targetDataType:pcm::repository::DataType{
+		};
+	}
+	
+	relation Mark_repository_Signature {
+
+		checkonly domain source sourceSignature:pcm::repository::Signature{
+		};
+
+		checkonly domain target targetSignature:pcm::repository::Signature{
+		};
+	}
+	
+	relation Mark_entity_Entity {
+
+		checkonly domain source sourceEntity:pcm::core::entity::Entity{
+		};
+
+		checkonly domain target targetEntity:pcm::core::entity::Entity{
+		};
+		where {
+			Mark_identifier_Identifier(sourceEntity, targetEntity);
+			Mark_entity_NamedElement(sourceEntity, targetEntity);
+		}
+	}
+	
+	relation Mark_identifier_Identifier {
+
+		checkonly domain source sourceIdentifier:identifier::Identifier{
+		};
+
+		checkonly domain target targetIdentifier:identifier::Identifier{
+		};
+	}
+	
+	relation Mark_entity_NamedElement {
+
+		checkonly domain source sourceNamedElement:pcm::core::entity::NamedElement{
+		};
+
+		checkonly domain target targetNamedElement:pcm::core::entity::NamedElement{
+		};
+	}
+}
+
+
+
+
+
+

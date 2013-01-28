@@ -1,0 +1,894 @@
+library DependencyMetrics; 
+
+import Utilities;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational";
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+modeltype IMPOCL uses "http://www.eclipse.org/qvt/1.0/ImperativeOCL";
+modeltype ECORE uses "http://www.eclipse.org/emf/2002/Ecore";
+modeltype OCL uses "http://www.eclipse.org/ocl/1.1.0/OCL";
+
+------------------------
+// Utility queries
+
+query AllOperations(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::ImperativeOperation) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::ImperativeOperation) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::ImperativeOperation]) );
+}
+
+query AllOperations(transModule : QVTO::expressions::Module) : Bag(QVTO::expressions::ImperativeOperation) { 
+	return AllOperations(OrderedSet{transModule});
+}
+
+query AllMappings(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::MappingOperation) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::MappingOperation) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::MappingOperation]) );
+}
+
+query AllMappings(transModule : QVTO::expressions::Module) : Bag(QVTO::expressions::MappingOperation) { 
+	return AllMappings(OrderedSet{transModule});
+}
+
+query AllHelpers(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::Helper) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::Helper) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::Helper]) );
+}
+
+query AllHelpers(transModule : QVTO::expressions::Module) : Bag(QVTO::expressions::Helper) { 
+	return AllHelpers(OrderedSet{transModule});
+}
+
+query AllImperativeOperations(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::ImperativeOperation) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::ImperativeOperation) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::ImperativeOperation]) );
+}
+
+// calls starting from imperative operations
+query GetCalls(operations : Bag(QVTO::expressions::ImperativeOperation)) : Bag(OCL::ecore::OCLExpression) { 
+	return operations->iterate(	operation : QVTO::expressions::ImperativeOperation;
+								acc : Bag(OCL::ecore::OCLExpression) = Bag{} |
+								acc->union(
+									GetCalls( operation )					
+								)
+							  );
+}
+
+query GetCalls(expression : QVTO::expressions::ImperativeOperation) : Bag(OCL::ecore::OCLExpression) { 
+	return expression
+			.allSubobjectsOfKind(OCL::ecore::OCLExpression)[OCL::ecore::OCLExpression]
+			->asBag();
+}
+
+// calls starting from ocl expression
+query GetCalls(expressions : Bag(OCL::ecore::OCLExpression)) : Bag(OCL::ecore::OCLExpression) { 
+	return expressions->iterate( expression : OCL::ecore::OCLExpression;
+							acc : Bag(OCL::ecore::OCLExpression) = Bag{} |
+							acc->union(
+								GetCalls(expression)						
+							)
+						  );
+}
+
+query GetCalls(expression : OCL::ecore::OCLExpression) : Bag(OCL::ecore::OCLExpression) {	
+	return expression
+			.allSubobjectsOfKind(OCL::ecore::OCLExpression)[OCL::ecore::OCLExpression]
+			->asBag();
+}
+
+query GetDepth(startOp : QVTO::expressions::ImperativeOperation, endOp : QVTO::expressions::ImperativeOperation, depth : Integer, visited : Set(QVTO::expressions::ImperativeOperation)) : Integer {
+	if startOp = endOp then {
+		return depth;
+	} endif;
+	
+	// which operations are called?
+	var operations := 
+		GetCalls(startOp)[QVTO::expressions::ImperativeCallExp]
+		->referredOperation[QVTO::expressions::ImperativeOperation];
+	var constructors := 
+		GetCalls(startOp)[IMPOCL::InstantiationExp]
+		.eAnnotations
+		._references[QVTO::expressions::Constructor];
+	operations += constructors;
+	if(startOp.oclIsKindOf(QVTO::expressions::MappingOperation)) then {
+		var _mapping := startOp.oclAsType(QVTO::expressions::MappingOperation);
+		var disjunctions := _mapping.disjunct;
+		operations += disjunctions;
+	} endif;
+	
+	// filter already visited operations
+	operations := 
+		operations->select(
+			op : QVTO::expressions::ImperativeOperation |
+			visited->excludes(op)
+		);
+	
+	// abort if no operation is left
+	if operations->size() = 0 then {
+		return 9999999 // infinity ;)
+	} endif;
+	
+	// recursion
+	var depthList := operations
+						->iterate( 
+							operation : QVTO::expressions::ImperativeOperation;
+							acc : Sequence(Integer) = Sequence{} |
+							acc->append(
+								GetDepth(operation, endOp, depth+1, visited->including(startOp))
+							)
+						);
+						
+	// find minimum in depth List
+	return getIntSeqMinimum(depthList);
+}
+
+
+------------------------
+// Metrics
+
+query RuleDependencyDepth(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Rule Dependency Depth";
+
+	var operations := AllOperations(transModules);
+	var helpers := operations[QVTO::expressions::Helper];
+	var mappings := operations[QVTO::expressions::MappingOperation];
+	var entry := operations![QVTO::expressions::EntryOperation];
+	var constructors := operations[QVTO::expressions::Constructor];
+	
+	// check whether main does not call operations
+	var entryCalls := 
+		GetCalls(entry)[QVTO::expressions::ImperativeCallExp]
+		->referredOperation[QVTO::expressions::ImperativeOperation];
+	var constructorCalls := 
+		GetCalls(entry)[IMPOCL::InstantiationExp]
+		.eAnnotations
+		._references[QVTO::expressions::Constructor];
+	entryCalls += constructorCalls;
+	
+	if entryCalls->size()=0 then
+		return getNewAggregatedIntegerMetric(name, Sequence{0})
+	endif;		
+
+	// preliminary set of leaf operations
+	var leafs : Set(QVTO::expressions::ImperativeOperation) := Set{};
+	leafs := 
+		leafs
+		->union(mappings->asSet())
+		->union(helpers->asSet())
+		->union(constructors->asSet());
+	
+	// filter operations calling other operations
+	leafs := leafs->select(
+						leaf |
+						GetCalls(leaf)[QVTO::expressions::ImperativeCallExp]
+						->size()=0
+					);
+	leafs := leafs->select(
+						leaf |
+						GetCalls(leaf)[IMPOCL::InstantiationExp]
+						->eAnnotations
+						._references[QVTO::expressions::Constructor]
+						->select(
+							_constructor |
+							constructors->includes(_constructor)
+						)
+						->size()=0
+					);
+	
+	// filter disjuncting operations
+	var disjunctions := mappings->select(
+										_mapping |
+										_mapping
+										.disjunct
+										->size() > 0
+									);
+	leafs := leafs->select(
+						leaf |
+						disjunctions
+						.oclAsType(QVTO::expressions::ImperativeOperation)
+						->excludes(leaf)
+					);
+	
+	// filter abstract operations
+	var abstractOperations := mappings->select(
+											_mapping |
+											_mapping
+											.eAnnotations
+											.details
+											->select(
+												mapentry : EStringToStringMapEntry |
+												mapentry.key = "abstract" and
+												mapentry.value = "true"
+											)->size()>0
+										);
+	leafs := leafs->select(
+						leaf |
+						abstractOperations
+						.oclAsType(QVTO::expressions::ImperativeOperation)
+						->excludes(leaf)
+					);
+	
+	// filter operations used in application conditions
+	var applicationConditionCalls :=
+		GetCalls(mappings->_when)[QVTO::expressions::ImperativeCallExp]
+		->referredOperation[QVTO::expressions::ImperativeOperation];
+	leafs := leafs
+				->select(
+					leaf |
+					not applicationConditionCalls->includes(leaf) 
+				);
+	
+	if leafs->size() = 0 then {
+		return getNewAggregatedIntegerMetric(name, Sequence{-1});
+	} endif;
+	
+	// calculate depth
+	var value := leafs->iterate(	
+						leaf : QVTO::expressions::ImperativeOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetDepth(entry, leaf, 0, Set{})
+						) 
+					);
+					
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumImportedModulePerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Imported Modules per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							transModule.moduleImport->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumTimesModuleImported(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Times a Module is Imported"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							transModules
+							->select(
+								importingModule |
+								importingModule
+								.moduleImport
+								->importedModule
+								->includes(transModule)
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsFromMappingsInOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Mappings in other Modules per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(
+								AllMappings(
+									transModules
+									->excluding(transModule)
+									->asOrderedSet() 
+								)
+							)[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call : QVTO::expressions::ImperativeCallExp |
+								transModule
+								.eOperations[QVTO::expressions::MappingOperation]
+								->includes(call.referredOperation.oclAsType(QVTO::expressions::MappingOperation))
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsFromHelpersInOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Helpers in other Modules per Module";
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(
+								AllHelpers(
+									transModules
+									->excluding(transModule)
+									->asOrderedSet() 
+								)
+							)[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call : QVTO::expressions::ImperativeCallExp |
+								transModule
+								.eOperations[QVTO::expressions::Helper]
+								->includes(call.referredOperation.oclAsType(QVTO::expressions::Helper))
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Module "Set" Fan-In
+query NumDistinctCallsFromOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls from other Modules per Module (Module Fan-In)"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(
+								AllOperations(
+									transModules
+									->excluding(transModule)
+									->asOrderedSet() 
+								)
+							)[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call : QVTO::expressions::ImperativeCallExp |
+								transModule
+								.eOperations[QVTO::expressions::ImperativeOperation]
+								->includes(call.referredOperation.oclAsType(QVTO::expressions::ImperativeOperation))
+							)->asSet()->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Module "Bag" Fan-In
+query NumCallsFromOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from other Modules per Module (Module Bag Fan-In)"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(
+								AllOperations(
+									transModules
+									->excluding(transModule)
+									->asOrderedSet() 
+								)
+							)[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call : QVTO::expressions::ImperativeCallExp |
+								transModule
+								.eOperations[QVTO::expressions::ImperativeOperation]
+								->includes(call.referredOperation.oclAsType(QVTO::expressions::ImperativeOperation))
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToMappingsInOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Mappings in other Modules per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call |
+								AllMappings(transModule)
+								->excludes(
+									call.referredOperation.oclAsType(QVTO::expressions::MappingOperation)
+								)
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+
+query NumCallsToHelpersInOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Helpers in other Modules per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call |
+								AllHelpers(transModule)
+								->excludes(
+									call.referredOperation.oclAsType(QVTO::expressions::Helper)
+								)
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Module "Set" Fan-Out
+query NumDistinctCallsToOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls to other Modules per Module (Module Fan-Out)"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call |
+								AllOperations(transModule)
+								->excludes(
+									call.referredOperation.oclAsType(QVTO::expressions::ImperativeOperation)
+								)
+							)->asSet()->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Module "Bag" Fan-Out
+query NumCallsToOtherModulesPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to other Modules per Module (Module Bag Fan-Out)"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[QVTO::expressions::ImperativeCallExp]
+							->select(
+								call |
+								AllOperations(transModule)
+								->excludes(
+									call.referredOperation.oclAsType(QVTO::expressions::ImperativeOperation)
+								)
+							)->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsFromMappingsToMappingsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Mappings to Mappings per Mapping";
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsFromMappingsToHelpersPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Mappings to Helpers per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Mapping "Set" Fan-Out
+query NumDistinctCallsFromMappingsToMappingsOrHelpersPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls from Mappings to Mappings or Helpers per Mapping (Mapping Fan-Out)"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->asSet()->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Mapping "Bag" Fan-Out
+query NumCallsFromMappingsToMappingsOrHelpersPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Mappings to Mappings or Helpers per Mapping (Mapping Bag Fan-Out)"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToMappingsFromMappingsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Mappings from Mappings per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(mappings)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->select(
+								operation |
+								operation = _mapping
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToMappingsFromHelpersPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Mappings from Helpers per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var helpers := AllHelpers(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(helpers)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->select(
+								operation |
+								operation = _mapping
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Mapping "Set" Fan-In
+query NumDistinctCallsToMappingsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls to Mappings per Mapping (Mapping Fan-In)"; 
+	var mappings := AllMappings(transModules);
+	var operations := AllOperations(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(operations)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->select(
+								operation |
+								operation = _mapping
+							)->asSet()->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Mapping "Bag" Fan-In
+query NumCallsToMappingsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Mappings per Mapping (Mapping Bag Fan-In)"; 
+	var mappings := AllMappings(transModules);
+	var operations := AllOperations(transModules);
+	var value := mappings->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(operations)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->select(
+								operation |
+								operation = _mapping
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+	
+query NumCallsFromHelpersToHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Helpers to Helpers per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsFromHelpersToMappingsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Helpers to Mappings per Helper";
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::MappingOperation]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Helper "Set" Fan-Out
+query NumDistinctCallsFromHelpersToMappingsOrHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls from Helpers to Mappings or Helpers per Helper (Helper Fan-Out)"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->asSet()->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Helper "Bag" Fan-Out
+query NumCallsFromHelpersToMappingsOrHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Helpers to Mappings or Helpers per Helper (Helper Bag Fan-Out)"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+	
+query NumCallsToHelpersFromMappingsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Helpers from Mappings per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var mappings := AllMappings(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(mappings)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->select(
+								operation |
+								operation = _helper
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToHelpersFromHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Helpers from Helpers per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(helpers)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->select(
+								operation |
+								operation = _helper
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Helper "Set" Fan-In
+query NumDistinctCallsToHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls to Helpers per Helper (Helper Fan-In)"; 
+	var helpers := AllHelpers(transModules);
+	var operations := AllOperations(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(operations)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->select(
+								operation |
+								operation = _helper
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Helper "Bag" Fan-In
+query NumCallsToHelpersPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Helpers per Helper (Helper Bag Fan-In)"; 
+	var helpers := AllHelpers(transModules);
+	var operations := AllOperations(transModules);
+	var value := helpers->iterate(
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(operations)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::Helper]
+							->select(
+								operation |
+								operation = _helper
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToLog(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Calls to Log"; 
+	var value := GetCalls(AllOperations(transModules))[IMPOCL::LogExp]->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumCallsToLogPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Log per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[IMPOCL::LogExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToLogPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Log per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[IMPOCL::LogExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToLogPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Log per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[IMPOCL::LogExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+	
+query NumCallsToAssert(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Calls to Assert"; 
+	var value := GetCalls(AllOperations(transModules))[IMPOCL::AssertExp]->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumCallsToAssertPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Assert per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[IMPOCL::AssertExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToAssertPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Assert per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[IMPOCL::AssertExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToAssertPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Assert per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[IMPOCL::AssertExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+	
+query NumCallsToResolve(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Calls to Resolve"; 
+	var value := GetCalls(AllOperations(transModules))[QVTO::expressions::ResolveExp]->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumCallsToResolvePerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Resolve per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(AllOperations(transModule))[QVTO::expressions::ResolveExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToResolvePerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Resolve per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_mapping)[QVTO::expressions::ResolveExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumCallsToResolvePerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls to Resolve per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	
+						_helper : QVTO::expressions::Helper;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_helper)[QVTO::expressions::ResolveExp]->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Imperative Operation "Set" Fan-Out
+query NumDistinctCallsFromOperationsToOperationsPerOperation(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls from Operations to Operations per Operation (Operation Fan-Out)"; 
+	var operations := AllImperativeOperations(transModules);
+	var value := operations->iterate(
+						_operation : QVTO::expressions::ImperativeOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_operation)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->asSet()->size() // calls to operations
+							+
+							GetCalls(_operation)[IMPOCL::InstantiationExp]
+							->asSet()->size() // calls to constructors
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Imperative Operation "Bag" Fan-Out
+query NumCallsFromOperationsToOperationsPerOperation(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)"; 
+	var operations := AllImperativeOperations(transModules);
+	var value := operations->iterate(
+						_operation : QVTO::expressions::ImperativeOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetCalls(_operation)[QVTO::expressions::ImperativeCallExp]
+							->referredOperation[QVTO::expressions::ImperativeOperation]
+							->size() // calls to operations
+							+
+							GetCalls(_operation)[IMPOCL::InstantiationExp]
+							->size() // calls to constructors
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}

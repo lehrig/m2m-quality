@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QvtMetric-Plugin
+Bundle-SymbolicName: de.upb.m2m.quality.parser
+Bundle-Version: 1.0.0.qualifier
+Export-Package: de.upb.m2m.quality.parser
+Require-Bundle: org.eclipse.emf;bundle-version="2.6.0",
+ de.ikv.medini.qvt.plugin;bundle-version="1.7.0",
+ org.eclipse.emf.common;bundle-version="2.7.0",
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

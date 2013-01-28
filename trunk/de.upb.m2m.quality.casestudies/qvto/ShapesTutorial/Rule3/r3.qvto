@@ -1,0 +1,69 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a refinement that transforms an arrow to an
+ * arrow-square-arrow combination.
+ * 
+ * Implementation time: 20 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule3" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule3(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every arrow, create an 
+	 * arrow-square-arrow combination for it, and delete it finally.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var arrows = copy[RootBlock].allSubobjectsOfKind(Arrow);
+		arrows[Arrow]
+			->forEach(arrow) {
+				var square := new Square(arrow);
+				new Arrow(arrow, square);
+				new Arrow(square, arrow);
+				target.removeElement(arrow);
+			}
+	}
+	
+	/**
+	 * Constructor for creating a new square by using information (name and root)
+	 * from a given arrow.
+	 * @param arrow The arrow to be used as a template
+	 */
+	constructor Square::Square(arrow : Arrow) {
+		name := arrow.name+" generated square";
+		block := arrow.block;
+	}
+	
+	/**
+	 * Constructor for creating a new arrow between the source of a given arrow 
+	 * and a shape. The given arrow provides root and name for the new arrow.
+	 * @param arrow The arrow to be used as a template
+	 * @param shape The shape to be connected to
+	 */
+	constructor Arrow::Arrow(arrow : Arrow, shape : Shape) {
+		name := arrow.name+" generated first arrow";
+		block := arrow.block;
+		result.source := arrow.source;
+		result.target := shape;
+	}
+	
+	/**
+	 * Constructor for creating a new arrow between a shape and the target of a
+	 * given arrow. The given arrow provides root and name for the new arrow.
+	 * @param shape The shape to be connected from
+	 * @param arrow The arrow to be used as a template
+	 */
+	constructor Arrow::Arrow(shape : Shape, arrow : Arrow) {
+		name := arrow.name+" generated second arrow";
+		block := arrow.block;
+		result.source := shape;
+		result.target := arrow.target;
+	}
+}

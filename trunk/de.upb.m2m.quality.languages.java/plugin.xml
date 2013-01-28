@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits">
+      <unit
+            name="MetricsBlackboxUnit"
+            namespace="de.upb.m2m.quality.languages.java">
+         <library
+               class="de.upb.m2m.quality.languages.java.MetricsBlackboxLibrary"
+               name="MetricsBlackboxLibrary">
+         </library>
+      </unit>
+   </extension>
+   <extension
+         point="de.upb.m2m.quality.languages">
+      <language
+            class="de.upb.m2m.quality.languages.java.JavaConfiguration">
+      </language>
+   </extension>
+
+</plugin>

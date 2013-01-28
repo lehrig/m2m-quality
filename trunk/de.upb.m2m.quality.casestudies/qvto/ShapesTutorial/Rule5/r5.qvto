@@ -1,0 +1,107 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies an abstraction that removes all triangles and
+ * reconnects arrows belonging to it accordingly.
+ * 
+ * Implementation time: 40 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule5" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule5(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every triangle, rewire 
+	 * (link every source of incoming arrows to every target of outgoing
+	 * arrows by new arrows), and finally delete the triangle.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var triangles = copy[RootBlock].allSubobjectsOfKind(Triangle);
+		triangles[Triangle]
+			->forEach(triangle) {
+				rewire(triangle);
+				target.removeElement(triangle);
+			}
+	}
+	
+	/**
+	 * Rewires the given shape, i.e., the helper links every source of incoming
+	 * arrows to every target of outgoing arrows by new arrows. The original
+	 * arrows are deleted afterwards.
+	 *
+	 * @param shape The shape to be rewired
+	 */
+	helper rewire(shape : Shape) {
+		var inArrows := shape.inArrow;
+		var outArrows := shape.outArrow;
+		
+		inArrows->forEach(inArrow) {
+			outArrows->forEach(outArrow) {
+				new Arrow(
+						inArrow.source,
+						outArrow.target,
+						getArrowName(inArrow, outArrow),
+						shape.block
+					);
+			};
+			target.removeElement(inArrow);
+		};
+		
+		outArrows->forEach(outArrow) {
+			target.removeElement(outArrow);
+		};
+	}
+	
+	/**
+	 * Creates the name for an arrow. If the given (a) source arrows' source is 
+	 * a triangle, or (b) target arrows' target is a triangle, then these the
+	 * respective arrow does not contribute to the new arrow name.
+	 *
+	 * @param src A source arrow may contributing to the new name
+	 * @param tgt A target arrow may contributing to the new name
+	 * @return The new arrow name
+	 */
+	query getArrowName(src : Arrow, tgt : Arrow) : String {
+		var arrowName := "";
+		
+		if not src.source.oclIsKindOf(Triangle) then {
+			arrowName := src.name;
+			if not tgt.target.oclIsKindOf(Triangle) then {
+				arrowName := arrowName+"_"+tgt.name;
+			} endif;
+		}
+		else {
+			if not tgt.target.oclIsKindOf(Triangle) then {
+				arrowName := tgt.name;
+			} endif;
+		} endif;
+		
+		return arrowName;
+	}
+	
+	/**
+	 * Constructor for creating a new arrow.
+	 *
+	 * @param src The source of the Arrow
+	 * @param tgt The target of the Arrow
+	 * @param name The name of the Arrow
+	 * @param block The block the Arrow belongs to
+	 */
+	constructor Arrow::Arrow(
+							src : Shape, 
+							tgt : Shape, 
+							name : String, 
+							block : Block
+						) {
+		result.name := name;
+		result.block := block;
+		result.source := src;
+		result.target := tgt;
+	}
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.m2m.quality.model/src"
+    modelPluginID="de.upb.m2m.quality.model" modelName="QVTMetrics" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>QVTMetrics.ecore</foreignModel>
+  <genPackages prefix="QVTMetrics" basePackage="de.upb.m2m.quality.model" disposableProviderFactory="true"
+      ecorePackage="QVTMetrics.ecore#/">
+    <genClasses ecoreClass="QVTMetrics.ecore#//DomainPredicateCount">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//DomainPredicateCount/average"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//DomainPredicateCount/mean"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTMetrics.ecore#//Transformation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//Transformation/relations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//Transformation/functions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//Transformation/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noStarts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noWhen"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noWhere"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noRelations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noTopLevelRelations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noMetamodels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noOclQueries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgWhen"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgWhere"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgEnforcedDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgCheckonlyDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgSizeOfDomainPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgVars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgRelFanOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgValOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgFanIn"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//Transformation/extends_metric"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noDirectChildren"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noTransitiveChildren"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noTransitiveParents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noOverrides"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgChildComplexity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/balance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgVarBindingRate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgRelationDependencyDepth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgTypeOverlap"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noLeafRelations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgFuncFanOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgNWWPC"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/avgNWWP"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/loc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/sloc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/bloc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/cloc"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Transformation/noIncludes"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTMetrics.ecore#//Relation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//Relation/domainPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noCheckonlyDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noEnforcedDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noWhen"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noWhere"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noDomains"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noVars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/valOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/fanOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/fanIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noBoundVars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/noUnboundVars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/varBindingRate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/avgSizeOfDomainPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/isLeaf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/depthOfLeaf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/nwwp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Relation/nwwpc"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTMetrics.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Function/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Function/fanOut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//Function/fanIn"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTMetrics.ecore#//DomainPredicate"/>
+    <genClasses ecoreClass="QVTMetrics.ecore#//DomainPattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTMetrics.ecore#//DomainPattern/domainPredicateCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTMetrics.ecore#//DomainPattern/sizeOfDomainPattern"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

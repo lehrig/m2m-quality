@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="r8" nsURI="urn:r8.ecore" nsPrefix="r8">
+  <eClassifiers xsi:type="ecore:EClass" name="Circle2block">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join2Fork">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Circle2Baseblock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsJoinNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsForkNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Circle2Circle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CircleWithSeveralOutgoingArrows2Block">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CircleWithOneOutgoingArrow2Block">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasPath">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s1">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s2">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextCircle">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsJoinAndFork">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s1">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s2">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasJoinPredecessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s1">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fork">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predecessor">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasNoJoinPredecessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s1">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predecessor">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsStartingNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s1">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockBlock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

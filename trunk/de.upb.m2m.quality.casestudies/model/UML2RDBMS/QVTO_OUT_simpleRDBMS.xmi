@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleRDBMS:RdbmsSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SimpleRDBMS="urn:SimpleRDBMS.ecore" xsi:schemaLocation="urn:SimpleRDBMS.ecore ../../metamodel/UML2RDBMS/SimpleRDBMS.ecore" rdbmsName="myPackage">
+  <rdbmsTable rdbmsName="Library">
+    <rdbmsColumn rdbmsName="Library_tid" rdbmsType="NUMBER" rdbmsKey="//@rdbmsTable.0/@rdbmsKey.0"/>
+    <rdbmsColumn rdbmsName="Library_LibraryToMedium_Medium_tid" rdbmsType="NUMBER" rdbmsForeignKey="//@rdbmsTable.0/@rdbmsForeignKey.0"/>
+    <rdbmsForeignKey rdbmsName="Library_LibraryToMedium_Medium" rdbmsRefersTo="//@rdbmsTable.1/@rdbmsKey.0" rdbmsColumn="//@rdbmsTable.0/@rdbmsColumn.1"/>
+    <rdbmsKey rdbmsName="Library_pk" rdbmsColumn="//@rdbmsTable.0/@rdbmsColumn.0"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Medium">
+    <rdbmsColumn rdbmsName="Medium_author_name" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Medium_tid" rdbmsType="NUMBER" rdbmsKey="//@rdbmsTable.1/@rdbmsKey.0"/>
+    <rdbmsKey rdbmsName="Medium_pk" rdbmsColumn="//@rdbmsTable.1/@rdbmsColumn.1" rdbmsRefersToOpposite="//@rdbmsTable.0/@rdbmsForeignKey.0"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="DVD">
+    <rdbmsColumn rdbmsName="DVD_author_name" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="DVD_tid" rdbmsType="NUMBER" rdbmsKey="//@rdbmsTable.2/@rdbmsKey.0"/>
+    <rdbmsKey rdbmsName="DVD_pk" rdbmsColumn="//@rdbmsTable.2/@rdbmsColumn.1"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Book">
+    <rdbmsColumn rdbmsName="Book_numberOfPages" rdbmsType="NUMBER"/>
+    <rdbmsColumn rdbmsName="Book_author_name" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Book_tid" rdbmsType="NUMBER" rdbmsKey="//@rdbmsTable.3/@rdbmsKey.0"/>
+    <rdbmsKey rdbmsName="Book_pk" rdbmsColumn="//@rdbmsTable.3/@rdbmsColumn.2"/>
+  </rdbmsTable>
+  <rdbmsTable rdbmsName="Author">
+    <rdbmsColumn rdbmsName="Author_name" rdbmsType="VARCHAR"/>
+    <rdbmsColumn rdbmsName="Author_tid" rdbmsType="NUMBER" rdbmsKey="//@rdbmsTable.4/@rdbmsKey.0"/>
+    <rdbmsKey rdbmsName="Author_pk" rdbmsColumn="//@rdbmsTable.4/@rdbmsColumn.1"/>
+  </rdbmsTable>
+</SimpleRDBMS:RdbmsSchema>

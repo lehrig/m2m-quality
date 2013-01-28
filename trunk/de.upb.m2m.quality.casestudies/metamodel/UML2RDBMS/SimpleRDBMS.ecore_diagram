@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_TjBbsPdyEeG2--o8eVN7qA" type="Ecore" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_VZKd8PdyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZQkkPdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZUO8PdyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZUO8fdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZUO8vdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZU2APdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZU2AfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZU2AvdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZU2A_dyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZU2BPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZU2BfdyEeG2--o8eVN7qA"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsColumn"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZKd8fdyEeG2--o8eVN7qA" x="268" y="396"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_VZVdEPdyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZVdEvdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZVdE_dyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZVdFPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZVdFfdyEeG2--o8eVN7qA"/>
+      <layoutConstraint xmi:type="notation:Ratio" xmi:id="_JtEGYPd2EeG2--o8eVN7qA" value="0.23076923076923078"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZVdFvdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZVdF_dyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZVdGPdyEeG2--o8eVN7qA"/>
+      <layoutConstraint xmi:type="notation:Ratio" xmi:id="_JtEtcPd2EeG2--o8eVN7qA" value="0.23076923076923078"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZWEIPdyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZWEIfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZWEIvdyEeG2--o8eVN7qA"/>
+      <layoutConstraint xmi:type="notation:Ratio" xmi:id="_JtFUgPd2EeG2--o8eVN7qA" value="0.23076923076923078"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsForeignKey"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZVdEfdyEeG2--o8eVN7qA" x="460" y="468"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_VZWEI_dyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZWEJfdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZWEJvdyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZWEJ_dyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZWEKPdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZWrMPdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZWrMfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZWrMvdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZWrM_dyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZWrNPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZWrNfdyEeG2--o8eVN7qA"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsKey"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZWEJPdyEeG2--o8eVN7qA" x="136" y="460"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_VZWrNvdyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZXSQPdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZXSQfdyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZXSQvdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZXSQ_dyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZXSRPdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZXSRfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZXSRvdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZXSR_dyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZXSSPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZXSSfdyEeG2--o8eVN7qA"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsModelElement"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZWrN_dyEeG2--o8eVN7qA" x="12" y="96"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_VZX5UPdyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZX5UvdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZX5U_dyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZX5VPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZX5VfdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZX5VvdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZX5V_dyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZX5WPdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZYgYPdyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZYgYfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZYgYvdyEeG2--o8eVN7qA"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsSchema"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZX5UfdyEeG2--o8eVN7qA" x="136" y="216"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_VZYgY_dyEeG2--o8eVN7qA" type="2001" fontName="Lucida Grande">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VZYgZfdyEeG2--o8eVN7qA" type="5001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZYgZvdyEeG2--o8eVN7qA" type="7001">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZYgZ_dyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZYgaPdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZZHcPdyEeG2--o8eVN7qA" type="7002">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZZHcfdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZZHcvdyEeG2--o8eVN7qA"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_VZZHc_dyEeG2--o8eVN7qA" type="7003">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VZZHdPdyEeG2--o8eVN7qA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VZZHdfdyEeG2--o8eVN7qA"/>
+    </children>
+    <element xmi:type="ecore:EClass" href="SimpleRDBMS.ecore#//RdbmsTable"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VZYgZPdyEeG2--o8eVN7qA" x="136" y="320"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_TjPeIPdyEeG2--o8eVN7qA"/>
+  <element xmi:type="ecore:EPackage" href="SimpleRDBMS.ecore#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_WKzWQPdyEeG2--o8eVN7qA" type="4002" source="_VZKd8PdyEeG2--o8eVN7qA" target="_VZWEI_dyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WKzWQ_dyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WKz9UPdyEeG2--o8eVN7qA" x="20" y="18"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WKz9UfdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WKz9UvdyEeG2--o8eVN7qA" x="-2" y="10"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WKzWQfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsColumn/rdbmsKey"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WKzWQvdyEeG2--o8eVN7qA" points="[0, 0, 0, 172]$[0, -172, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS_B4fdyEeG2--o8eVN7qA" id="(0.1271186440677966,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS_B4vdyEeG2--o8eVN7qA" id="(0.9692307692307692,0.17307692307692307)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WM2ksPdyEeG2--o8eVN7qA" type="4002" source="_VZKd8PdyEeG2--o8eVN7qA" target="_VZVdEPdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WM3LwPdyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WM3LwfdyEeG2--o8eVN7qA" x="-18" y="27"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WM3LwvdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WM3Lw_dyEeG2--o8eVN7qA" x="-8" y="11"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WM2ksfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsColumn/rdbmsForeignKey"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WM2ksvdyEeG2--o8eVN7qA" points="[0, 0, 112, 60]$[-112, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS7XgfdyEeG2--o8eVN7qA" id="(0.9661016949152542,0.5423728813559322)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS7-kPdyEeG2--o8eVN7qA" id="(0.061224489795918366,0.40384615384615385)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WM6PEPdyEeG2--o8eVN7qA" type="4004" source="_VZKd8PdyEeG2--o8eVN7qA" target="_VZWrNvdyEeG2--o8eVN7qA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_WM6PEfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WM6PEvdyEeG2--o8eVN7qA" points="[-4, 0, 212, 218]$[-216, 0, 0, 218]$[-216, -214, 0, 4]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTAQAvdyEeG2--o8eVN7qA" id="(0.03389830508474576,0.0847457627118644)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTA3EPdyEeG2--o8eVN7qA" id="(0.36065573770491804,0.9560439560439561)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WM-ggPdyEeG2--o8eVN7qA" type="4002" source="_VZVdEPdyEeG2--o8eVN7qA" target="_VZWEI_dyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WM_HkvdyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WM_Hk_dyEeG2--o8eVN7qA" x="65" y="7"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WM_HlPdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WM_HlfdyEeG2--o8eVN7qA" x="19" y="7"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WM_HkPdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsForeignKey/rdbmsRefersTo"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WM_HkfdyEeG2--o8eVN7qA" points="[-9, 1, 188, 0]$[-105, 1, 92, 0]$[-192, 1, 5, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS9MsfdyEeG2--o8eVN7qA" id="(0.09183673469387756,0.5961538461538461)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS9zwPdyEeG2--o8eVN7qA" id="(0.9230769230769231,0.7692307692307693)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNCK4PdyEeG2--o8eVN7qA" type="4002" source="_VZVdEPdyEeG2--o8eVN7qA" target="_VZKd8PdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNCK4_dyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNCx8PdyEeG2--o8eVN7qA" x="-1" y="24"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNCx8fdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNCx8vdyEeG2--o8eVN7qA" x="5" y="15"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNCK4fdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsForeignKey/rdbmsColumn"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNCK4vdyEeG2--o8eVN7qA" points="[-43, -52, 245, 300]$[-240, -293, 48, 59]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS9zwfdyEeG2--o8eVN7qA" id="(0.08163265306122448,0.1346153846153846)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS9zwvdyEeG2--o8eVN7qA" id="(0.9576271186440678,0.2711864406779661)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNFOMPdyEeG2--o8eVN7qA" type="4004" source="_VZVdEPdyEeG2--o8eVN7qA" target="_VZWrNvdyEeG2--o8eVN7qA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNFOMfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNFOMvdyEeG2--o8eVN7qA" points="[0, 52, 459, 337]$[0, 76, 459, 361]$[-459, 76, 0, 361]$[-459, -281, 0, 4]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTBeIPdyEeG2--o8eVN7qA" id="(0.24489795918367346,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTBeIfdyEeG2--o8eVN7qA" id="(0.10655737704918032,0.9560439560439561)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNHqcPdyEeG2--o8eVN7qA" type="4002" source="_VZWEI_dyEeG2--o8eVN7qA" target="_VZKd8PdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNHqc_dyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNIRgPdyEeG2--o8eVN7qA" x="19" y="26"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNIRgfdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNIRgvdyEeG2--o8eVN7qA" x="-10" y="10"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNHqcfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsKey/rdbmsColumn"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNHqcvdyEeG2--o8eVN7qA" points="[16, -18, -336, 362]$[303, -328, -49, 52]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS_o8PdyEeG2--o8eVN7qA" id="(0.9384615384615385,0.4807692307692308)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS_o8fdyEeG2--o8eVN7qA" id="(0.01694915254237288,0.4745762711864407)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNKtwPdyEeG2--o8eVN7qA" type="4002" source="_VZWEI_dyEeG2--o8eVN7qA" target="_VZVdEPdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNLU0PdyEeG2--o8eVN7qA" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNLU0fdyEeG2--o8eVN7qA" x="58" y="11"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNLU0vdyEeG2--o8eVN7qA" type="6003">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNLU0_dyEeG2--o8eVN7qA" x="31" y="11"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNKtwfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsKey/rdbmsRefersToOpposite"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNKtwvdyEeG2--o8eVN7qA" points="[40, -6, -256, 38]$[223, -34, -73, 10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS7-kfdyEeG2--o8eVN7qA" id="(0.38461538461538464,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS7-kvdyEeG2--o8eVN7qA" id="(0.061224489795918366,0.8076923076923077)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNNxEPdyEeG2--o8eVN7qA" type="4004" source="_VZWEI_dyEeG2--o8eVN7qA" target="_VZWrNvdyEeG2--o8eVN7qA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNNxEfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNNxEvdyEeG2--o8eVN7qA" points="[-5, 0, 90, 301]$[-101, 0, -6, 301]$[-101, -289, -6, 12]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS8loPdyEeG2--o8eVN7qA" id="(0.07692307692307693,0.3076923076923077)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS8lofdyEeG2--o8eVN7qA" id="(0.2786885245901639,0.8681318681318682)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WNQ0YPdyEeG2--o8eVN7qA" type="4003" source="_VZX5UPdyEeG2--o8eVN7qA" target="_VZYgY_dyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNRbcPdyEeG2--o8eVN7qA" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNRbcfdyEeG2--o8eVN7qA" x="15" y="-29"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WNRbcvdyEeG2--o8eVN7qA" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WNRbc_dyEeG2--o8eVN7qA" x="-3" y="9"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WNQ0YfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsSchema/rdbmsTable"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WNQ0YvdyEeG2--o8eVN7qA" points="[0, 0, 290, 60]$[-290, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS8lovdyEeG2--o8eVN7qA" id="(0.24096385542168675,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WObSAPdyEeG2--o8eVN7qA" type="4004" source="_VZX5UPdyEeG2--o8eVN7qA" target="_VZWrNvdyEeG2--o8eVN7qA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_WObSAfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WObSAvdyEeG2--o8eVN7qA" points="[-7, 0, 38, 79]$[-45, 0, 0, 79]$[-45, -76, 0, 3]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTA3EfdyEeG2--o8eVN7qA" id="(0.08433734939759036,0.9038461538461539)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTA3EvdyEeG2--o8eVN7qA" id="(0.5655737704918032,0.978021978021978)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WOeVUPdyEeG2--o8eVN7qA" type="4003" source="_VZYgY_dyEeG2--o8eVN7qA" target="_VZKd8PdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOe8YPdyEeG2--o8eVN7qA" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOe8YfdyEeG2--o8eVN7qA" x="50" y="-20"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOe8YvdyEeG2--o8eVN7qA" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOe8Y_dyEeG2--o8eVN7qA" x="21" y="-10"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WOeVUfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsTable/rdbmsColumn"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WOeVUvdyEeG2--o8eVN7qA" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS6wcPdyEeG2--o8eVN7qA" id="(0.7397260273972602,0.7884615384615384)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS7XgPdyEeG2--o8eVN7qA" id="(0.288135593220339,0.15254237288135594)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WOh_sPdyEeG2--o8eVN7qA" type="4003" source="_VZYgY_dyEeG2--o8eVN7qA" target="_VZVdEPdyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOh_s_dyEeG2--o8eVN7qA" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOh_tPdyEeG2--o8eVN7qA" x="131" y="98"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOimwPdyEeG2--o8eVN7qA" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOimwfdyEeG2--o8eVN7qA" x="52" y="-12"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WOh_sfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsTable/rdbmsForeignKey"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WOh_svdyEeG2--o8eVN7qA" points="[8, 0, -305, -125]$[307, 0, -6, -125]$[307, 121, -6, -4]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS-a0PdyEeG2--o8eVN7qA" id="(0.8904109589041096,0.5192307692307693)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS-a0fdyEeG2--o8eVN7qA" id="(0.5510204081632653,0.07692307692307693)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WOlDAPdyEeG2--o8eVN7qA" type="4003" source="_VZYgY_dyEeG2--o8eVN7qA" target="_VZWEI_dyEeG2--o8eVN7qA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOlqEPdyEeG2--o8eVN7qA" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOlqEfdyEeG2--o8eVN7qA" x="21" y="22"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_WOlqEvdyEeG2--o8eVN7qA" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WOlqE_dyEeG2--o8eVN7qA" x="2" y="8"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WOlDAfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xmi:type="ecore:EReference" href="SimpleRDBMS.ecore#//RdbmsTable/rdbmsKey"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WOlDAvdyEeG2--o8eVN7qA" points="[-12, 44, 88, -324]$[-86, 316, 14, -52]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS-a0vdyEeG2--o8eVN7qA" id="(0.1643835616438356,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WS_B4PdyEeG2--o8eVN7qA" id="(0.12307692307692308,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WOoGUPdyEeG2--o8eVN7qA" type="4004" source="_VZYgY_dyEeG2--o8eVN7qA" target="_VZWrNvdyEeG2--o8eVN7qA">
+    <styles xmi:type="notation:FontStyle" xmi:id="_WOoGUfdyEeG2--o8eVN7qA" fontName="Lucida Grande"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WOoGUvdyEeG2--o8eVN7qA" points="[-36, 0, 65, 163]$[-101, 0, 0, 163]$[-101, -159, 0, 4]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WTAQAfdyEeG2--o8eVN7qA" id="(0.48360655737704916,0.9560439560439561)"/>
+  </edges>
+</notation:Diagram>

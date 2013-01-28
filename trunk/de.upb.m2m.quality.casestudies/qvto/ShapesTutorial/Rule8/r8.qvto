@@ -1,0 +1,129 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a hierarchical clustering that groups fork/join
+ * pairs of circles. The transformation assumes that there are only circles and
+ * arrows within the source model. 
+ *
+ * A fork/join pair is defined via two circles (fork and join circle). Every 
+ * path starting from the fork circle needs to go through the join circle to be 
+ * a valid fork/join pair. Furthermore, the pair is only valid if join and fork
+ * circle have the shortest possible distance over all other fork and join 
+ * pairs.
+ *
+ * The clustering creates one block for each such pair (named after the fork 
+ * circle) and puts every circle enclosed by the pair inside the block. This
+ * process is recursively repeated for the inner circles to create a whole
+ * clustering hierarchy. Arrows do not exists anymore in the target model.
+ * 
+ * Implementation time: 95 Minutes (Had some small bug in last line of mapping
+ * root2root() which took way too much time to figure out:
+ * - First version: 
+ *   modelElement := startingCircle.map circle2blockOrCircle(result);
+ * - Fixed version: 
+ *   startingCircle.map circle2blockOrCircle(result);
+ * The issue was that the first subblock is (in the first version) not nested
+ * into the root block)
+ *
+ * @see MediniQVT Plugin "Rule8" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule8(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point that creates from the source shapes model a new shapes model.
+	 */
+	main() {
+		source.rootObjects()[RootBlock]->map root2root();
+		
+		// Removes temporarily created blocks. Creating and deleting
+		// temporarily blocks is not the nicest solution. A nicer solution may
+		// be provided in future.
+		var tmpBlocks := target.rootObjects()[Block]->select(b | b.name="tmp");
+		tmpBlocks->forEach(block) { target.removeElement(block) };
+	}
+
+	/**
+	 * Maps the source root block to a new root block. The idea is to find
+	 * the starting circle and to follow all its paths to the final circle
+	 * to add one circle (respectively block) after the other.
+	 */
+	mapping RootBlock::root2root(): RootBlock {
+		var circles := self.modelElement[Circle];
+		var startingCircle := circles->select(c | c.inArrow->size() = 0);
+		
+		assert(startingCircle->size()=1)
+		with log ("There must be exactly one starting circle!");
+		
+		result.name := "top level";
+		startingCircle.map circle2blockOrCircle(result);
+	}
+	
+	/**
+	 * Maps circles to blocks or circles.
+	 * @param root The block the new circle/block will be nested into
+	 */
+	mapping Circle::circle2blockOrCircle(root : Block) : Shape 
+		disjuncts 	Circle::forkCircle2Block,
+					Circle::joinCircle2Block,
+					Circle::circle2circle,
+					Circle::circle2finalCircle{}
+	
+	/**
+	 * Abstract mapping for shape initialization.
+	 * @param root The block the shape will be nested into
+	 */
+	abstract mapping Circle::circle2shape(root : Block) : Shape {
+		name := self.name;
+		block := root;
+	}
+	
+	/**
+	 * Maps a circle to a block in case the circle has more than one outgoing 
+	 * arrow.
+	 * @param root The block the new block will be nested into
+	 */
+	mapping Circle::forkCircle2Block(root : Block) : Block
+		inherits Circle::circle2shape
+		when{self.outArrow->size()>1} {
+		self.outArrow->target[Circle]->map circle2blockOrCircle(result);
+	}
+	
+	/**
+	 * Creates a temporarily block and moves on to the next circle or block in 
+	 * case the circle has more than one incoming arrow.
+	 * @param root The block the new block will be nested into
+	 */
+	mapping Circle::joinCircle2Block(root : Block) : Block
+		inherits Circle::circle2shape
+		when{self.inArrow->size()>1} {
+		name := "tmp";
+		block := null;
+		self.outArrow->target[Circle]->map circle2blockOrCircle(root.block);
+	}
+	
+	/**
+	 * Maps a circle to a circle and follows its outgoing arrow for further
+	 * mappings in case the source circle has at exactly one outgoing arrow.
+	 * @param root The block the new circle will be nested into
+	 */
+	mapping Circle::circle2circle(root : Block) : Circle
+		inherits Circle::circle2shape
+		when{self.outArrow->size()=1} {
+		self.outArrow->target[Circle]->map circle2blockOrCircle(root);
+	}
+	
+	/**
+	 * Maps a circle to the final circle in case the circle has no outgoing
+	 * arrow.
+	 * @param root The block the new circle will be nested into
+	 */
+	mapping Circle::circle2finalCircle(root : Block) : Circle
+		inherits Circle::circle2shape
+		when{self.outArrow->size()=0} {
+	}
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="r1" nsURI="urn:r1.ecore" nsPrefix="r1">
+  <eClassifiers xsi:type="ecore:EClass" name="ArrowSource2ArrowSource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceArrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetArrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceArrowSource">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetArrowSource">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrowTarget2ArrowTarget">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceArrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetArrow">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceArrowTarget">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetArrowTarget">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Shape"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElementName2ModelElementName">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceModelElement">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetModelElement">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElementblock2ModelElementblock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceModelElement">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetModelElement">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceblock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetblock">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Source2Target">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//ModelElement"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapRootBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Block"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapCircle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Circle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Square"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapTriangle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapSquare">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Square"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Square"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapArrow">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t">
+      <eType xsi:type="ecore:EClass" href="../../../metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

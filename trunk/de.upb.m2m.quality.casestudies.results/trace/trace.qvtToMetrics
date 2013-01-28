@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qvtToMetrics="urn:qvtToMetrics.ecore">
+  <qvtToMetrics:visitFunction>
+    <f href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@ownedOperation.0"/>
+    <m href="../output/Output_QVT-R.xmi#//@functions.0"/>
+  </qvtToMetrics:visitFunction>
+  <qvtToMetrics:visitFunctions>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <op href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@ownedOperation.0"/>
+    <func href="../output/Output_QVT-R.xmi#//@functions.0"/>
+  </qvtToMetrics:visitFunctions>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.0"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.1"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.2"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.3"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.4"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.5"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.6"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelations>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.7"/>
+  </qvtToMetrics:visitRelations>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.0"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.0/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.0"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.0/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitTransformation>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+  </qvtToMetrics:visitTransformation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.1"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.1/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.1"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.1/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.2"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.2/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.2"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.2/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.3"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.3/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.3"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.3/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.3"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3/@domain.2"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.3/@domainPattern.2"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.4"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.4/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.4"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.4/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.4"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4/@domain.2"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.4/@domainPattern.2"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.5"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.5/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.5"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.5/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.5"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5/@domain.2"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.5/@domainPattern.2"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.6"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.6/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.6"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.6/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.6"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6/@domain.2"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.6/@domainPattern.2"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.7"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7/@domain.0"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.7/@domainPattern.0"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:visitRelation>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.7"/>
+    <dom href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7/@domain.1"/>
+    <pat href="../output/Output_QVT-R.xmi#//@relations.7/@domainPattern.1"/>
+  </qvtToMetrics:visitRelation>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.7"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.6"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.5"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.4"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.3"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.2"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.1"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationAvg>
+    <r href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0"/>
+    <m href="../output/Output_QVT-R.xmi#//@relations.0"/>
+  </qvtToMetrics:calcRelationAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.0"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.0"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.1"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.1"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.2"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.2"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.3"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.3"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.4"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.4"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.5"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.5"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.6"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.6"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcRelationsAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+    <rul href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0/@rule.7"/>
+    <rel href="../output/Output_QVT-R.xmi#//@relations.7"/>
+  </qvtToMetrics:calcRelationsAvg>
+  <qvtToMetrics:calcTransAvg>
+    <t href="../output/QVT-R-AST-uml2rdbms.qvt.xmi#/0"/>
+    <m href="../output/Output_QVT-R.xmi#/"/>
+  </qvtToMetrics:calcTransAvg>
+</xmi:XMI>

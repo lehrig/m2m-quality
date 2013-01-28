@@ -1,0 +1,62 @@
+library MiscellaneousMetrics; 
+
+import Utilities;
+
+modeltype JAVA uses "http://www.eclipse.org/MoDisco/Java/0.2.incubation/java"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+
+------------------------
+// Utility queries
+
+query AllClasses(_class : JAVA::ClassDeclaration) : Set(JAVA::ClassDeclaration) { 
+	return _class.bodyDeclarations[JAVA::ClassDeclaration];
+}
+
+query AllFields(_class : JAVA::ClassDeclaration) : Set(JAVA::FieldDeclaration) { 
+	return _class.bodyDeclarations[JAVA::FieldDeclaration];
+}
+------------------------
+// Metrics
+
+query NumLOCs() : SimpleMetric { 
+	var name := "Lines of Code"; 
+	var value := NumLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumBLOCs() : SimpleMetric { 
+	var name := "Blank lines of Code"; 
+	var value := NumBLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumCLOCs() : SimpleMetric { 
+	var name := "Comment lines of Code"; 
+	var value := NumCLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumSLOCs() : SimpleMetric { 
+	var name := "Source lines of Code"; 
+	var value := NumSLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumImports(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Imports"; 
+	var value := _class.originalCompilationUnit.imports->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumInnerClasses(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Inner Classes"; 
+	var value := AllClasses(_class)->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMemberVariables(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Member Variables"; 
+	var value := AllFields(_class)->size();
+	return getNewSimpleMetric(name, value);
+}

@@ -1,0 +1,473 @@
+transformation Ecore2copyQVT (mm: ecore, help: helper, qvt: QVTRelation)  {
+
+	top relation Start_Package2Transformation {
+		
+		checkonly domain mm ePackage: ecore::EPackage {
+		};
+		
+		checkonly domain help helper: helper::Helper {
+			rootPackage = rPackage: ecore::EPackage{}
+		};
+		
+		enforce domain qvt t: QVTRelation::RelationalTransformation {
+		};
+		
+		when {
+			ePackage = rPackage;
+		}
+		
+		where {
+		 	Package2Transformation(ePackage, t);
+		}
+	}
+
+
+	relation Package2Transformation {
+		n:String;
+		
+		checkonly domain mm ePackage: ecore::EPackage {
+		  name = n
+		};
+	
+		enforce domain qvt t: QVTRelation::RelationalTransformation {
+		  name = 'Copy' + n,
+		  modelParameter = sourceMM: QVTBase::TypedModel {
+		  		name = 'source',
+		  		usedPackage = uPackage: ecore::EPackage{}
+		  },
+		  modelParameter = targetMM: QVTBase::TypedModel {
+		  		name = 'target',
+		  		usedPackage = uPackage: ecore::EPackage{}
+		  }
+		};
+		when {
+			ePackage.eContainer().oclIsUndefined();
+		}
+		where {
+			uPackage = ePackage;
+			MarkTypedModel(sourceMM, targetMM);
+			MarkTransformation(t);
+		}
+	}
+	
+	relation MarkTypedModel {
+		checkonly domain qvt sourceMM: QVTBase::TypedModel {};
+		checkonly domain qvt targetMM: QVTBase::TypedModel {};
+	}
+	
+	relation MarkTransformation {	
+		checkonly domain qvt t: QVTRelation::RelationalTransformation {};
+	}
+	
+	/*
+	* Create a Relation for each classifier in the metamodel
+	*/
+	top relation Class2CopyRelation {
+		sourceMM, targetMM : QVTBase::TypedModel;
+		checkonly domain mm eClass: ecore::EClass {
+		  	ePackage = ePackage: ecore::EPackage {},
+		  	name = n : String{},
+		  	abstract = false --only concrete classes get a copy relation
+		};
+		
+		enforce domain qvt rel: Relation {
+			name = 'Copy_' + ePackage.name + '_'  + n,
+			isTopLevel = true,
+			variable = sourceVar: ocl::ecore::Variable {},
+		 	variable = targetVar: ocl::ecore::Variable {},
+		 	_domain = sourceDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 	},
+		 	_domain = targetDom: QVTRelation::RelationDomain {
+		 		isEnforceable = true	
+		 	},
+		 	_transformation = transfo: QVTRelation::RelationalTransformation {},
+		 	_where = wherePattern: QVTBase::Pattern {
+		 		predicate = pred: QVTBase::Predicate {
+					conditionExpression =  markerCall: QVTRelation::RelationCallExp {}
+				}
+		 	}
+		};
+
+		when {
+			Package2Transformation(rootPackage(ePackage), transfo) or 
+				MarkTransformation(transfo);
+			MarkTypedModel(sourceMM, targetMM);
+		}
+		where {
+			Class2Domain(sourceMM, eClass, 'source', sourceVar, sourceDom);
+			Class2Domain(targetMM, eClass, 'target', targetVar, targetDom);
+			Class2MarkerCall(eClass, sourceVar, targetVar, markerCall);
+		}
+	}
+		
+	top relation SubClass2MarkerCallInWhen {
+		checkonly domain mm subClass: ecore::EClass {
+			eSuperTypes = superClass: ecore::EClass {}
+		};
+		
+		checkonly domain help helper: helper::Helper {  
+			_not = notOp : ecore::EOperation {},
+			boolean = booleanType: ecore::EDataType {}
+		};
+				
+		enforce domain qvt rel: Relation {
+			_when = whenPattern: QVTBase::Pattern {
+		 		predicate = pred: QVTBase::Predicate {
+					conditionExpression = notCall: ocl::ecore::OperationCallExp {
+						source = markerCall: QVTRelation::RelationCallExp {},
+						referredOperation = notOp,
+						eType = booleanType
+					}
+				}
+			}
+		};	
+		when {
+			Class2CopyRelation(superClass, rel);
+		}
+		where {
+			Class2MarkerCall(subClass, rel.variable->at(1), rel.variable->at(2), markerCall);
+		}
+	}
+
+	--create a marker relation for each class
+	top relation Class2MarkerRelation {
+		sourceMM, targetMM: QVTBase::TypedModel;
+		checkonly domain mm eClass: ecore::EClass {
+			ePackage = ePackage: ecore::EPackage {},
+		  	name = n : String{}
+		};
+		enforce domain qvt rel: Relation {
+			name = 'Mark_' + ePackage.name + '_' + n,
+		 	isTopLevel = false,
+		 	variable = sourceVar: ocl::ecore::Variable {},
+		 	variable = targetVar: ocl::ecore::Variable {},
+		 	_domain = sourceDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 	},
+		 	_domain = targetDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 		
+		 	},
+		 	_transformation = transfo: QVTRelation::RelationalTransformation {},
+		 	_where = wherePattern: QVTBase::Pattern {}
+		};
+		when {
+			Package2Transformation(rootPackage(ePackage), transfo) or 
+				MarkTransformation(transfo);
+			MarkTypedModel(sourceMM, targetMM);
+		}
+		where {
+			Class2Domain(sourceMM, eClass, 'source', sourceVar, sourceDom);
+			Class2Domain(targetMM, eClass, 'target', targetVar, targetDom);
+			eClass.eSuperTypes -> forAll(st | Class2MarkerCallInPattern(st, sourceVar, targetVar, wherePattern));
+		}
+	}
+	
+	/*
+	* Create a Relation for each attribute in the metamodel
+	*/
+	top relation Attribute2Relation {
+		sourceMM, targetMM: QVTBase::TypedModel;
+		checkonly domain mm attribute: ecore::EAttribute {
+		  	name = attrName: String {},
+		  	eType = attrType: ecore::EDataType {},
+		  	eContainingClass = eClass: ecore::EClass {
+				ePackage = ePackage: ecore::EPackage {},
+		  		name = className: String {}
+		  	}
+		};
+		
+		checkonly domain help helper: helper::Helper {  
+			_not = equalOp : ecore::EOperation {}
+		};
+		
+		enforce domain qvt rel: Relation {
+			name = 'CopyAttribute_' + className + '_' + attrName,
+			isTopLevel = true,
+			variable = attrVar: ocl::ecore::Variable {
+				name = 'local_' + attrName + 'Value',
+				eType = attrType
+			},
+		 	variable = sourceVar: ocl::ecore::Variable {},
+		 	variable = targetVar: ocl::ecore::Variable {},
+		 	variable = attrSourceVar: ocl::ecore::Variable {},
+		 	variable = attrTargetVar: ocl::ecore::Variable {},
+		 	_domain = sourceDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 	},
+		 	_domain = targetDom: QVTRelation::RelationDomain {
+		 		isEnforceable = true	
+		 	},
+		 	_transformation = transfo: QVTRelation::RelationalTransformation {},
+		 	_when = whenPattern: QVTBase::Pattern {
+		 		predicate = pred: QVTBase::Predicate {
+					conditionExpression =  markerCall: QVTRelation::RelationCallExp {}
+				}
+		 	}
+		};
+		
+
+		when {
+			Package2Transformation(rootPackage(ePackage), transfo) or 
+				MarkTransformation(transfo);
+			MarkTypedModel(sourceMM, targetMM);
+		}
+		
+		where {
+			Class2Domain(sourceMM, eClass, 'source', sourceVar, sourceDom);
+			Attribute2Template(attribute, 'source', attrVar, attrSourceVar, sourceDom.pattern.templateExpression);
+			Class2Domain(targetMM, eClass, 'target', targetVar, targetDom);
+			Attribute2Template(attribute, 'target', attrVar, attrTargetVar, targetDom.pattern.templateExpression);
+			Class2MarkerCall(eClass, sourceVar, targetVar, markerCall);
+		}
+	}
+
+	/*
+	* Create a Relation for each reference in the metamodel
+	*/
+	top relation Reference2Relation {
+		sourceMM, targetMM: QVTBase::TypedModel;
+		checkonly domain mm reference: ecore::EReference {
+		  	name = refName: String {},
+		  	eType = refType: ecore::EClass {},
+		  	eContainingClass = eClass: ecore::EClass {
+				ePackage = ePackage: ecore::EPackage {},
+		  		name = className: String {}
+		  	}
+		};
+	
+		enforce domain qvt rel: Relation {
+			_transformation = transfo: QVTRelation::RelationalTransformation {},
+		 	name = 'CopyReference_' + className + '_' + refName,
+			isTopLevel = true,
+			variable = sourceVar: ocl::ecore::Variable {},
+		 	variable = targetVar: ocl::ecore::Variable {},
+		 	variable = sourceRefVar: ocl::ecore::Variable {},
+		 	variable = targetRefVar: ocl::ecore::Variable {},
+		 	_domain = sourceDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 	},
+		 	_domain = targetDom: QVTRelation::RelationDomain {
+		 		isEnforceable = true	
+		 	},
+		 	_when = whenPattern: QVTBase::Pattern {
+		 		predicate = pred1: QVTBase::Predicate {
+					conditionExpression =  markerCall1: QVTRelation::RelationCallExp {}
+				},
+				predicate = pred2: QVTBase::Predicate {
+					conditionExpression =  markerCall2: QVTRelation::RelationCallExp {}
+				}
+		 	}
+		};
+		
+		when {
+			Package2Transformation(rootPackage(ePackage), transfo) or 
+				MarkTransformation(transfo);
+			MarkTypedModel(sourceMM, targetMM); 
+		}
+		
+		where {
+			Class2Domain(sourceMM, eClass, 'source', sourceVar, sourceDom);
+			Reference2Template(reference, 'source', sourceRefVar, sourceDom.pattern.templateExpression);
+			Class2Domain(targetMM, eClass, 'target', targetVar, targetDom);
+			Reference2Template(reference, 'target', targetRefVar, targetDom.pattern.templateExpression);
+			Class2MarkerCall(eClass, sourceVar, targetVar, markerCall1);
+			Class2MarkerCall(refType, sourceRefVar, targetRefVar, markerCall2);
+		}
+	}
+	
+	
+	/*
+	* For references that refer to elements outside the scope of the input domain
+	* create a relation that copies the reference if it is configured like that
+	*/
+	top relation ExternalReference2Relation {
+		sourceMM, targetMM: QVTBase::TypedModel;
+		checkonly domain mm reference: ecore::EReference {
+		  	name = refName: String {},
+		  	eType = refType: ecore::EClass {},
+		  	eContainingClass = eClass: ecore::EClass {
+				ePackage = ePackage: ecore::EPackage {},
+		  		name = className: String {}
+		  	}
+		};
+		
+		checkonly domain help helper: helper::Helper {
+			copyExternalReferences = true
+		};
+	
+		enforce domain qvt rel: Relation {
+			_transformation = transfo: QVTRelation::RelationalTransformation {},
+		 	name = 'CopyReference_' + className + '_' + refName + '_ext',
+			isTopLevel = true,
+			variable = sourceVar: ocl::ecore::Variable {},
+		 	variable = targetVar: ocl::ecore::Variable {},
+		 	variable = sourceRefVar: ocl::ecore::Variable {},
+		 	_domain = sourceDom: QVTRelation::RelationDomain {
+		 		isCheckable = true
+		 	},
+		 	_domain = targetDom: QVTRelation::RelationDomain {
+		 		isEnforceable = true	
+		 	},
+		 	_when = whenPattern: QVTBase::Pattern {
+		 		predicate = pred1: QVTBase::Predicate {
+					conditionExpression =  markerCall1: QVTRelation::RelationCallExp {}
+				}
+		 	}
+		};
+		
+		when {
+			Package2Transformation(rootPackage(ePackage), transfo) or 
+				MarkTransformation(transfo);
+			MarkTypedModel(sourceMM, targetMM); 
+			not Reference2Relation(reference, rel);
+		}
+		
+		where {
+			Class2Domain(sourceMM, eClass, 'source', sourceVar, sourceDom);
+			Reference2Template(reference, 'source', sourceRefVar, sourceDom.pattern.templateExpression);
+			Class2Domain(targetMM, eClass, 'target', targetVar, targetDom);
+			Reference2Template(reference, 'target', sourceRefVar, targetDom.pattern.templateExpression);
+			Class2MarkerCall(eClass, sourceVar, targetVar, markerCall1);
+		}
+	}
+		
+	top relation MarkBooleanType {
+		checkonly domain help helper: helper::Helper {
+			boolean = booleanType: ecore::EDataType {} 
+		};
+		where {
+			BooleanType(booleanType);
+		}
+	}
+	
+	relation BooleanType {
+		checkonly domain qvt booleanType: ecore::EDataType {};
+	}
+	
+	relation Class2Domain {
+		checkonly domain qvt mm: QVTBase::TypedModel {};
+		checkonly domain mm eClass: ecore::EClass {
+			name = className: String {} 
+		};
+		primitive domain prefix: String;
+		enforce domain qvt var: ocl::ecore::Variable {
+		 	name = prefix + className,
+		 	eType = eClass
+		};
+		enforce domain qvt dom: QVTRelation::RelationDomain {
+			--name = prefix + '_' + className,-- check if needed
+			typedModel = mm,
+			name = prefix + className, 
+			rootVariable = var,
+		 	pattern = p: QVTRelation::DomainPattern {
+		 		templateExpression = expr: QVTTemplate::ObjectTemplateExp {
+		 			referredClass = eClass,
+		 			eType = eClass,
+		 			bindsTo = var: ocl::ecore::Variable {}
+		 		},
+		 		bindsTo =  var: ocl::ecore::Variable {}
+		 	}
+		 }; 
+	}
+	
+	relation Attribute2Template {
+		attributeOwningClass : ecore::EClass;
+		checkonly domain mm attribute: ecore::EAttribute {
+			name = attrName: String {},
+			eType = attrType: ecore::EDataType {}
+		};
+		primitive domain prefix: String;
+		checkonly domain qvt attrValVar: ocl::ecore::Variable {};
+		enforce domain qvt attrVar: ocl::ecore::Variable {
+			name = prefix + '_' + attrName,
+			eType = attrType
+		};
+		enforce domain qvt expr: QVTTemplate::ObjectTemplateExp {
+		 	part = attrTemplate: QVTTemplate::PropertyTemplateItem {
+		 		referredProperty = attribute,
+		 		value = featureExp: ocl::ecore::VariableExp {
+		 			referredVariable = attrValVar,
+					eType = attrType
+				} 
+			},
+			eType = attributeOwningClass
+		};
+		where {
+			attributeOwningClass = attribute.eContainingClass;
+		}
+	}
+
+	relation Reference2Template {
+		referenceOwningClass : ecore::EClass;
+		checkonly domain mm reference: ecore::EReference {
+			name = refName: String {},
+			eType = refType: ecore::EClass {}
+		};
+		primitive domain prefix: String;
+		enforce domain qvt refVar: ocl::ecore::Variable {
+			name = prefix + '_' + refName,
+			eType = refType
+		};
+		enforce domain qvt expr: QVTTemplate::ObjectTemplateExp {
+		 	part = refTemplate: QVTTemplate::PropertyTemplateItem {
+		 		referredProperty = reference, 
+		 		value =  refTemp: QVTTemplate::ObjectTemplateExp {
+		 			bindsTo = refVar, 
+		 			referredClass = refType,
+		 			eType = refType
+		 		} 
+			},
+			eType = referenceOwningClass
+		 };
+		where {
+			referenceOwningClass = reference.eContainingClass;
+		}
+	}
+
+	relation Class2MarkerCall {
+		booleanType: ecore::EDataType;
+		checkonly domain mm eClass: ecore::EClass {};
+		checkonly domain qvt sourceVar: ocl::ecore::Variable {};
+		checkonly domain qvt targetVar: ocl::ecore::Variable {};
+		enforce domain qvt exp: QVTRelation::RelationCallExp {
+			eType = booleanType,
+			referredRelation = markerRelation: QVTRelation::Relation {},
+			argument = sourceVarExp: ocl::ecore::VariableExp {
+				referredVariable = sourceVar,
+				eType = sourceVar.eType
+			},
+			argument = targetVarExp : ocl::ecore::VariableExp {
+				referredVariable = targetVar,
+				eType = targetVar.eType
+			}
+		};
+		when {
+			Class2MarkerRelation(eClass, markerRelation);
+			BooleanType(booleanType);
+		}
+	}
+	
+	relation Class2MarkerCallInPattern {
+		checkonly domain mm eClass: ecore::EClass {};
+		checkonly domain qvt sourceVar: ocl::ecore::Variable{};
+		checkonly domain qvt targetVar: ocl::ecore::Variable{};	
+		enforce domain qvt pattern: QVTBase::Pattern {
+		 	predicate = pred: QVTBase::Predicate {
+				conditionExpression =  markerCall: QVTRelation::RelationCallExp {}
+			}
+		};		
+		where {
+			Class2MarkerCall(eClass, sourceVar, targetVar, markerCall);
+		}
+	}
+	
+	query rootPackage(pack : EPackage): EPackage {
+		if (pack.eContainer().oclAsType(ecore::EPackage).oclIsUndefined()) then
+			pack
+		else
+			rootPackage(pack.eContainer().oclAsType(ecore::EPackage))
+		endif
+	}
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<workflow>
+	<property name="javaModel" value="de.upb.m2m.quality.casestudies.results/output/Output_Java.xmi" />
+	<property name="qvtoModel" value="de.upb.m2m.quality.casestudies.results/output/Output_QVT-O.xmi" />
+	<property name="qvtrModel" value="de.upb.m2m.quality.casestudies.results/output/Output_QVT-R.xmi" />
+	<property name="src-gen" value="src-gen" />
+	
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<platformUri value=".."/>
+	</bean>
+	
+	<!-- instantiate metamodel -->
+	<bean id="mm_emf" class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+	
+	<!-- load Java model and store it in slots 'javaModel' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${javaModel}" />
+		<modelSlot value="javaModel" />
+	</component>
+	
+	<!-- load QVT-O model and store it in slots 'qvtoModel' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${qvtoModel}" />
+		<modelSlot value="qvtoModel" />
+	</component>
+	
+	<!-- load QVT-R model and store it in slots 'qvtrModel' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+		<uri value="platform:/resource/${qvtrModel}" />
+		<modelSlot value="qvtrModel" />
+	</component>
+
+	<!-- check java model -->
+	<component class="org.eclipse.xtend.check.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::Checks" />
+		<emfAllChildrenSlot value="javaModel" />
+	</component>
+	
+	<!-- check QVT-O model -->
+	<component class="org.eclipse.xtend.check.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::Checks" />
+		<emfAllChildrenSlot value="qvtoModel" />
+	</component>
+	
+	<!-- check QVT-R model -->
+	<component class="org.eclipse.xtend.check.CheckComponent">
+		<metaModel idRef="mm_emf"/>
+		<checkFile value="metamodel::Checks" />
+		<emfAllChildrenSlot value="qvtrModel" />
+	</component>
+
+	<!--  generate code -->
+	<component class="org.eclipse.xpand2.Generator">
+		<metaModel idRef="mm_emf"/>
+		<metaModel id="QualityMetrics" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+			<metaModelPackage value="de.upb.m2m.quality.model.QualityMetrics.QualityMetricsPackage"/>
+		</metaModel>
+		<metaModel id="QVTMetrics" class="org.eclipse.xtend.typesystem.emf.EmfMetaModel">
+			<metaModelPackage value="de.upb.m2m.quality.model.QVTMetrics.QVTMetricsPackage"/>
+		</metaModel>
+		<expand
+			value="template::GQMLaTeXTemplate::main(javaModel, qvtoModel) FOR qvtrModel" />
+		<outlet path="${src-gen}" >
+			<postprocessor class="beautifier.GQMLaTeXBeautifier" />
+		</outlet>
+	</component>
+</workflow>

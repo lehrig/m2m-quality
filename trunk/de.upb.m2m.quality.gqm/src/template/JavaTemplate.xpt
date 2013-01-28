@@ -1,0 +1,37 @@
+«IMPORT QualityMetrics»
+
+«EXTENSION template::QualityMetricsExtensions»
+
+«DEFINE main FOR Metrics»
+«FILE "Java-"+TrafoName+".txt"-»
+-------------------------------------------------
+Automatically measureable metrics for Java + EMF
+-------------------------------------------------
+GM2.6: «getValue("Number of Imports", this)» (Number of included modules (classes/compilation units/libraries))
+GM2.7: 0 (Number of applied reuse mechanisms (inheritance/logical composition))
+GM2.8: - (Average number of when clauses (QVT-R and QVT-O))
+GM2.9: «getValue("Number of Inner Classes", this)+getValue("Number of Member Variables", this)» (Number of intermediate structures)
+GM2.10: - (Average distinct phases per rule (QVT-O))
+-------------------------------------------------
+M1.1: «getAverage("Number of Parameters per Method", this)» (Average number of domains)
+M1.2: «getAverage("Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)", this)» (Average fan-out)
+M1.3: «getAverage("Method Dependency Depth", this)» (Average rule dependency depth)
+M1.4: «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+M9.1: «getValue("Source lines of Code", this)»  (Lines of Code)
+M9.2: 1 (Number of starts)
+M9.3: «getValue("Number of Methods", this)» (Number of rules)
+M9.4: 1 (Number of top-level rules)
+M9.5: «getAverage("Number of Parameters per Method", this)» (Average number of domains)
+M9.6: «getAverage("Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)", this)» (Average fan-out)
+M9.7: «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+M11.1: «getValue("Source lines of Code", this)»  (Lines of Code)
+M11.2: 1 (Number of starts)
+M11.3: «getValue("Number of Methods", this)» (Number of rules)
+M11.4: 1 (Number of top-level rules)
+M11.5: «getAverage("Number of Subobjects per Method", this)» (Average size of domain pattern)
+M11.6: «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+«ENDFILE»
+«ENDDEFINE»

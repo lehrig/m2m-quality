@@ -1,0 +1,7 @@
+Register these metamodels:
+- helper.ecore of this folder
+- http://www.eclipse.org/emf/2002/Ecore
+- http://schema.omg.org/spec/QVT/1.0/qvtbase.xml
+- http://schema.omg.org/spec/QVT/1.0/qvtrelation.xml
+- http://schema.omg.org/spec/QVT/1.0/qvttemplate.xml
+- http://www.eclipse.org/ocl/1.1.0/OCL

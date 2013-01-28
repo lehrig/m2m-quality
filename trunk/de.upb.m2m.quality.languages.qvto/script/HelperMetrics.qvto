@@ -1,0 +1,181 @@
+library HelperMetrics; 
+
+import Utilities;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+modeltype ECORE uses "http://www.eclipse.org/emf/2002/Ecore";
+modeltype OCL uses "http://www.eclipse.org/ocl/1.1.0/OCL";
+
+------------------------
+// Utility queries
+
+query NumHelpersInModule(transModule : QVTO::expressions::Module) : Integer { 
+	return transModule.eOperations[QVTO::expressions::Helper]->size();
+}
+
+query AllHelpers(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::Helper) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::Helper) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::Helper]) );
+}
+
+------------------------
+// Metrics
+
+query NumHelpers(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Helpers"; 
+	var value := transModules->iterate(	transModule : QVTO::expressions::Module;
+										acc : Integer = 0 |
+										acc + NumHelpersInModule(transModule) );
+	return getNewSimpleMetric(name, value);
+}
+
+query NumHelpersPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Helpers per Module"; 
+	var value := transModules->iterate(	transModule : QVTO::expressions::Module;
+										acc : Sequence(Integer) = Sequence{} |
+										acc->append(NumHelpersInModule(transModule)) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Helper";
+	var helpers := 	AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(_helper.subobjects()->size()) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumUnusedHelpers(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Unused Helpers"; 
+	var helpers := 	AllHelpers(transModules);								
+	var value := helpers->select(_helper | 
+									QVTO::expressions::ImperativeCallExp.allInstances()->select( impCall | 
+										impCall.referredOperation = _helper)->size()=0)	
+											->size();		
+	return getNewSimpleMetric(name, value);
+}
+
+query NumOverloadedHelpers(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Overloaded Helpers"; 
+	var helpers := 	AllHelpers(transModules);
+	var value := helpers->select(_helper | _helper.overridden <> null)->overridden->asSet()->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumHelpersPerHelperName(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Helpers per Helper Name";
+	var helpers := 	AllHelpers(transModules);
+	var helperNames := helpers->name->asSet();
+	var value := helperNames->iterate(	helperName : String;
+										acc : Sequence(Integer) = Sequence{} |
+										acc->append(
+											helpers->select(_helper | _helper.name = helperName)->size()
+											) 
+										);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumParamsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Helper";
+	var helpers := 	AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+										_helper.eParameters->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumUnusedParamsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Unused Parameters per Helper"; 
+	var helpers := 	AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+											_helper.eParameters->select(parameter | 
+												_helper.body.variable->select(variable |
+													variable.name = parameter.name
+												)->size()=0
+											)->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumInParamsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Helper parameters with IN direction per Helper";
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+											_helper.eParameters[QVTO::expressions::VarParameter]->select(parameter |
+												parameter.kind = QVTO::expressions::DirectionKind::_in
+											)->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumInOutParamsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Helper parameters with INOUT direction per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+											_helper.eParameters[QVTO::expressions::VarParameter]->select(parameter |
+												parameter.kind = QVTO::expressions::DirectionKind::_inout
+											)->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOutParamsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Helper parameters with OUT direction per Helper"; 
+	var helpers := AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+											_helper.eParameters[QVTO::expressions::VarParameter]->select(parameter |
+												parameter.kind = QVTO::expressions::DirectionKind::_out
+											)->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumVariablesPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Variables per Helper"; 
+	var helpers := 	AllHelpers(transModules);
+	var value := helpers->iterate(	_helper : QVTO::expressions::Helper;
+									acc : Sequence(Integer) = Sequence{} |
+									acc->append(
+											_helper.body.variable->size()
+										) 
+									);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumUnusedVariablesPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Unused Variables per Helper"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOpsOnCollectionsPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Operations on Collections per Helper"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query CyclomaticComplexityPerHelper(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Cyclomatic Complexity per Helper"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}*/

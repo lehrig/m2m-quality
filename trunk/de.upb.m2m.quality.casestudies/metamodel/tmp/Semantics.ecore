@@ -1,0 +1,1682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="semantics" nsURI="urn:semantics.ecore" nsPrefix="semantics">
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Boolean"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="BridgeFactory" instanceClassName="org.oslo.ocl20.semantics.factories.BridgeFactory"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.semantics.factories.BridgeFactory"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Class" instanceClassName="java.lang.Class"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.List"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Map" instanceClassName="java.util.Map"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.Map"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"
+        serializable="false"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="OclProcessor" instanceClassName="org.oslo.ocl20.OclProcessor"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.OclProcessor"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Double"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Double"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SemanticsVisitable">
+      <eOperations name="accept" eType="#/0/Object">
+        <eAnnotations source="body">
+          <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+        </eAnnotations>
+        <eParameters name="visitor" eType="#/0/OclVisitor"/>
+        <eParameters name="data" eType="#/0/Object"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SemanticsVisitor">
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="visitable" eType="#/0/SemanticsVisitable"/>
+        <eParameters name="data" eType="#/0/Object"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Set" instanceClassName="java.util.Set"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.Set"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="TypeFactory" instanceClassName="org.oslo.ocl20.semantics.factories.TypeFactory"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.semantics.factories.TypeFactory"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclVisitor" abstract="true">
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Tag"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/contexts/Constraint"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/VariableDeclaration"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/BooleanLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/UndefinedLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/TypeLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/IntegerLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/RealLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/StringLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/EnumLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/CollectionLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/TupleLiteralExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/OperationCallExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/PropertyCallExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/IteratorExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/IterateExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/VariableExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/IfExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/LetExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/OclMessageExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/OclMessageArg"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/UnspecifiedValueExp"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/OclAnyType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/DataType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Primitive"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/BooleanType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/IntegerType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/RealType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/StringType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/TupleType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/CollectionType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/SequenceType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/OrderedSetType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/SetType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/BagType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/OclModelElementType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/OclMessageType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/types/VoidType"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Property"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/CollectionKind"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/CollectionRange"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/CollectionLiteralPart"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/expressions/CollectionItem"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/contexts/ContextDeclaration"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/contexts/OperationContextDecl"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/contexts/PropertyContextDecl"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/model/contexts/ClassifierContextDecl"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/SendAction"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/EnumLiteral"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/CallAction"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Signal"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Namespace"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Environment"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Classifier"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+      <eOperations name="visit" eType="#/0/Object">
+        <eParameters name="host" eType="#/0/bridge/Enumeration"/>
+        <eParameters name="data" ordered="false" eType="#/0/Object"/>
+      </eOperations>
+    </eClassifiers>
+    <eSubpackages name="bridge" nsURI="urn:semantics.bridge.ecore" nsPrefix="semantics.bridge">
+      <eClassifiers xsi:type="ecore:EClass" name="CallAction" eSuperTypes="#/0/bridge/ModelElement">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+            eType="#/0/bridge/Operation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Classifier" eSuperTypes="#/0/bridge/Namespace">
+        <eOperations name="lookupProperty" eType="#/0/bridge/Property">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="Property pr = localLookupProperty(name);&#xA;if (pr!= null) return pr;&#xA;//if still not found, look in super types&#xA;java.util.Iterator i = this.getAllSuperTypes().iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;Classifier c = (Classifier) i.next();&#xA;&#x9;Property p = c.localLookupProperty(name);&#xA;&#x9;if (p!=null)&#xA;&#x9;&#x9;return p;&#xA;}&#xA;return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookupOperation" eType="#/0/bridge/Operation">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;Operation op = lookupCachedOp(name, types);&#xA;&#x9;&#x9;return op;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="lookupSignal" eType="#/0/bridge/Signal">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="conformsTo" eType="#/0/Boolean">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="if (this.equals(c))&#xA;&#x9;return Boolean.TRUE;&#xA;if (c.getClass() == org.oslo.ocl20.semantics.model.types.OclAnyType.class &amp;&amp; !(this instanceof org.oslo.ocl20.semantics.model.types.CollectionType))&#xA;&#x9;return Boolean.TRUE;&#xA;return Boolean.FALSE;"/>
+          </eAnnotations>
+          <eParameters name="c" eType="#/0/bridge/Classifier"/>
+        </eOperations>
+        <eOperations name="getDelegate" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return java.lang.Class.class;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getImplClass" eType="#/0/Class">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return org.oslo.ocl20.standard.lib.OclType.class;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="localLookupProperty" eType="#/0/bridge/Property">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="java.util.Iterator i = getProperties().iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;Property p = (Property) i.next();&#xA;&#x9;if (p.getName().equals(name))&#xA;&#x9;&#x9;return p;&#xA;}&#xA;return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="getAllSuperTypes" eType="#/0/List">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="List result = new java.util.Vector();&#xA;List x = this.getSuperTypes();&#xA;result.addAll(x);&#xA;java.util.Iterator i = x.iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;Classifier c = (Classifier)i.next();&#xA;&#x9;java.util.Iterator j = c.getAllSuperTypes().iterator();&#xA;&#x9;while (j.hasNext()) {&#xA;&#x9;&#x9;Classifier st = (Classifier)j.next();&#xA;&#x9;&#x9;if (!result.contains(st)) {&#xA;&#x9;&#x9;&#x9;result.add(st);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return result;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="createOperations">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="// no exception"/>
+          </eAnnotations>
+          <eParameters name="typeFactory" eType="#/0/TypeFactory"/>
+        </eOperations>
+        <eOperations name="addProperty">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="getProperties().add(prop);"/>
+          </eAnnotations>
+          <eParameters name="prop" eType="#/0/bridge/Property"/>
+        </eOperations>
+        <eOperations name="addOperation">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="getOperations().add(operation);"/>
+          </eAnnotations>
+          <eParameters name="operation" eType="#/0/bridge/Operation"/>
+        </eOperations>
+        <eOperations name="lookupOwnedElement" eType="#/0/bridge/ModelElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookupCachedOp" eType="#/0/bridge/Operation">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#xD;&#xA;&#x9;&#x9;java.util.Iterator i = getOperations().iterator();&#xD;&#xA;&#x9;&#x9;while (i.hasNext()) {&#xD;&#xA;&#x9;&#x9;&#x9;Operation op = (Operation) i.next();&#xD;&#xA;&#x9;&#x9;&#x9;String opName = op.getName();&#xD;&#xA;&#x9;&#x9;&#x9;if (opName.equals(name)) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;List parameters = op.getOwnedParameter();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;List parameterTypes = new ArrayList(parameters.size());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;for (Iterator iter = parameters.iterator(); iter.hasNext();) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Parameter parameter = (Parameter) iter.next();&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;parameterTypes.add(parameter.getType());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if (typesConform(parameterTypes, types))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return op;&#xD;&#xA;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;// if still not found, look in super types&#xD;&#xA;&#x9;&#x9;i = this.getSuperTypes().iterator();&#xD;&#xA;&#x9;&#x9;while (i.hasNext()) {&#xD;&#xA;&#x9;&#x9;&#x9;Classifier c = (Classifier) i.next();&#xD;&#xA;&#x9;&#x9;&#x9;Operation p = c.lookupOperation(name, types);&#xD;&#xA;&#x9;&#x9;&#x9;if (p != null)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;return p;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="getSuperTypes" eType="#/0/List">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return new java.util.Vector();"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="typesConform" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="if (paramTypes==null) paramTypes=new java.util.Vector();&#xA;if (argTypes==null) argTypes = new java.util.Vector();&#xA;if (paramTypes.size() != argTypes.size())&#xA;&#x9;return false;&#xA;for (int i = 0; i &lt; paramTypes.size(); i++) {&#xA;&#x9;Classifier paramType = (Classifier) paramTypes.get(i);&#xA;&#x9;Classifier argType = (Classifier) argTypes.get(i);&#xA;&#x9;if (argType == null)&#xA;&#x9;&#x9;return false;&#xA;&#x9;if (argType.conformsTo(paramType) == Boolean.FALSE)&#xA;&#x9;&#x9;return false;&#xA;}&#xA;return true;"/>
+          </eAnnotations>
+          <eParameters name="paramTypes" eType="#/0/List"/>
+          <eParameters name="argTypes" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="getEnvironmentWithoutParents" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;&#x9;&#x9;Environment env = this.getProcessor().getBridgeFactory().buildEnvironment();&#xA;&#x9;&#x9;&#x9;&#x9;Environment result = env.addNamespace(this);&#xA;&#x9;&#x9;&#x9;&#x9;result.setParent(null);&#xA;&#x9;&#x9;&#x9;&#x9;return result;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getEnvironmentWithParents" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;&#x9;&#x9;if (this.getNamespace() == null) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;Environment result = getEnvironmentWithoutParents();&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.setParent(this.getNamespace().getEnvironmentWithParents());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return result;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="operations" upperBound="-1"
+            eType="#/0/Object" transient="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="processor" lowerBound="1"
+            eType="#/0/OclProcessor" transient="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+            eType="#/0/bridge/Property"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#/0/bridge/Classifier">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DefinedClass" eSuperTypes="#/0/bridge/Classifier">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+            eType="#/0/bridge/DefinedOperation" containment="true" eOpposite="#/0/bridge/DefinedOperation/class"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="package" lowerBound="1"
+            eType="#/0/bridge/DefinedPackage" eOpposite="#/0/bridge/DefinedPackage/ownedType"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DefinedOperation" eSuperTypes="#/0/bridge/Operation">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="class" lowerBound="1"
+            eType="#/0/bridge/DefinedClass" eOpposite="#/0/bridge/DefinedClass/ownedOperation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1"
+            eType="#/0/bridge/Classifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DefinedPackage" eSuperTypes="#/0/bridge/Namespace">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
+            eType="#/0/bridge/DefinedClass" containment="true" eOpposite="#/0/bridge/DefinedClass/package"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="#/0/SemanticsVisitable">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1"
+            eType="#/0/bridge/Tag" eOpposite="#/0/bridge/Tag/element"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral" eSuperTypes="#/0/bridge/Property #/0/bridge/ModelElement">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" lowerBound="1"
+            eType="#/0/bridge/Enumeration" eOpposite="#/0/bridge/Enumeration/literal"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#/0/bridge/DataType">
+        <eOperations name="lookupEnumLiteral" eType="#/0/bridge/EnumLiteral">
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="literal" lowerBound="1"
+            upperBound="-1" eType="#/0/bridge/EnumLiteral" containment="true" eOpposite="#/0/bridge/EnumLiteral/enumeration"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Environment">
+        <eAnnotations source="see">
+          <details key="see" value=""/>
+        </eAnnotations>
+        <eOperations name="lookupLocal" eType="#/0/bridge/NamedElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="NamedElement nel = (NamedElement) getNamedElementEntrys().get(name);&#xA;if (nel == null) {&#xA;&#x9;java.util.Iterator i = this.getNamespaces().iterator();&#xA;&#x9;while (i.hasNext() &amp;&amp; nel == null) {&#xA;&#x9;&#x9;Namespace ns = (Namespace) i.next();&#xA;&#x9;&#x9;ModelElement me = ns.lookupOwnedElement(name);&#xA;&#x9;&#x9;if (me != null) {&#xA;&#x9;&#x9;&#x9;nel = bridgeFactory.buildNamedElement(name, me, Boolean.FALSE);&#xA;&#x9;&#x9;&#x9;if (nel != null) getNamedElementEntrys().put(name, nel);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return nel;&#xA;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookup" eType="#/0/bridge/ModelElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;NamedElement ne = lookupLocal(name);&#xA;&#x9;&#x9;if (ne != null) {&#xA;&#x9;&#x9;&#x9;return ne.getReferredElement();&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;if (getParent() != null ) {&#xA;&#x9;&#x9;&#x9;   return getParent().lookup(name);&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookupPathName" eType="#/0/bridge/ModelElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;if (names.size() == 1)&#xA;&#x9;&#x9;&#x9;return lookup((String) names.get(0));&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;NamedElement nel = lookupLocal((String) names.get(0));&#xA;&#x9;&#x9;&#x9;//if (nel == null) return null;&#xA;&#x9;&#x9;&#x9;if (nel!=null &amp;&amp; nel.getReferredElement() instanceof Namespace) {&#xA;&#x9;&#x9;&#x9;&#x9;// indicates a sub namespace of the namespace in which self is present&#xA;&#x9;&#x9;&#x9;&#x9;return nestedEnvironment().addNamespace((Namespace) nel.getReferredElement()).lookupPathName(names.subList(1, names.size()));&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;// search in surrounding namespace&#xA;&#x9;&#x9;&#x9;&#x9;if (getParent() != null ) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return getParent().lookupPathName(names);&#xA;&#x9;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}"/>
+          </eAnnotations>
+          <eParameters name="names" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="addElement" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="if (name == null) return this;&#xA;// the name must not clash with names already existing in this environment&#xA;if (getNamedElementEntrys().get(name) != null) {&#xA;&#x9;return this;&#xA;}&#xA;EnvironmentImpl result;&#xA;&#x9;result = (EnvironmentImpl) this.clone();&#xA;result.getNamedElementEntrys().put(name, org.oslo.ocl20.synthesis.CreationHelper.createNamedElement(name, elem, imp));&#xA;return result;&#xA;&#xA;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="elem" eType="#/0/bridge/ModelElement"/>
+          <eParameters name="imp" eType="#/0/Boolean"/>
+        </eOperations>
+        <eOperations name="addEnvironment" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="// the names must not clash with names already existing in this environment&#xA;java.util.Iterator i = ((EnvironmentImpl) env).getNamedElementEntrys().keySet().iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;String s = (String) i.next();&#xA;&#x9;if (this.getNamedElementEntrys().containsKey(s)) {&#xA;&#x9;&#x9;throw new RuntimeException(&quot;In Environment.addEnvironment: Name already exists in environemnt - &quot; + s);&#xA;&#x9;}&#xA;}&#xA;&#xA;EnvironmentImpl result = (EnvironmentImpl) this.clone();&#xA;&#xA;result.getNamespaces().addAll(((EnvironmentImpl) env).getNamespaces());&#xA;result.getNamedElementEntrys().putAll(((EnvironmentImpl) env).getNamedElementEntrys());&#xA;return result;"/>
+          </eAnnotations>
+          <eParameters name="env" eType="#/0/bridge/Environment"/>
+        </eOperations>
+        <eOperations name="addNamespace" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;EnvironmentImpl result;&#xA;&#x9;&#x9;result = (EnvironmentImpl) this.clone();&#xA;&#x9;&#x9;result.namespaces.add(ns);&#xA;&#x9;&#x9;return result.addElement(ns.getName(), ns, Boolean.FALSE);"/>
+          </eAnnotations>
+          <eParameters name="ns" eType="#/0/bridge/Namespace"/>
+        </eOperations>
+        <eOperations name="lookupImplicitProperty" eType="#/0/bridge/Property">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="NamedElement entry = lookupImplicitSourceForProperty(name);&#xA;if (entry != null) {&#xA;&#x9;org.oslo.ocl20.semantics.bridge.ModelElement source = entry.getReferredElement();&#xA;&#x9;if (source != null &amp;&amp; source instanceof org.oslo.ocl20.semantics.model.expressions.VariableDeclaration) {&#xA;&#x9;&#x9;source = ((org.oslo.ocl20.semantics.model.expressions.VariableDeclaration)source).getType();&#xA;&#x9;}&#xA;&#x9;if (source != null &amp;&amp; source instanceof org.oslo.ocl20.semantics.bridge.Classifier) {&#xA;&#x9;&#x9;Property result = ((org.oslo.ocl20.semantics.bridge.Classifier)source).lookupProperty(name);&#xA;&#x9;&#x9;return result;&#xA;&#x9;}&#xA;}&#xA;return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookupImplicitSourceForProperty" eType="#/0/bridge/NamedElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="// For each element&#xA;NamedElement foundElement = null;&#xA;java.util.Iterator i = getNamedElements().iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;NamedElement entry = (NamedElement)i.next();&#xA;&#x9;// Implicit element&#xA;&#x9;if (entry != null &amp;&amp; entry.getMayBeImplicit() != null &amp;&amp; entry.getMayBeImplicit().booleanValue()) {&#xA;&#x9;&#x9;// foundElement = entry.getType().lookupAttribute(name)&#xA;&#x9;&#x9;org.oslo.ocl20.semantics.bridge.Classifier type = entry.getType();&#xA;&#x9;&#x9;if (type != null) {&#xA;&#x9;&#x9;&#x9;Property foundProperty = type.lookupProperty(name);&#xA;&#x9;&#x9;&#x9;if (foundProperty != null)&#xA;&#x9;&#x9;&#x9;&#x9;foundElement = entry;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;// Search up&#xA;if (foundElement == null) {&#xA;&#x9;Environment parent = getParent();&#xA;&#x9;if (parent != null) return parent.lookupImplicitSourceForProperty(name);&#xA;&#x9;return null;&#xA;} else {&#xA;&#x9;return foundElement;&#xA;}"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="lookupImplicitOperation" eType="#/0/bridge/Operation">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="NamedElement ne = lookupImplicitSourceForOperation(name, types);&#xA;if (ne== null) {&#xA;    bridgeFactory.buildClassifier(this);&#xA;    //ErrorManager.reportError(null,&quot;Environment, Can't Find &quot;+name+params);&#xA;} else {&#xA;    org.oslo.ocl20.semantics.bridge.ModelElement source = ne.getReferredElement();&#xA;&#x9;if (source instanceof org.oslo.ocl20.semantics.model.expressions.VariableDeclaration) {&#xA;&#x9;&#x9;source = ((org.oslo.ocl20.semantics.model.expressions.VariableDeclaration)source).getType();&#xA;&#x9;}&#xA;&#x9;if (source instanceof org.oslo.ocl20.semantics.bridge.Classifier) {&#xA;&#x9;&#x9;org.oslo.ocl20.semantics.bridge.Operation result = ((org.oslo.ocl20.semantics.bridge.Classifier)source).lookupOperation(name, types);&#xA;&#x9;&#x9;return result;&#xA;&#x9;}&#xA;}&#xA;return null;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="nestedEnvironment" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;Environment result = new EnvironmentImpl();&#xA;&#x9;&#x9;result.setBridgeFactory(bridgeFactory);&#xA;&#x9;&#x9;result.setParent(this);&#xA;&#x9;&#x9;return result;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="lookupPathName" eType="#/0/bridge/Operation">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;if (names.size() == 2) {&#xA;&#x9;&#x9;&#x9;Classifier cl = (Classifier) lookup((String) names.get(0));&#xA;&#x9;&#x9;&#x9;String op_name = (String) names.get(1);&#xA;&#x9;&#x9;&#x9;return cl.lookupOperation(op_name, types);&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;ModelElement firstNamespace = lookupLocal((String) names.get(0)).getReferredElement();&#xA;&#x9;&#x9;&#x9;if (firstNamespace instanceof Namespace) {&#xA;&#x9;&#x9;&#x9;&#x9;// indicates a sub namespace of the namespace in which self is present&#xA;&#x9;&#x9;&#x9;&#x9;return nestedEnvironment().addNamespace((Namespace) firstNamespace).lookupPathName(names.subList(1, names.size()), types);&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;// search in surrounding namespace&#xA;&#x9;&#x9;&#x9;&#x9;return getParent().lookupPathName(names, types);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}"/>
+          </eAnnotations>
+          <eParameters name="names" eType="#/0/List"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="lookupImplicitSourceForOperation" eType="#/0/bridge/NamedElement">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="// For each element&#xA;NamedElement foundElement = null;&#xA;java.util.Iterator i = getNamedElements().iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;NamedElement entry = (NamedElement)i.next();&#xA;&#x9;// Implicit element&#xA;&#x9;if (entry.getMayBeImplicit().booleanValue()) {&#xA;&#x9;&#x9;// foundElement = entry.getType().lookupOperation(name, params)&#xA;&#x9;&#x9;org.oslo.ocl20.semantics.bridge.Operation foundOperation = entry.getType().lookupOperation(name, types);&#xA;&#x9;&#x9;if (foundOperation != null)&#xA;&#x9;&#x9;&#x9;foundElement = entry;&#xA;&#x9;}&#xA;}&#xA;// Search up&#xA;if (foundElement == null) {&#xA;&#x9;Environment parent = getParent();&#xA;&#x9;if (parent != null) return parent.lookupImplicitSourceForOperation(name, types);&#xA;&#x9;else return null;&#xA;// Return the found element&#xA;} else {&#xA;&#x9;return foundElement;&#xA;}"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="types" eType="#/0/List"/>
+        </eOperations>
+        <eOperations name="addVariableDeclaration" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="if (name == null) return this;&#xA;if (type == null) return this;&#xA;// the name must not clash with names already existing in this environment&#xA;if (getNamedElementEntrys().get(name) != null) return this;&#xA;org.oslo.ocl20.semantics.model.expressions.VariableDeclaration vd = org.oslo.ocl20.synthesis.CreationHelper.createVariableDeclaration(name);&#xA;vd.setType(type);&#xA;EnvironmentImpl result;&#xA;result = (EnvironmentImpl) this.clone();&#xA;result.getNamedElementEntrys().put(name, org.oslo.ocl20.synthesis.CreationHelper.createNamedElement(name, vd, clash));&#xA;return result;&#xA;&#xA;"/>
+          </eAnnotations>
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eParameters name="type" eType="#/0/bridge/Classifier"/>
+          <eParameters name="clash" eType="#/0/Boolean"/>
+        </eOperations>
+        <eOperations name="clone" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;EnvironmentImpl copy = new EnvironmentImpl();&#xA;&#x9;&#x9;copy.setBridgeFactory(bridgeFactory);&#xA;&#x9;&#x9;copy.getNamedElementEntrys().putAll(getNamedElementEntrys());&#xA;&#x9;&#x9;copy.getNamespaces().addAll(getNamespaces());&#xA;&#x9;&#x9;copy.parent = parent;&#xA;&#x9;&#x9;return copy;&#xA;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getProcessor" eType="#/0/OclProcessor">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((org.oslo.ocl20.semantics.factories.BridgeFactory)bridgeFactory).getProcessor();"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getEMPTY_ENV" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;EnvironmentImpl newEnvironment = new EnvironmentImpl(); &#xA;&#x9;&#x9;newEnvironment.setBridgeFactory(bridgeFactory);&#xA;&#x9;&#x9;return newEnvironment;"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="getNamedElements" eType="#/0/Set">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return new java.util.LinkedHashSet(getNamedElementEntrys().values());"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="setNamedElements">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="getNamedElementEntrys().clear();&#xA;java.util.Iterator i = namedElements.iterator();&#xA;while (i.hasNext()) {&#xA;&#x9;NamedElement ne = (NamedElement)i.next();&#xA;&#x9;this.getNamedElementEntrys().put(ne.getName(), ne);&#xA;}"/>
+          </eAnnotations>
+          <eParameters name="namedElements" eType="#/0/Set"/>
+        </eOperations>
+        <eOperations name="addVariableDeclaration" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="if (variableDeclaration == null) return this;&#xA;if (variableDeclaration.getName() == null) return this;&#xA;// the name must not clash with names already existing in this environment&#xA;if (getNamedElementEntrys().get(variableDeclaration.getName()) != null) return this;&#xA;EnvironmentImpl result;&#xA;result = (EnvironmentImpl) this.clone();&#xA;result.getNamedElementEntrys().put(variableDeclaration.getName(), org.oslo.ocl20.synthesis.CreationHelper.createNamedElement(variableDeclaration.getName(), variableDeclaration, clash));&#xA;return result;"/>
+          </eAnnotations>
+          <eParameters name="variableDeclaration" eType="#/0/model/expressions/VariableDeclaration"/>
+          <eParameters name="clash" eType="#/0/Boolean"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="bridgeFactory" lowerBound="1"
+            eType="#/0/BridgeFactory" transient="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="namedElementEntrys"
+            lowerBound="1" eType="#/0/Map" transient="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespaces" upperBound="-1"
+            eType="#/0/bridge/Namespace"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+            eType="#/0/bridge/Environment"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelElement" eSuperTypes="#/0/SemanticsVisitable #/0/bridge/Element">
+        <eOperations name="getDelegate" eType="#/0/Object"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#/0/bridge/Element">
+        <eOperations name="getType" eType="#/0/bridge/Classifier">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;&#x9;&#x9;if (referredElement instanceof org.oslo.ocl20.semantics.model.expressions.VariableDeclaration)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return ((org.oslo.ocl20.semantics.model.expressions.VariableDeclaration) referredElement).getType();&#xA;&#x9;&#x9;&#x9;&#x9;if (referredElement instanceof Classifier)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return (Classifier) referredElement;&#xA;&#x9;&#x9;&#x9;&#x9;//if (referredElement instanceof IState)&#xA;&#x9;&#x9;&#x9;&#x9;//    return ???&#xA;&#x9;&#x9;&#x9;&#x9;return null;"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="mayBeImplicit" lowerBound="1"
+            eType="#/0/Boolean" transient="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="referredElement" lowerBound="1"
+            eType="#/0/bridge/ModelElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="#/0/bridge/ModelElement">
+        <eOperations name="getEnvironmentWithoutParents" eType="#/0/bridge/Environment"/>
+        <eOperations name="getEnvironmentWithParents" eType="#/0/bridge/Environment">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;if (this.getNamespace() == null) {&#xA;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;Environment result = getEnvironmentWithoutParents();&#xA;&#x9;&#x9;&#x9;result.setParent(this.getNamespace().getEnvironmentWithParents());&#xA;&#x9;&#x9;&#x9;return result;&#xA;&#x9;&#x9;}"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="lookupOwnedElement" eType="#/0/bridge/ModelElement">
+          <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="&#x9;&#x9;if (getNamespace() == null)&#xA;&#x9;&#x9;    return getName();&#xA;&#x9;&#x9;return getNamespace().getFullName(sep)+sep+getName();"/>
+          </eAnnotations>
+          <eParameters name="sep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" lowerBound="1"
+            eType="#/0/bridge/Namespace"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="OclModelElementType" eSuperTypes="#/0/model/types/OclAnyType">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#/0/bridge/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
+            eType="#/0/bridge/Parameter" containment="true" eOpposite="#/0/bridge/Parameter/operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
+            eType="#/0/bridge/Classifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#/0/bridge/ModelElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+            eType="#/0/bridge/Classifier"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#/0/bridge/Operation"
+            eOpposite="#/0/bridge/Operation/ownedParameter"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#/0/model/types/OclAnyType">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#/0/bridge/ModelElement">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+            eType="#/0/bridge/Classifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SendAction" eSuperTypes="#/0/bridge/ModelElement">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="signal" lowerBound="1"
+            eType="#/0/bridge/Signal"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Signal" eSuperTypes="#/0/bridge/ModelElement">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterNames" upperBound="-1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parameterTypes" upperBound="-1"
+            eType="#/0/bridge/Classifier"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Tag" eSuperTypes="#/0/bridge/Element">
+        <eOperations name="accept" eType="#/0/Object">
+          <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+            <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="#/0/OclVisitor"/>
+          <eParameters name="data" eType="#/0/Object"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+            eType="#/0/bridge/Element" eOpposite="#/0/bridge/Element/tag"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="model" nsURI="urn:semantics.model.ecore" nsPrefix="semantics.model">
+      <eSubpackages name="contexts" nsURI="urn:semantics.model.contexts.ecore" nsPrefix="semantics.model.contexts">
+        <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDecl" eSuperTypes="#/0/model/contexts/ContextDeclaration">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredClassifier"
+              lowerBound="1" eType="#/0/bridge/Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#/0/SemanticsVisitable">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+              eType="#/0/model/contexts/ConstraintKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="defProperty" eType="#/0/bridge/Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="defOperation" eType="#/0/bridge/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
+              eType="#/0/model/contexts/ContextDeclaration" eOpposite="#/0/model/contexts/ContextDeclaration/constraint"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="ConstraintKind">
+          <eLiterals name="INIT"/>
+          <eLiterals name="DERIVE" value="1"/>
+          <eLiterals name="INV" value="2"/>
+          <eLiterals name="DEF" value="3"/>
+          <eLiterals name="PRE" value="4"/>
+          <eLiterals name="POST" value="5"/>
+          <eLiterals name="BODY" value="6"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ContextDeclaration" eSuperTypes="#/0/SemanticsVisitable">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredNamespace"
+              lowerBound="1" eType="#/0/bridge/Namespace"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
+              eType="#/0/model/contexts/Constraint" containment="true" eOpposite="#/0/model/contexts/Constraint/context"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DefinedOperation" eSuperTypes="#/0/bridge/Operation">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+              eType="#/0/model/contexts/Constraint"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="DefinedProperty" eSuperTypes="#/0/bridge/Property">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+              eType="#/0/model/contexts/Constraint"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OperationContextDecl" eSuperTypes="#/0/model/contexts/ContextDeclaration">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation"
+              lowerBound="1" eType="#/0/bridge/Operation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PropertyContextDecl" eSuperTypes="#/0/model/contexts/ContextDeclaration">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty"
+              lowerBound="1" eType="#/0/bridge/Property"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="expressions" nsURI="urn:semantics.model.expressions.ecore"
+          nsPrefix="semantics.model.expressions">
+        <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanSymbol" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+              defaultValueLiteral="false"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#/0/model/expressions/OclExpression"
+              containment="true" eOpposite="#/0/model/expressions/OclExpression/appliedProperty"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionItem" eSuperTypes="#/0/model/expressions/CollectionLiteralPart">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="item" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EEnum" name="CollectionKind">
+          <eLiterals name="COLLECTION"/>
+          <eLiterals name="SET" value="1"/>
+          <eLiterals name="SEQUENCE" value="2"/>
+          <eLiterals name="BAG" value="3"/>
+          <eLiterals name="ORDERED_SET" value="4"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+              eType="#/0/model/expressions/CollectionKind"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+              eType="#/0/model/expressions/CollectionLiteralPart" containment="true"
+              eOpposite="#/0/model/expressions/CollectionLiteralPart/collectionLiteralExp"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPart" eSuperTypes="#/0/SemanticsVisitable">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="collectionLiteralExp"
+              lowerBound="1" eType="#/0/model/expressions/CollectionLiteralExp" eOpposite="#/0/model/expressions/CollectionLiteralExp/parts"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+              eType="#/0/bridge/Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionRange" eSuperTypes="#/0/model/expressions/CollectionLiteralPart">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="last" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="first" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredEnumLiteral"
+              lowerBound="1" eType="#/0/bridge/EnumLiteral"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IfExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExp" eSuperTypes="#/0/model/expressions/NumericalLiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerSymbol" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IterateExp" eSuperTypes="#/0/model/expressions/LoopExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
+              eType="#/0/model/expressions/VariableDeclaration" containment="true"
+              eOpposite="#/0/model/expressions/VariableDeclaration/baseExp"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IteratorExp" eSuperTypes="#/0/model/expressions/LoopExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="LetExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+              eType="#/0/model/expressions/VariableDeclaration" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="LiteralExp" eSuperTypes="#/0/model/expressions/OclExpression"/>
+        <eClassifiers xsi:type="ecore:EClass" name="LoopExp" eSuperTypes="#/0/model/expressions/CallExp">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression" containment="true" eOpposite="#/0/model/expressions/OclExpression/loopExp"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="iterators" lowerBound="1"
+              upperBound="-1" eType="#/0/model/expressions/VariableDeclaration" containment="true"
+              eOpposite="#/0/model/expressions/VariableDeclaration/loopExpr"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ModelPropertyCallExp" eSuperTypes="#/0/model/expressions/CallExp"/>
+        <eClassifiers xsi:type="ecore:EClass" name="NumericalLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp"/>
+        <eClassifiers xsi:type="ecore:EClass" name="OclExpression" eSuperTypes="#/0/bridge/ModelElement">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMarkedPre" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="loopExp" eType="#/0/model/expressions/LoopExp"
+              eOpposite="#/0/model/expressions/LoopExp/body"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="operationCallExp"
+              lowerBound="1" eType="#/0/model/expressions/OperationCallExp" eOpposite="#/0/model/expressions/OperationCallExp/arguments"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="propertyCallExp"
+              lowerBound="1" eType="#/0/model/expressions/PropertyCallExp" eOpposite="#/0/model/expressions/PropertyCallExp/qualifiers"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+              eType="#/0/bridge/Classifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="appliedProperty"
+              eType="#/0/model/expressions/CallExp" eOpposite="#/0/model/expressions/CallExp/source"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initialisedVariable"
+              eType="#/0/model/expressions/VariableDeclaration" eOpposite="#/0/model/expressions/VariableDeclaration/initExpression"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OclMessageArg">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#/0/model/expressions/OclExpression"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="unspecified" eType="#/0/model/expressions/UnspecifiedValueExp"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OclMessageExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+              eType="#/0/model/expressions/OclMessageArg"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+              eType="#/0/model/expressions/OclExpression"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#/0/model/expressions/ModelPropertyCallExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation"
+              lowerBound="1" eType="#/0/bridge/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+              eType="#/0/model/expressions/OclExpression" containment="true" eOpposite="#/0/model/expressions/OclExpression/operationCallExp"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#/0/model/expressions/ModelPropertyCallExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="qualifiers" upperBound="-1"
+              eType="#/0/model/expressions/OclExpression" containment="true" eOpposite="#/0/model/expressions/OclExpression/propertyCallExp"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty"
+              lowerBound="1" eType="#/0/bridge/Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp" eSuperTypes="#/0/model/expressions/NumericalLiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+              defaultValueLiteral="0"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringSymbol" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="tuplePart" upperBound="-1"
+              eType="#/0/model/expressions/VariableDeclaration" eOpposite="#/0/model/expressions/VariableDeclaration/tupleLiteralExp"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TypeLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="literalType" lowerBound="1"
+              eType="#/0/bridge/Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UndefinedLiteralExp" eSuperTypes="#/0/model/expressions/LiteralExp">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="UnspecifiedValueExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#/0/bridge/ModelElement">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="variableExps" upperBound="-1"
+              eType="#/0/model/expressions/VariableExp" eOpposite="#/0/model/expressions/VariableExp/referredVariable"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="tupleLiteralExp"
+              lowerBound="1" eType="#/0/model/expressions/TupleLiteralExp" eOpposite="#/0/model/expressions/TupleLiteralExp/tuplePart"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="loopExpr" eType="#/0/model/expressions/LoopExp"
+              eOpposite="#/0/model/expressions/LoopExp/iterators"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+              eType="#/0/bridge/Classifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="baseExp" eType="#/0/model/expressions/IterateExp"
+              eOpposite="#/0/model/expressions/IterateExp/result"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" eType="#/0/model/expressions/OclExpression"
+              containment="true" eOpposite="#/0/model/expressions/OclExpression/initialisedVariable"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VariableExp" eSuperTypes="#/0/model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable"
+              lowerBound="1" eType="#/0/model/expressions/VariableDeclaration" eOpposite="#/0/model/expressions/VariableDeclaration/variableExps"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="types" nsURI="urn:semantics.model.types.ecore" nsPrefix="semantics.model.types">
+        <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#/0/model/types/CollectionType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#/0/bridge/Primitive">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CollectionType" eSuperTypes="#/0/bridge/DataType">
+          <eOperations name="getBaseElementType" eType="#/0/bridge/Classifier"/>
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" lowerBound="1"
+              eType="#/0/bridge/Classifier"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#/0/model/types/RealType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OclAnyType" eSuperTypes="#/0/bridge/DataType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OclMessageType" eSuperTypes="#/0/bridge/Classifier">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="OrderedSetType" eSuperTypes="#/0/model/types/CollectionType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RealType" eSuperTypes="#/0/bridge/Primitive">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SequenceType" eSuperTypes="#/0/model/types/CollectionType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SetType" eSuperTypes="#/0/model/types/CollectionType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#/0/bridge/Primitive">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="#/0/bridge/DataType">
+          <eOperations name="getNames" eType="#/0/List"/>
+          <eOperations name="getTypes" eType="#/0/List"/>
+          <eOperations name="project" eType="#/0/model/types/TupleType">
+            <eParameters name="names" eType="#/0/Set"/>
+          </eOperations>
+          <eOperations name="join" eType="#/0/model/types/TupleType">
+            <eParameters name="tupletype" eType="#/0/model/types/TupleType"/>
+          </eOperations>
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="partType" upperBound="-1"
+              eType="#/0/model/expressions/VariableDeclaration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TypeType" eSuperTypes="#/0/bridge/Primitive">
+          <eOperations name="getClassifier" eType="#/0/bridge/Classifier"/>
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#/0/model/types/StringType #/0/model/types/OrderedSetType #/0/model/types/IntegerType #/0/model/types/BooleanType #/0/model/types/SetType #/0/model/types/SequenceType #/0/bridge/OclModelElementType #/0/model/types/BagType">
+          <eOperations name="accept" eType="#/0/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="#/0/OclVisitor"/>
+            <eParameters name="data" eType="#/0/Object"/>
+          </eOperations>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EPackage name="semantics" nsURI="urn:semantics.ecore" nsPrefix="semantics">
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Boolean"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="BridgeFactory" instanceClassName="org.oslo.ocl20.semantics.factories.BridgeFactory"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.semantics.factories.BridgeFactory"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Class" instanceClassName="java.lang.Class"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.List"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Map" instanceClassName="java.util.Map"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.Map"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"
+        serializable="false"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="OclProcessor" instanceClassName="org.oslo.ocl20.OclProcessor"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.OclProcessor"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Double"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.lang.Double"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Set" instanceClassName="java.util.Set"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="java.util.Set"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="TypeFactory" instanceClassName="org.oslo.ocl20.semantics.factories.TypeFactory"
+        serializable="false">
+      <eAnnotations source="instance">
+        <details key="instance" value="org.oslo.ocl20.semantics.factories.TypeFactory"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eSubpackages name="model" nsURI="urn:semanticsQvt.model.ecore" nsPrefix="semanticsQvt.model">
+      <eSubpackages name="qvtbase" nsURI="urn:semanticsQvt.model.qvtbase.ecore" nsPrefix="semanticsQvt.model.qvtbase">
+        <eClassifiers xsi:type="ecore:EClass" name="Domain" eSuperTypes="SemanticsOcl.ecore#//bridge/NamedElement">
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckable" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforcable" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="typedModel" eType="#/1/model/qvtbase/TypedModel"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="SemanticsOcl.ecore#//bridge/DefinedOperation">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="queryExpression"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="FunctionParameter" eSuperTypes="SemanticsOcl.ecore#//bridge/Parameter SemanticsOcl.ecore#//model/expressions/VariableDeclaration">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((OclVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Pattern" eSuperTypes="SemanticsOcl.ecore#//bridge/Element">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="whereOwner" lowerBound="1"
+              eType="#/1/model/qvtrelation/Relation" eOpposite="#/1/model/qvtrelation/Relation/where"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="whenOwner" eType="#/1/model/qvtrelation/Relation"
+              eOpposite="#/1/model/qvtrelation/Relation/when"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" upperBound="-1"
+              eType="#/1/model/qvtbase/Predicate" containment="true" eOpposite="#/1/model/qvtbase/Predicate/pattern"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="bindsTo" upperBound="-1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/VariableDeclaration"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="SemanticsOcl.ecore#//bridge/Element">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="contitionExpression"
+              lowerBound="1" eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+              eType="#/1/model/qvtbase/Pattern" eOpposite="#/1/model/qvtbase/Pattern/predicate"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="SemanticsOcl.ecore#//bridge/NamedElement">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
+              eType="#/1/model/qvtbase/Domain" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="#/1/model/qvtbase/Rule"
+              eOpposite="#/1/model/qvtbase/Rule/overriden"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="overriden" upperBound="-1"
+              eType="#/1/model/qvtbase/Rule" eOpposite="#/1/model/qvtbase/Rule/overrides"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
+              eType="#/1/model/qvtbase/Transformation" eOpposite="#/1/model/qvtbase/Transformation/rule"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="SemanticsOcl.ecore#//bridge/DefinedClass SemanticsOcl.ecore#//bridge/DefinedPackage">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTag" upperBound="-1"
+              eType="ecore:EClass SemanticsOcl.ecore#//bridge/Tag" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="modelParameter" upperBound="-1"
+              eType="#/1/model/qvtbase/TypedModel" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#/1/model/qvtbase/Transformation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rule" upperBound="-1"
+              eType="#/1/model/qvtbase/Rule" containment="true" eOpposite="#/1/model/qvtbase/Rule/transformation"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TypedModel" eSuperTypes="SemanticsOcl.ecore#//bridge/NamedElement SemanticsOcl.ecore#//SemanticsVisitable">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOn" upperBound="-1"
+              eType="#/1/model/qvtbase/TypedModel"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="usedPackage" lowerBound="1"
+              upperBound="-1" eType="ecore:EClass SemanticsOcl.ecore#//bridge/Namespace"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="qvtrelation" nsURI="urn:semanticsQvt.model.qvtrelation.ecore"
+          nsPrefix="semanticsQvt.model.qvtrelation">
+        <eClassifiers xsi:type="ecore:EClass" name="DomainPattern" eSuperTypes="#/1/model/qvtbase/Pattern">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="templateExpression"
+              eType="#/1/model/qvttemplate/TemplateExp" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Key" eSuperTypes="SemanticsOcl.ecore#//bridge/Element">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="identifies" lowerBound="1"
+              eType="ecore:EClass SemanticsOcl.ecore#//bridge/Classifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#/1/model/qvtrelation/RelationalTransformation"
+              eOpposite="#/1/model/qvtrelation/RelationalTransformation/ownedKey"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="part" lowerBound="1"
+              upperBound="-1" eType="ecore:EClass SemanticsOcl.ecore#//bridge/Property"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Relation" eSuperTypes="#/1/model/qvtbase/Rule">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTopLevel" lowerBound="1"
+              eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="#/1/model/qvtbase/Pattern"
+              containment="true" eOpposite="#/1/model/qvtbase/Pattern/whereOwner"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/VariableDeclaration"
+              containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="operationalImpl"
+              upperBound="-1" eType="#/1/model/qvtrelation/RelationImplementation"
+              eOpposite="#/1/model/qvtrelation/RelationImplementation/relation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="when" eType="#/1/model/qvtbase/Pattern"
+              containment="true" eOpposite="#/1/model/qvtbase/Pattern/whenOwner"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RelationCallExp" eSuperTypes="SemanticsOcl.ecore#//model/expressions/OclExpression">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredRelation"
+              eType="#/1/model/qvtrelation/Relation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RelationDomain" eSuperTypes="#/1/model/qvtbase/Domain">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rootVariable" lowerBound="1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/VariableDeclaration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#/1/model/qvtrelation/DomainPattern"
+              containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RelationImplementation" eSuperTypes="SemanticsOcl.ecore#//bridge/Element">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="relation" eType="#/1/model/qvtrelation/Relation"
+              eOpposite="#/1/model/qvtrelation/Relation/operationalImpl"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="impl" lowerBound="1"
+              eType="ecore:EClass SemanticsOcl.ecore#//bridge/Operation"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="inDirectionOf" lowerBound="1"
+              eType="#/1/model/qvtbase/TypedModel"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="RelationalTransformation" eSuperTypes="#/1/model/qvtbase/Transformation">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKey" upperBound="-1"
+              eType="#/1/model/qvtrelation/Key" containment="true" eOpposite="#/1/model/qvtrelation/Key/transformation"/>
+        </eClassifiers>
+      </eSubpackages>
+      <eSubpackages name="qvttemplate" nsURI="urn:semanticsQvt.model.qvttemplate.ecore"
+          nsPrefix="semanticsQvt.model.qvttemplate">
+        <eClassifiers xsi:type="ecore:EClass" name="ColletionTemplateExp" eSuperTypes="#/1/model/qvttemplate/TemplateExp">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refferedCollectionType"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/types/CollectionType"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ObjectTemplateExp" eSuperTypes="#/1/model/qvttemplate/TemplateExp">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="refferedClass" lowerBound="1"
+              eType="ecore:EClass SemanticsOcl.ecore#//bridge/Classifier"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1"
+              eType="#/1/model/qvttemplate/PropertyTemplateItem" containment="true"
+              eOpposite="#/1/model/qvttemplate/PropertyTemplateItem/objContainer"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="PropertyTemplateItem" eSuperTypes="SemanticsOcl.ecore#//bridge/Element">
+          <eOperations name="accept" eType="#/1/Object">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+              <details key="body" value="return ((QvtVisitor)visitor).visit(this,data);"/>
+            </eAnnotations>
+            <eParameters name="visitor" eType="ecore:EClass SemanticsOcl.ecore#//OclVisitor"/>
+            <eParameters name="data" eType="#/1/Object"/>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
+              eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty"
+              lowerBound="1" eType="ecore:EClass SemanticsOcl.ecore#//bridge/Property"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="objContainer" lowerBound="1"
+              eType="#/1/model/qvttemplate/ObjectTemplateExp" eOpposite="#/1/model/qvttemplate/ObjectTemplateExp/part"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TemplateExp" abstract="true" eSuperTypes="SemanticsOcl.ecore#//model/expressions/LiteralExp">
+          <eStructuralFeatures xsi:type="ecore:EReference" name="bindsTo" eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/VariableDeclaration"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OclExpression"
+              containment="true"/>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="qvt" nsURI="urn:semanticsQvt.qvt.ecore" nsPrefix="semanticsQvt.qvt">
+      <eClassifiers xsi:type="ecore:EClass" name="QvtVisitor" abstract="true" eSuperTypes="SemanticsOcl.ecore#//OclVisitor">
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/RelationDomain"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/RelationalTransformation"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/Relation"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/RelationCallExp"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvttemplate/ObjectTemplateExp"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvttemplate/PropertyTemplateItem"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="ecore:EClass SemanticsOcl.ecore#//model/expressions/OperationCallExp"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/DomainPattern"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/Key"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtbase/Predicate"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtbase/Pattern"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtrelation/RelationImplementation"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="ecore:EClass SemanticsOcl.ecore#//bridge/Tag"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtbase/TypedModel"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+        <eOperations name="visit" eType="#/1/Object">
+          <eParameters name="host" eType="#/1/model/qvtbase/Function"/>
+          <eParameters name="data" ordered="false" eType="#/1/Object"/>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+</xmi:XMI>

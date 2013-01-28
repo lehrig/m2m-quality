@@ -1,0 +1,44 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation has three in/out domains as it transforms two source 
+ * models to their intersection target model. It builds the intersection by
+ * comparing its two source models element by element regarding equal names.
+ * 
+ * Implementation time: 20 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule11" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source First source shapes model
+ * @param source2 Second source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule11(in source:SHAPES, in source2:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the source model, then select every model element
+	 * of source and source2 and delete every element in the target for which
+	 * holds:
+	 * - it is part of source
+	 * - its name is _not_ in the list of model element names of source2
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var modelElementsSource
+				:= copy[RootBlock]
+					.allSubobjectsOfKind(ModelElement)[ModelElement];
+		var modelElementsSource2
+				:= source2.rootObjects()[RootBlock]
+					.allSubobjectsOfKind(ModelElement)[ModelElement];
+		var source2Names := modelElementsSource2->name;
+		
+		modelElementsSource
+			->forEach(sourceME) {
+				if(source2Names->excludes(sourceME.name)) then {
+					target.removeElement(sourceME);
+				}endif;
+			}
+	}
+}

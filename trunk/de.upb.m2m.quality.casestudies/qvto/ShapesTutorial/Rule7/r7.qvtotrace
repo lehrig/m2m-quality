@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trace="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore">
+  <traceRecords>
+    <mappingOperation name="root2root" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//root2root"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="RootBlock">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#/"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RootBlock">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#/"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="arrow2circle" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//arrow2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Arrow">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#//@modelElement.2"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#//@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="arrow2circle" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//arrow2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Arrow">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#//@modelElement.4"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#//@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2arrow" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//circle2arrow"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#//@modelElement.0"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Arrow">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#//@modelElement.4"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2arrow" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//circle2arrow"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#//@modelElement.1"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Arrow">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#//@modelElement.5"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2arrow" package="Rule7" module="Rule7">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule7/r7.qvtox#//circle2arrow"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/source.shapes#//@modelElement.3"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Arrow">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule7/target.shapes#//@modelElement.6"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+</trace:Trace>

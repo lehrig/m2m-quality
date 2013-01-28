@@ -1,0 +1,48 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a refactoring that rewrites mathematical
+ * expressions without changing their value. Concretely, these two refactorings
+ * are applied:
+ * 1) string1+'*'+string2 to string2+'*'+string1 if string1 <> string2
+ * 2) string1+'*'+string1 to string1+'^2'
+ * 
+ * Implementation time: 20 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule12" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule12(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the source model, then select every model element
+	 * and check for each element's name whether a refactoring should be
+	 * applied to it. If this is the case, the name is refactored accordingly.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var modelElements
+				:= copy[RootBlock]
+					.allSubobjectsOfKind(ModelElement)[ModelElement];
+		
+		modelElements
+			->forEach(modelElement) {
+				var name := modelElement.name;
+				if(name.indexOf("*") <> -1) then {
+					var before := name.substringBefore("*");
+					var after := name.substringAfter("*");
+					
+					if(before = after) then {
+						modelElement.name := before+"^2";
+					}
+					else {
+						modelElement.name := after+"*"+before;
+					} endif;
+				} endif;
+			}
+	}
+}

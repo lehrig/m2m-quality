@@ -1,0 +1,3 @@
+Write a copy transformation, which copies the intersection of two models, where two model elements are equal if their name is equal.
+Concrete, intersect "source.shapes" and "source2.shapes".
+Tip: Use three domains in your transformation.

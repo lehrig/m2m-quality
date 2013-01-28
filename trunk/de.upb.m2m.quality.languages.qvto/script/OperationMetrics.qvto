@@ -1,0 +1,57 @@
+library OperationMetrics; 
+
+import Utilities;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+------------------------
+// Utility queries
+
+query AllOperations(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::ImperativeOperation) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::ImperativeOperation) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::ImperativeOperation]) );
+}
+
+------------------------
+// Metrics
+
+query NumSubobjectsPerOperation(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Operation"; 
+	var operations := AllOperations(transModules);
+	var value := operations->iterate(	
+						_mapping : QVTO::expressions::ImperativeOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.subobjects()
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOperations(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Operations";
+	var operations := AllOperations(transModules); 
+	var value := operations->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumParamsPerOperation(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Operation"; 
+	var operations := AllOperations(transModules);
+	var value := operations->iterate(	
+						_mapping : QVTO::expressions::ImperativeOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.eParameters
+							->size()
+						) 
+					);
+	// add model params
+	value := value->append(transModules![QVTO::expressions::OperationalTransformation].modelParameter->size());
+	return getNewAggregatedIntegerMetric(name, value);
+}
