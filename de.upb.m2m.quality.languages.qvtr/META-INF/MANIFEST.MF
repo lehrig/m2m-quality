@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: QvtrQuality
+Bundle-SymbolicName: de.upb.m2m.quality.languages.qvtr;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
+ de.upb.m2m.quality.configurator;bundle-version="0.1.0",
+ de.upb.m2m.quality.parser;bundle-version="1.0.0",
+ de.ikv.medini.qvt.plugin;bundle-version="1.7.0",
+ org.eclipse.emf.ecore;bundle-version="2.7.0",
+ org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.emf.ecore.xmi,
+ de.upb.m2m.quality.model;bundle-version="1.0.0",
+ de.upb.m2m.quality.languages;bundle-version="1.0.0"
+Import-Package: org.eclipse.emf.ecore.xmi.impl

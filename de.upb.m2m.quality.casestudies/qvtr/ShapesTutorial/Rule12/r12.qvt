@@ -1,0 +1,197 @@
+-- The magic of this solution is relation ModelElementName2ModelElementName_Pattern1 and ModelElementName2ModelElementName_Pattern2, which have precedence over relation ModelElementName2ModelElementName by using negation;
+--  ModelElementName2ModelElementName_Pattern1 requires that ModelElementName2ModelElementName_Pattern2 not matches: instead claiming that this relation not holds, a simple inequality condition is used in this solution
+transformation r12(source : Shapes, target : Shapes) {
+	
+	top relation ArrowSource2ArrowSource {
+		
+		enforce domain source sourceArrow : Shapes::Arrow {
+			source = sourceArrowSource : Shapes::Shape {
+			}
+		};
+		
+		enforce domain target targetArrow : Shapes::Arrow {
+			source = targetArrowSource : Shapes::Shape {
+			}
+		};
+		
+		when {
+			Source2Target(sourceArrow, targetArrow);
+			Source2Target(sourceArrowSource, targetArrowSource);
+		}
+		
+	}
+	
+	top relation ArrowTarget2ArrowTarget {
+		
+		enforce domain source sourceArrow : Shapes::Arrow {
+			target = sourceArrowTarget : Shapes::Shape {
+			}
+		};
+		
+		enforce domain target targetArrow : Shapes::Arrow {
+			target = targetArrowTarget : Shapes::Shape {
+			}
+		};
+		
+		when {
+			Source2Target(sourceArrow, targetArrow);
+			Source2Target(sourceArrowTarget, targetArrowTarget);
+		}
+		
+	}
+	
+	top relation ModelElementName2ModelElementName {
+		
+		varName : String;
+		
+		enforce domain source sourceModelElement : Shapes::ModelElement {
+			name = varName
+		};
+		
+		enforce domain target targetModelElement : Shapes::ModelElement {
+			name = varName
+		};
+		
+		when {
+			Source2Target(sourceModelElement, targetModelElement);
+			not ModelElementName2ModelElementName_Pattern1(sourceModelElement,targetModelElement);
+			not ModelElementName2ModelElementName_Pattern2(sourceModelElement,targetModelElement);
+		}
+		
+	}
+	
+	top relation ModelElementName2ModelElementName_Pattern1 {
+		
+		string1,string2 : String;
+		
+		enforce domain source sourceModelElement : Shapes::ModelElement {
+			name = string1+'*'+string2
+		};
+		
+		enforce domain target targetModelElement : Shapes::ModelElement {
+			name = string2+'*'+string1
+		};
+		
+		when {
+			Source2Target(sourceModelElement, targetModelElement);
+			string1<>string2;
+		}
+		
+	}
+	
+	top relation ModelElementName2ModelElementName_Pattern2 {
+		
+		string1 : String;
+		
+		enforce domain source sourceModelElement : Shapes::ModelElement {
+			name = string1+'*'+string1
+		};
+		
+		enforce domain target targetModelElement : Shapes::ModelElement {
+			name = string1+'^2'
+		};
+		
+		when {
+			Source2Target(sourceModelElement, targetModelElement);
+		}
+		
+	}
+	
+	top relation ModelElementblock2ModelElementblock {
+		
+		enforce domain source sourceModelElement : Shapes::ModelElement {
+			block = sourceblock : Shapes::Block {
+			}
+		};
+		
+		enforce domain target targetModelElement : Shapes::ModelElement {
+			block = targetblock : Shapes::Block {
+			}
+		};
+		
+		when {
+			Source2Target(sourceModelElement, targetModelElement);
+			Source2Target(sourceblock, targetblock);
+		}
+		
+	}
+	
+	top relation Source2Target {
+		
+		enforce domain source s : Shapes::ModelElement {
+		};
+		
+		enforce domain target t : Shapes::ModelElement {
+		};
+		
+		when {
+			MapBlock(s, t) or MapRootBlock(s, t) or MapCircle(s, t) or MapTriangle(s, t) or MapSquare(s, t) or MapArrow(s, t);
+		}
+		
+	}
+	
+	top relation MapRootBlock {
+		
+		enforce domain source s : Shapes::RootBlock {
+		};
+		
+		enforce domain target t : Shapes::RootBlock {
+		};
+		
+	}
+	
+	top relation MapBlock {
+		
+		enforce domain source s : Shapes::Block {
+		};
+		
+		enforce domain target t : Shapes::Block {
+		};
+		
+		when {
+			not MapRootBlock(s, t);
+		}
+		
+	}
+	
+	top relation MapCircle {
+		
+		enforce domain source s : Shapes::Circle {
+		};
+		
+		enforce domain target t : Shapes::Circle {
+		};
+		
+	}
+	
+	top relation MapTriangle {
+		
+		enforce domain source s : Shapes::Triangle {
+		};
+		
+		enforce domain target t : Shapes::Triangle {
+		};
+		
+	}
+	
+	top relation MapSquare {
+		
+		enforce domain source s : Shapes::Square {
+		};
+		
+		enforce domain target t : Shapes::Square {
+		};
+		
+	}
+	
+	top relation MapArrow {
+		
+		enforce domain source s : Shapes::Arrow {
+		};
+		
+		enforce domain target t : Shapes::Arrow {
+		};
+		
+	}
+	
+}

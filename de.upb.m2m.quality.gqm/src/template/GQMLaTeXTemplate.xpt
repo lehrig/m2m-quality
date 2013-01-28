@@ -1,0 +1,86 @@
+«IMPORT QualityMetrics»
+«IMPORT QVTMetrics»
+
+«EXTENSION template::QualityMetricsExtensions»
+
+«DEFINE main(Metrics java, Metrics qvto) FOR Transformation»
+«FILE "AutoResults-"+name+".tex"-»
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Automated Metrics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Number of included modules (classes/compilation units/libraries)
+\def\NumberOfIncludedModulesJava{ «getValue("Number of Imports", java)» }
+\def\NumberOfIncludedModulesQVTO{ «getValue("Number of Modules", qvto)-1» }
+\def\NumberOfIncludedModulesQVTR{ 0 }
+
+% Number of applied reuse mechanisms (inheritance/logical composition)
+\def\NumberOfAppliedReuseMechanismsJava{ 0 }
+\def\NumberOfAppliedReuseMechanismsQVTO{ «getValue("Number of Mapping Inhertiances", qvto)
+									   +getValue("Number of Mapping Merges", qvto)
+									   +getValue("Number of Mapping Disjunctions", qvto)» }
+\def\NumberOfAppliedReuseMechanismsQVTR{ «noOverrides» }
+
+% Average number of when clauses
+\def\AverageNumberOfWhenClausesJava{-}
+\def\AverageNumberOfWhenClausesQVTO{ «getAverage("Number of When Clauses per Mapping", qvto)» }
+\def\AverageNumberOfWhenClausesQVTR{ «avgWhen» }
+
+% Number of intermediate structures
+\def\NumberOfIntermediateStructuresJava{ «getValue("Number of Inner Classes", java)
+										+getValue("Number of Member Variables", java)» }
+\def\NumberOfIntermediateStructuresQVTO{ «getValue("Number of Intermediate Classes", qvto)
+										+getValue("Number of Intermediate Properties", qvto)» }
+\def\NumberOfIntermediateStructuresQVTR{ «avgVars*noRelations» }
+
+% Average distinct phases per rule
+\def\AverageDistinctPhasesPerRuleJava{-}
+\def\AverageDistinctPhasesPerRuleQVTO{ «getAverage("Number of Distinct Phases per Mapping", qvto)» }
+\def\AverageDistinctPhasesPerRuleQVTR{-}
+
+% + Average number of domains [KGH12]
+\def\AverageNumberOfDomainsJava{ «getAverage("Number of Parameters per Method", java)» }
+\def\AverageNumberOfDomainsQVTO{ «getAverage("Number of Parameters per Operation", qvto)» }
+\def\AverageNumberOfDomainsQVTR{ «avgDomains» }
+
+% + Average fan-out [KGH12]
+\def\AverageFanOutJava{ «getAverage("Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)", java)» }
+\def\AverageFanOutQVTO{ «getAverage("Number of Distinct Calls from Operations to Operations per Operation (Operation Fan-Out)", qvto)» }
+\def\AverageFanOutQVTR{ «avgRelFanOut» }
+
+% - Average rule dependency depth [KGH12]
+\def\AverageRuleDependencyDepthJava{ «getAverage("Method Dependency Depth", java)» }
+\def\AverageRuleDependencyDepthQVTO{ «getAverage("Rule Dependency Depth", qvto)» }
+\def\AverageRuleDependencyDepthQVTR{ «avgRelationDependencyDepth» }
+
+% + Average number of explicit internal scheduling calls [KGH12]
+\def\AverageNumberOfInternalSchedulingCallsJava{ «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", java)» }
+\def\AverageNumberOfInternalSchedulingCallsQVTO{ «getAverage("Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)", qvto)» }
+\def\AverageNumberOfInternalSchedulingCallsQVTR{ «avgNWWPC» }
+
+% + Lines of code [KGH12]
+\def\LinesOfCodeJava{ «getValue("Source lines of Code", java)» }
+\def\LinesOfCodeQVTO{ «getValue("Source lines of Code", qvto)» }
+\def\LinesOfCodeQVTR{ «sloc» }
+
+% + Number of starts [KGH12]
+\def\NumberOfStartsJava{ 1 }
+\def\NumberOfStartsQVTO{ 1 }
+\def\NumberOfStartsQVTR{ «noStarts» }
+
+% + Number of rules [KGH12]
+\def\NumberOfRulesJava{ «getValue("Number of Methods", java)» }
+\def\NumberOfRulesQVTO{ «getValue("Number of Operations", qvto)» }
+\def\NumberOfRulesQVTR{ «noRelations» }
+
+% + Number of top-level rules [KGH12]
+\def\NumberOfTopLevelRulesJava{ 1 }
+\def\NumberOfTopLevelRulesQVTO{ 1 }
+\def\NumberOfTopLevelRulesQVTR{ «noTopLevelRelations» }
+
+% - Average size of domain pattern [KGH12]
+\def\AverageSizeDomainPatternJava{ «getAverage("Number of Subobjects per Method", java)» }
+\def\AverageSizeDomainPatternQVTO{ «getAverage("Number of Subobjects per Operation", qvto)» }
+\def\AverageSizeDomainPatternQVTR{ «avgSizeOfDomainPattern» }
+«ENDFILE»
+«ENDDEFINE»

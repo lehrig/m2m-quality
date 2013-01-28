@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shapes:RootBlock xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Shapes="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore">
+  <modelElement xsi:type="Shapes:Circle" name="a1" inArrow="//@modelElement.3" outArrow="//@modelElement.4"/>
+  <modelElement xsi:type="Shapes:Circle" name="a2" inArrow="//@modelElement.4" outArrow="//@modelElement.6"/>
+  <modelElement xsi:type="Shapes:Square" name="initial square" outArrow="//@modelElement.3"/>
+  <modelElement xsi:type="Shapes:Arrow" name="c1" source="//@modelElement.2" target="//@modelElement.0"/>
+  <modelElement xsi:type="Shapes:Arrow" name="c2" source="//@modelElement.0" target="//@modelElement.1"/>
+  <modelElement xsi:type="Shapes:Square" name="final square" inArrow="//@modelElement.6"/>
+  <modelElement xsi:type="Shapes:Arrow" name="c3" source="//@modelElement.1" target="//@modelElement.5"/>
+</Shapes:RootBlock>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="de.upb.m2m.quality.ui.launchConfigurationType">
+<intAttribute key="de.uka.ipd.sdq.workflowengine.debuglevel" value="2"/>
+<stringAttribute key="javaFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/src/de/upb/m2m/quality/casestudies/javaemf/ShapesRule3.java"/>
+<stringAttribute key="javaXmiFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/javaemf/UML2RDBMS/uml2rdbms.xmi"/>
+<stringAttribute key="outputFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/tmp/output/test.xmi"/>
+<stringAttribute key="outputFolder" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies.results/output"/>
+<stringAttribute key="outputXmiFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/tmp/output/test.xmi"/>
+<stringAttribute key="qvtFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvtr/UML2RDBMS/uml2rdbms.qvt"/>
+<stringAttribute key="qvtoFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule3/r3.qvto"/>
+<stringAttribute key="qvtoXmiFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.xmi"/>
+<stringAttribute key="qvtrFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvtr/ShapesTutorial/Rule3/r3.qvt"/>
+<stringAttribute key="qvtrXmiFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvtr/UML2RDBMS/uml2rdbms.xmi"/>
+<stringAttribute key="traceFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/tmp/trace"/>
+<stringAttribute key="traceFolder" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies.results/trace"/>
+<stringAttribute key="xmiFile" value="/Users/basti/Documents/uni/SHK/runtime-PCM2SCA/de.upb.m2m.quality.casestudies/qvtr/UML2RDBMS/uml2rdbms.xmi"/>
+</launchConfiguration>

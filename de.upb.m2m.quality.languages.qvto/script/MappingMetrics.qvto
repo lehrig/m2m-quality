@@ -1,0 +1,362 @@
+library MappingMetrics; 
+
+import Utilities;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+------------------------
+// Utility queries
+
+query AllMappings(transModules : OrderedSet(QVTO::expressions::Module)) : Bag(QVTO::expressions::MappingOperation) { 
+	return transModules->iterate(	transModule : QVTO::expressions::Module;
+									acc : Bag(QVTO::expressions::MappingOperation) = Bag{} |
+									acc->union(transModule.eOperations[QVTO::expressions::MappingOperation]) );
+}
+
+query EntryOperation(transModules : OrderedSet(QVTO::expressions::Module)) : QVTO::expressions::EntryOperation { 
+	return transModules->eOperations![QVTO::expressions::EntryOperation];
+}
+
+------------------------
+// Metrics
+
+query NumMappings(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Mappings";
+	var mappings := AllMappings(transModules); 
+	var value := mappings->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMappingsWithCondition(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Mappings with Condition"; 
+	var mappings := AllMappings(transModules); 
+	var value := mappings
+					->select(
+						_mapping : QVTO::expressions::MappingOperation |
+						_mapping._when->size()>0
+					)->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMappingsPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Mappings per Module"; 
+	var value := transModules->iterate(	
+						transModule : QVTO::expressions::Module;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							transModule
+							.eOperations[QVTO::expressions::MappingOperation]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.subobjects()
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsOfEntryOperation(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Subobjects of Entry Operation"; 
+	var entryOperation := EntryOperation(transModules);
+	var value := entryOperation.subobjects()->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumParamsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.eParameters
+							->size()
+						) 
+					);
+	// add model params for simulating main parameters
+	value := value->append(transModules![QVTO::expressions::OperationalTransformation].modelParameter->size());
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumUnusedParamsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Unused Parameters per Mapping"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+*/
+
+query NumInParamsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of IN Parameters per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.eParameters[QVTO::expressions::VarParameter]
+							->select(
+								parameter |
+								parameter.kind = QVTO::expressions::DirectionKind::_in
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumInOutParamsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of INOUT Parameters per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.eParameters[QVTO::expressions::VarParameter]
+							->select(
+								parameter |
+								parameter.kind = QVTO::expressions::DirectionKind::_inout
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOutParamsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of OUT Parameters per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.eParameters[QVTO::expressions::VarParameter]
+							->select(
+								parameter |
+								parameter.kind = QVTO::expressions::DirectionKind::_out
+							)->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumOverloadedMappings(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Overloaded Mappings"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}*/
+
+query NumMappingsPerMappingName(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Mappings per Mapping Name";
+	var mappings := AllMappings(transModules);
+	var mappingNames := mappings->name->asSet();
+	var value := mappingNames->iterate(	
+					mapName : String;
+					acc : Sequence(Integer) = Sequence{} |
+					acc->append(
+						mappings
+						->select(
+							_mapping |
+							_mapping.name = mapName
+						)->size()
+					) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumUnusedMappings(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Unused Mappings"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}
+
+query NumAbstractMappings(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Abstract Mappings"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}
+*/
+
+query NumWhenClauses(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of When Clauses";
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Integer = 0 |
+						acc + if _mapping._when->size()>0 then 1 else 0 endif
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+query NumWhereClauses(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Where Clauses";
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Integer = 0 |
+						acc + if _mapping._where->size()>0 then 1 else 0 endif
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+query NumWhenClausesPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of When Clauses per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							if _mapping._when->size()>0 then 1 else 0 endif
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumWhereClausesPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Where Clauses per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							if _mapping._where->size()>0 then 1 else 0 endif
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumMappingsPerDisjunction(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Mappings per Disjunction";
+	var mappings := AllMappings(transModules);
+	var disjunctions := mappings
+						->select(
+							_mapping |
+							_mapping
+							.disjunct
+							->size()>0
+						);
+	var value := disjunctions
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping
+							.disjunct
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumMappingInheritances(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Mapping Inhertiances";
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Integer = 0 |
+						acc + _mapping.inherited->size()
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMappingMerges(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Mapping Merges"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Integer = 0 |
+						acc + _mapping.merged->size()
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMappingDisjunctions(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Mapping Disjunctions"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(	
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Integer = 0 |
+						acc + _mapping.disjunct->size()
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+ 
+query CountPhases(body : QVTO::expressions::MappingBody) : Integer { 
+	var initPhase := if body.initSection->size()>0 then 1 else 0 endif;
+	var populationPhase := if body.content->size()>0 then 1 else 0 endif;
+	var endPhase := if body.endSection->size()>0 then 1 else 0 endif;
+	return initPhase + populationPhase + endPhase;
+}
+ 
+query NumDistinctPhasesPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Phases per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							CountPhases(_mapping.body.oclAsType(QVTO::expressions::MappingBody))
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumVariablesPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Variables per Mapping"; 
+	var mappings := AllMappings(transModules);
+	var value := mappings
+					->iterate(
+						_mapping : QVTO::expressions::MappingOperation;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_mapping.body.variable->size()
+						)
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumUnusedVariablesPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Unused Variables per Mapping"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOpsOnCollectionsPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Operations on Collections per Module"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query CyclomaticComplexityPerMapping(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Cyclomatic Complexity per Mapping"; 
+	var value := ;
+	return getNewAggregatedIntegerMetric(name, value);
+}
+*/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.upb.m2m.quality.languages">
+      <language
+            class="de.upb.m2m.quality.languages.qvtr.QVTRConfiguration">
+      </language>
+   </extension>
+
+</plugin>

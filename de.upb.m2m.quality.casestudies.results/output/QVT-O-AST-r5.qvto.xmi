@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtoperational.expr:OperationalTransformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eimpocl="http://www.eclipse.org/qvt/1.0/ImperativeOCL"
+    xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmlns:qvtoperational.expr="http://www.eclipse.org/qvt/1.0.0/Operational/Expressions" name="Rule5"
+    instanceClassName="org.eclipse.m2m.internal.qvt.oml.evaluator.TransformationInstance"
+    eSuperTypes="http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Transformation"
+    nsPrefix="Rule5" entry="#//main" usedModelType="#//SHAPES">
+  <xmi:Extension extender="http://www.eclipse.org/qvt/1.0.0/Operational/Expressions/debugInfo">
+    <sourceURI>r5.qvto</sourceURI>
+    <offsets>0,b29,2cc,f5,5,f0,a,33,.,.,8,2b,0,1e,0,13,0,5,.,.,15,8,-15,2b,.,.,.,.,34,38,.,.,c,2c,0,e,0,3,.,.,5,8,-5,2c,.,.,24,7,.,.,d,6a,0,12,0,8,.,.,a,7,21,3f,6,f,.,.,7,7,f,1d,0,5,15,7,-3b0,0,4b7,19e,e,c,d,183,a,18,.,.,c,c,0,4,15,1a,.,.,d,d,0,4,15,e6,0,7,1b,cb,5,9f,0,8,1d,82,6,76,11,d,0,6,16,e,0,7,17,1e,.,.,d,6,9,7,11,a,0,4,-5c7,0,5e4,1c,0,5,15,6,-5f9,0,60d,44,0,8,1d,27,5,1d,0,5,15,7,-644,0,7de,18d,13,a,d,a,14,159,a,e,.,.,d,1,9,11e,3,23,4,1f,0,9,0,2,17,7,f,85,5,14,0,8,d,7,0,2,d,61,3,23,4,1f,0,9,0,2,17,7,f,2e,6,22,0,8,d,15,0,c,0,8,a,2,4,7,0,2,21,5d,5,53,3,23,4,1f,0,9,0,2,17,7,f,20,6,14,0,8,d,7,0,2,26,f,7,8,-152,5,23f,db,21,a,15,a,15,c,17,c,14,65,6,12,0,a,0,5,f,3,8,14,0,b,0,5,10,4,9,13,0,c,0,5,11,2,7,13,0,c,0,5,11,2,.,.,-c9,4,-a58,3c,.,.,.,.,.,.,.,.,.,.,.,.,.,.,1cb,f,12,10</offsets>
+    <lineBreaks>6b,3d,1,41,50,73,54,97,57,cc,67,fd,6a,122,8f,126,cb,128,d0,173,116,1af,11b,1b9,157,1fa,16d,213,183,237,188,23a,18a,23f,1d7,289,1fa,28d,223,292,243,2b3,266,2b6,285,2d8,294,2ee,2ab,315,2bd,31d,2c3,33f,2c8,342,2e9,365,2ee,368,2f0,36d,33e,3b8,37e,3bc,3bd,3fb,3dc,400,415,417,418,448,432,47a,45b,486,45f,48f,491,4aa,49d,4b5,4a0,4c9,4a3,4cb,4a8,4f5,4ac,51c,4d3,542,503,547,51e,55c,533,573,548,57d,55f,596,577,5ae,57a,5b0</lineBreaks>
+  </xmi:Extension>
+  <eOperations xsi:type="qvtoperational.expr:EntryOperation" name="main" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+    <body>
+      <content xsi:type="eimpocl:VariableInitExp" name="copy" eType="#//Bag(Element)">
+        <referredVariable name="copy" eType="#//Bag(Element)">
+          <initExpression xsi:type="eimpocl:ImperativeIterateExp" name="xcollect"
+              eType="#//Bag(Element)">
+            <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//Set(RootBlock)">
+              <source xsi:type="ocl.ecore:OperationCallExp" eType="#//Set(Element)"
+                  referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model/rootObjects">
+                <source xsi:type="ocl.ecore:VariableExp" name="source" eType="#//SHAPES"
+                    referredVariable="#//source"/>
+              </source>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+              <condition xsi:type="ocl.ecore:TypeExp" eType="#//RootBlock" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+            </source>
+            <body xsi:type="ocl.ecore:OperationCallExp" eType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"
+                referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element/deepclone">
+              <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"
+                  referredVariable="#//main/@body/@content.0/copy/xcollect/temp2"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+          </initExpression>
+        </referredVariable>
+      </content>
+      <content xsi:type="eimpocl:VariableInitExp" name="triangles" eType="#//Bag(Element)">
+        <referredVariable name="triangles" eType="#//Bag(Element)">
+          <initExpression xsi:type="ocl.ecore:IteratorExp" name="collect" eType="#//Bag(Element)">
+            <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//Bag(RootBlock)">
+              <source xsi:type="ocl.ecore:VariableExp" name="copy" eType="#//Bag(Element)"
+                  referredVariable="#//main/@body/@content.0/copy"/>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp3" eType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+              <condition xsi:type="ocl.ecore:TypeExp" eType="#//RootBlock" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+            </source>
+            <body xsi:type="ocl.ecore:OperationCallExp" eType="#//Set(Element)" referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element/allSubobjectsOfKind">
+              <source xsi:type="ocl.ecore:VariableExp" name="temp4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"
+                  referredVariable="#//main/@body/@content.1/triangles/collect/temp4"/>
+              <argument xsi:type="ocl.ecore:TypeExp" eType="#//Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+          </initExpression>
+        </referredVariable>
+      </content>
+      <content xsi:type="eimpocl:ForExp" name="forEach" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+        <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//Bag(Triangle)">
+          <source xsi:type="ocl.ecore:VariableExp" name="triangles" eType="#//Bag(Element)"
+              referredVariable="#//main/@body/@content.1/triangles"/>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp5" eType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+          <condition xsi:type="ocl.ecore:TypeExp" eType="#//Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+        </source>
+        <body xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+          <body xsi:type="qvtoperational.expr:ImperativeCallExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"
+              referredOperation="#//rewire">
+            <source xsi:type="ocl.ecore:VariableExp" name="this" eType="#/" referredVariable="#//this"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="triangle" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"
+                referredVariable="#//main/@body/@content.2/triangle"/>
+          </body>
+          <body xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"
+              referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model/removeElement">
+            <source xsi:type="ocl.ecore:VariableExp" name="target" eType="#//SHAPES"
+                referredVariable="#//target"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="triangle" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"
+                referredVariable="#//main/@body/@content.2/triangle"/>
+          </body>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="triangle" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+      </content>
+    </body>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:Helper" name="rewire" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="shape" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+        representedParameter="#//rewire/shape"/>
+    <body>
+      <content xsi:type="eimpocl:VariableInitExp" name="inArrows" eType="#//OrderedSet(Arrow)">
+        <referredVariable name="inArrows" eType="#//OrderedSet(Arrow)">
+          <initExpression xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(Arrow)"
+              referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape/inArrow">
+            <source xsi:type="ocl.ecore:VariableExp" name="shape" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                referredVariable="#//rewire/shape"/>
+          </initExpression>
+        </referredVariable>
+      </content>
+      <content xsi:type="eimpocl:VariableInitExp" name="outArrows" eType="#//OrderedSet(Arrow)">
+        <referredVariable name="outArrows" eType="#//OrderedSet(Arrow)">
+          <initExpression xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(Arrow)"
+              referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape/outArrow">
+            <source xsi:type="ocl.ecore:VariableExp" name="shape" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                referredVariable="#//rewire/shape"/>
+          </initExpression>
+        </referredVariable>
+      </content>
+      <content xsi:type="eimpocl:ForExp" name="forEach" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+        <source xsi:type="ocl.ecore:VariableExp" name="inArrows" eType="#//OrderedSet(Arrow)"
+            referredVariable="#//rewire/@body/@content.0/inArrows"/>
+        <body xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+          <body xsi:type="eimpocl:ForExp" name="forEach" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+            <source xsi:type="ocl.ecore:VariableExp" name="outArrows" eType="#//OrderedSet(Arrow)"
+                referredVariable="#//rewire/@body/@content.1/outArrows"/>
+            <body xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+              <body xsi:type="eimpocl:InstantiationExp" name="Arrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                  instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow">
+                <eAnnotations source="http://www.eclipse.org/m2m/1.0.0/QVT/constructor"
+                    references="#//Arrow"/>
+                <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/source">
+                  <source xsi:type="ocl.ecore:VariableExp" name="inArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//rewire/@body/@content.2/inArrow"/>
+                </argument>
+                <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/target">
+                  <source xsi:type="ocl.ecore:VariableExp" name="outArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//rewire/@body/@content.2/@body/forEach/outArrow"/>
+                </argument>
+                <argument xsi:type="qvtoperational.expr:ImperativeCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredOperation="#//getArrowName">
+                  <source xsi:type="ocl.ecore:VariableExp" name="this" eType="#/"
+                      referredVariable="#//this"/>
+                  <argument xsi:type="ocl.ecore:VariableExp" name="inArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//rewire/@body/@content.2/inArrow"/>
+                  <argument xsi:type="ocl.ecore:VariableExp" name="outArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//rewire/@body/@content.2/@body/forEach/outArrow"/>
+                </argument>
+                <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Block"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/block">
+                  <source xsi:type="ocl.ecore:VariableExp" name="shape" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                      referredVariable="#//rewire/shape"/>
+                </argument>
+              </body>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="outArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+          </body>
+          <body xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"
+              referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model/removeElement">
+            <source xsi:type="ocl.ecore:VariableExp" name="target" eType="#//SHAPES"
+                referredVariable="#//target"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="inArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                referredVariable="#//rewire/@body/@content.2/inArrow"/>
+          </body>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="inArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+      </content>
+      <content xsi:type="eimpocl:ForExp" name="forEach" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+        <source xsi:type="ocl.ecore:VariableExp" name="outArrows" eType="#//OrderedSet(Arrow)"
+            referredVariable="#//rewire/@body/@content.1/outArrows"/>
+        <body xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+          <body xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid"
+              referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model/removeElement">
+            <source xsi:type="ocl.ecore:VariableExp" name="target" eType="#//SHAPES"
+                referredVariable="#//target"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="outArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                referredVariable="#//rewire/@body/@content.3/outArrow"/>
+          </body>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="outArrow" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+      </content>
+    </body>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:Helper" name="getArrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="src" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+        representedParameter="#//getArrowName/src"/>
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+        representedParameter="#//getArrowName/tgt"/>
+    <body>
+      <content xsi:type="eimpocl:VariableInitExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+        <referredVariable name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+          <initExpression xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              stringSymbol=""/>
+        </referredVariable>
+      </content>
+      <content xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+        <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+            referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/source">
+              <source xsi:type="ocl.ecore:VariableExp" name="src" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                  referredVariable="#//getArrowName/src"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="#//Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+          </source>
+        </condition>
+        <thenExpression xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+          <body xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:VariableExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredVariable="#//getArrowName/@body/@content.0/arrowName"/>
+            <value xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/name">
+              <source xsi:type="ocl.ecore:VariableExp" name="src" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                  referredVariable="#//getArrowName/src"/>
+            </value>
+          </body>
+          <body xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+            <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not">
+              <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                  referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/target">
+                  <source xsi:type="ocl.ecore:VariableExp" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//getArrowName/tgt"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="#//Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+              </source>
+            </condition>
+            <thenExpression xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+              <body xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  isReset="true">
+                <left xsi:type="ocl.ecore:VariableExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredVariable="#//getArrowName/@body/@content.0/arrowName"/>
+                <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                  <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                    <source xsi:type="ocl.ecore:VariableExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredVariable="#//getArrowName/@body/@content.0/arrowName"/>
+                    <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        stringSymbol="_"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/name">
+                    <source xsi:type="ocl.ecore:VariableExp" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                        referredVariable="#//getArrowName/tgt"/>
+                  </argument>
+                </value>
+              </body>
+            </thenExpression>
+          </body>
+        </thenExpression>
+        <elseExpression xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+          <body xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+            <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not">
+              <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                  referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/target">
+                  <source xsi:type="ocl.ecore:VariableExp" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//getArrowName/tgt"/>
+                </source>
+                <argument xsi:type="ocl.ecore:TypeExp" eType="#//Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+              </source>
+            </condition>
+            <thenExpression xsi:type="eimpocl:BlockExp" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+              <body xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  isReset="true">
+                <left xsi:type="ocl.ecore:VariableExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredVariable="#//getArrowName/@body/@content.0/arrowName"/>
+                <value xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/name">
+                  <source xsi:type="ocl.ecore:VariableExp" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+                      referredVariable="#//getArrowName/tgt"/>
+                </value>
+              </body>
+            </thenExpression>
+          </body>
+        </elseExpression>
+      </content>
+      <content xsi:type="eimpocl:ReturnExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+        <value xsi:type="ocl.ecore:VariableExp" name="arrowName" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+            referredVariable="#//getArrowName/@body/@content.0/arrowName"/>
+      </content>
+    </body>
+    <result name="result" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//getArrowName/result" kind="out"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:Constructor" name="Arrow" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="src" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+        representedParameter="#//Arrow/src"/>
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+        representedParameter="#//Arrow/tgt"/>
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="name" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//Arrow/name"/>
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="block" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Block"
+        representedParameter="#//Arrow/block"/>
+    <body xsi:type="qvtoperational.expr:ConstructorBody">
+      <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+          isReset="true">
+        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+            referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/name">
+          <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+              referredVariable="#//Arrow/@body/@variable.0"/>
+        </left>
+        <value xsi:type="ocl.ecore:VariableExp" name="name" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+            referredVariable="#//Arrow/name"/>
+      </content>
+      <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Block"
+          isReset="true">
+        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Block"
+            referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//ModelElement/block">
+          <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+              referredVariable="#//Arrow/@body/@variable.0"/>
+        </left>
+        <value xsi:type="ocl.ecore:VariableExp" name="block" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Block"
+            referredVariable="#//Arrow/block"/>
+      </content>
+      <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+          isReset="true">
+        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+            referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/source">
+          <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+              referredVariable="#//Arrow/@body/@variable.0"/>
+        </left>
+        <value xsi:type="ocl.ecore:VariableExp" name="src" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+            referredVariable="#//Arrow/src"/>
+      </content>
+      <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+          isReset="true">
+        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+            referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow/target">
+          <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+              referredVariable="#//Arrow/@body/@variable.0"/>
+        </left>
+        <value xsi:type="ocl.ecore:VariableExp" name="tgt" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Shape"
+            referredVariable="#//Arrow/tgt"/>
+      </content>
+      <variable xsi:type="qvtoperational.expr:VarParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+          representedParameter="#//Arrow/@body/@variable.0" kind="out"/>
+    </body>
+    <context name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"
+        representedParameter="#//Arrow/self"/>
+  </eOperations>
+  <eClassifiers xsi:type="qvtoperational.expr:ModelType" name="SHAPES" instanceClassName="org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance"
+      eSuperTypes="http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model" metamodel="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#/"/>
+  <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Element)" instanceClassName="java.util.Set"
+      elementType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="RootBlock" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+  <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(RootBlock)" instanceClassName="java.util.Set"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+  <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Element)" instanceClassName="org.eclipse.ocl.util.Bag"
+      elementType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+  <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(RootBlock)" instanceClassName="org.eclipse.ocl.util.Bag"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//RootBlock"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="Triangle" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+  <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(Triangle)" instanceClassName="org.eclipse.ocl.util.Bag"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Triangle"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(Arrow)" instanceClassName="java.util.LinkedHashSet"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore#//Arrow"/>
+  <ownedVariable name="this" eType="#/"/>
+  <modelParameter name="source" eType="#//SHAPES" representedParameter="#//source"/>
+  <modelParameter name="target" eType="#//SHAPES" representedParameter="#//target"
+      kind="out"/>
+</qvtoperational.expr:OperationalTransformation>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="de.upb.m2m.quality.ui.M2MQualityConfigurationDelegate"
+            id="de.upb.m2m.quality.ui.launchConfigurationType"
+            modes="run, debug"
+            name="M2MQuality"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="de.upb.m2m.quality.ui.M2MQualityTabGroup"
+            id="de.upb.m2m.quality.ui.launchConfigurationTabGroup"
+            type="de.upb.m2m.quality.ui.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="de.upb.m2m.quality.ui.launchConfigurationType"
+            icon="icons/qvtmetrics_icon.gif"
+            id="de.upb.m2m.quality.ui.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+
+</plugin>

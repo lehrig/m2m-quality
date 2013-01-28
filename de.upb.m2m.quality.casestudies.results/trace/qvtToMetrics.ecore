@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtToMetrics"
+    nsURI="urn:qvtToMetrics.ecore" nsPrefix="qvtToMetrics">
+  <eClassifiers xsi:type="ecore:EClass" name="visitFunctions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsOcl.ecore#//bridge/DefinedOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="func" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="visitRelations">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rul" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtbase/Rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rel" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="visitTransformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="calcRelationAvg">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="r" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="calcTransAvg">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="calcBalance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="calcRelationsAvg">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="t" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/RelationalTransformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rul" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtbase/Rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rel" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Relation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="visitRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="r" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtrelation/Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dom" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtbase/Domain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pat" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//DomainPattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="visitFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="f" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsQvt.ecore#//model/qvtbase/Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="m" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="ecore:EClass bundleentry://2721.fwk3975755/metamodel/SemanticsOcl.ecore#//model/expressions/OclExpression"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,44 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies an abstraction that replaces all empty blocks 
+ * by a square.
+ * 
+ * Implementation time: 10 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule6" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule6(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every empty block and
+	 * replace it by a square with the same name.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var blocks = copy[RootBlock].allSubobjectsOfKind(Block);
+		var emptyBlocks := blocks[Block]->select(b | b.modelElement->size()=0);
+		emptyBlocks
+			->forEach(block) {
+				new Square(block);
+				target.removeElement(block);
+			}
+	}
+	
+	/**
+	 * Constructor for creating a new square by using information from a given
+	 * block.
+	 * @param block The block to be used as a template
+	 */
+	constructor Square::Square(block : Block) {
+		name := block.name;
+		result.block := block.block;
+		inArrow := block.inArrow;
+		outArrow := block.outArrow;
+	}
+}

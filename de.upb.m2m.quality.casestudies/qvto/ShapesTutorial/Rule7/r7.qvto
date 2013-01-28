@@ -1,0 +1,96 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a 1:1 duality relation by transforming circles
+ * to arrows and vice versa. In case a circle has no incoming arrows, it is
+ * connected to a new, "initial" square. In case a circle has no outgoing
+ * arrows, it is connected to a new, "final" square.
+ * Furthermore, the transformation assumes that there are only circles and
+ * arrows within the source model.
+ * 
+ * Implementation time: 75 Minutes (due to first trying a copy approach similar
+ * to the implementations of Rule1 to Rule6; this implementation here is more 
+ * like a "mapping plus resolve" approach now)
+ *
+ * @see MediniQVT Plugin "Rule7" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule7(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point that creates from the source shapes model a new shapes model.
+	 */
+	main() {
+		source.rootObjects()[RootBlock]->map root2root();
+	}
+
+	/**
+	 * Maps the source root block to a new root block. First, collects all 
+	 * arrows and circles. Afterwards, maps arrows to circles and, next, circles
+	 * to arrows.
+	 */
+	mapping RootBlock::root2root(): RootBlock {
+		var arrows := self.modelElement[Arrow];
+		var circles := self.modelElement[Circle];
+	
+		modelElement := arrows->map arrow2circle();
+		modelElement += circles->map circle2arrow();
+	}
+	
+	/**
+	 * Maps arrows to circles. Connections are not resolved.
+	 */
+	mapping Arrow::arrow2circle() : Circle {
+		name := self.name;
+		block := self.block;
+	}
+	
+	/**
+	 * Maps circles to arrows. Also resolves all connections to circles.
+	 */
+	mapping Circle::circle2arrow() : Arrow {
+		init {
+			var root := self.block.resolveone(Block);
+		
+			var sources : Bag(Shape);
+			if(self.inArrow->size() = 0) then {
+				var square := new Square(root, "initial");
+				sources := Bag{square};
+			}
+			else {
+				sources := self.inArrow.resolveone(Circle)->asBag();
+			} endif;
+			assert(sources->size()=1)
+			with log ("There can only be exactly one source!");
+		
+			var targets : Bag(Shape);
+			if(self.outArrow->size() = 0) then {
+				var square := new Square(root, "final");
+				targets := Bag{square};
+			}
+			else {
+				targets := self.outArrow.resolveone(Circle)->asBag();
+			} endif;
+			assert(targets->size()=1)
+			with log ("There can only be exactly one target!");
+		}
+		name := self.name;
+		block := self.block;
+		result.source := sources->any(true);
+		result.target := targets->any(true);
+	}
+	
+	/**
+	 * Constructor for creating a new square.
+	 * @param root The block to assign the square to
+	 * @param type The type-name of the square
+	 */
+	constructor Square::Square(root : Block, type : String) {
+		name := type+" square";
+		block := root;
+	}
+}

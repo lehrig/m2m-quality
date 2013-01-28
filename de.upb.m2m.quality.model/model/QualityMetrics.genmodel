@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.m2m.quality.model/src"
+    modelPluginID="de.upb.m2m.quality.model" modelName="QualityMetrics" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>QualityMetrics.ecore</foreignModel>
+  <genPackages prefix="QualityMetrics" basePackage="de.upb.m2m.quality.model" disposableProviderFactory="true"
+      ecorePackage="QualityMetrics.ecore#/">
+    <genClasses ecoreClass="QualityMetrics.ecore#//Metrics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QualityMetrics.ecore#//Metrics/SimpleMetrics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QualityMetrics.ecore#//Metrics/AggregatedIntegerMetrics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QualityMetrics.ecore#//Metrics/AggregatedRealMetrics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//Metrics/TrafoName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QualityMetrics.ecore#//Metric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//Metric/Metric"/>
+    </genClasses>
+    <genClasses ecoreClass="QualityMetrics.ecore#//SimpleMetric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//SimpleMetric/Value"/>
+    </genClasses>
+    <genClasses ecoreClass="QualityMetrics.ecore#//AggregatedIntegerMetric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedIntegerMetric/Minimum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedIntegerMetric/Maximum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedIntegerMetric/Median"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedIntegerMetric/Average"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedIntegerMetric/StandardDeviation"/>
+    </genClasses>
+    <genClasses ecoreClass="QualityMetrics.ecore#//AggregatedRealMetric">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedRealMetric/Minimum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedRealMetric/Maximum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedRealMetric/Median"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedRealMetric/Average"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QualityMetrics.ecore#//AggregatedRealMetric/StandardDeviation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

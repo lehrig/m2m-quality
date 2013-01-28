@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uriMap:MappingContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uriMap="http:///www.eclipse.org/m2m/qvt/oml/MModelUriMap/1.0.0">
+  <mapping sourceURI="http://m2m.upb.de/SimpleUML/1.0" targetURI="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore"/>
+  <mapping sourceURI="http://m2m.upb.de/SimpleRDBMS/1.0" targetURI="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore"/>
+  <mapping sourceURI="http://m2m.upb.de/Shapes/1.0" targetURI="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/ShapesTutorial/Shapes.ecore"/>
+</uriMap:MappingContainer>

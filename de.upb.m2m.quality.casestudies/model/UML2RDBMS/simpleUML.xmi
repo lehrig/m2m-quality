@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleUML:UmlPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SimpleUML="http://m2m.upb.de/SimpleUML/1.0" xsi:schemaLocation="http://m2m.upb.de/SimpleUML/1.0 ../../metamodel/UML2RDBMS/SimpleUML.ecore" umlName="myPackage" id="_pXZ9wKS6EduN8Krm-aC8vQ">
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="Library" umlKind="Persistent" id="_pXZ9waS6EduN8Krm-aC8vQ" umlReverse="_pXjuyKS6EduN8Krm-aC8vQ"/>
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="Medium" umlKind="Persistent" id="_pXjuwKS6EduN8Krm-aC8vQ" umlForward="_pXjuyKS6EduN8Krm-aC8vQ" umlSpecific="_pXjuwqS6EduN8Krm-aC8vQ _pXjuw6S6EduN8Krm-aC8vQ">
+    <umlAttribute umlName="author" id="_pXjuwaS6EduN8Krm-aC8vQ" umlType="_pXjuxaS6EduN8Krm-aC8vQ"/>
+  </umlOwnedElement>
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="DVD" umlKind="Persistent" id="_pXjuwqS6EduN8Krm-aC8vQ" umlGeneral="_pXjuwKS6EduN8Krm-aC8vQ"/>
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="Book" umlKind="Persistent" id="_pXjuw6S6EduN8Krm-aC8vQ" umlGeneral="_pXjuwKS6EduN8Krm-aC8vQ">
+    <umlAttribute umlName="numberOfPages" id="_pXjuxKS6EduN8Krm-aC8vQ" umlType="_pXjuyaS6EduN8Krm-aC8vQ"/>
+  </umlOwnedElement>
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="Author" umlKind="Persistent" id="_pXjuxaS6EduN8Krm-aC8vQ" umlAttribute1="_pXjuwaS6EduN8Krm-aC8vQ">
+    <umlAttribute umlName="name" id="_pXjuxqS6EduN8Krm-aC8vQ" umlType="_pXjuyqS6EduN8Krm-aC8vQ"/>
+  </umlOwnedElement>
+  <umlOwnedElement xsi:type="SimpleUML:UmlClass" umlName="nonPersistentClas" umlKind="nonPersistent" id="_pXjux6S6EduN8Krm-aC8vQ"/>
+  <umlOwnedElement xsi:type="SimpleUML:UmlAssociation" umlName="LibraryToMedium" umlKind="Persistent" id="_pXjuyKS6EduN8Krm-aC8vQ" umlDestination="_pXjuwKS6EduN8Krm-aC8vQ" umlSource="_pXZ9waS6EduN8Krm-aC8vQ"/>
+  <umlOwnedElement xsi:type="SimpleUML:UmlPrimitiveDataType" umlName="INTEGER" umlKind="" id="_pXjuyaS6EduN8Krm-aC8vQ" umlAttribute1="_pXjuxKS6EduN8Krm-aC8vQ"/>
+  <umlOwnedElement xsi:type="SimpleUML:UmlPrimitiveDataType" umlName="STRING" umlKind="" id="_pXjuyqS6EduN8Krm-aC8vQ" umlAttribute1="_pXjuxqS6EduN8Krm-aC8vQ"/>
+</SimpleUML:UmlPackage>

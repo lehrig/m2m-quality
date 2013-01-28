@@ -1,0 +1,42 @@
+«IMPORT QualityMetrics»
+«IMPORT QVTMetrics»
+
+«EXTENSION template::QualityMetricsExtensions»
+
+«DEFINE main(Metrics java, Metrics qvto) FOR Transformation»
+«FILE "GQM-"+name+".txt"-»
+----------------------------------------------------
+Automatically measureable metrics of the GQM Plan
+----------------------------------------------------
+ ID    | Java        | QVT-O       | QVT-R       | Description
+----------------------------------------------------
+ GM2.6 | «getValue("Number of Imports", java)» | «getValue("Number of Modules", qvto)-1» | 0 | Number of included modules (classes/compilation units/libraries)
+ GM2.7 | 0 | «getValue("Number of Mapping Inhertiances", qvto)
+	   +getValue("Number of Mapping Merges", qvto)
+	   +getValue("Number of Mapping Disjunctions", qvto)» | «noOverrides» | Number of applied reuse mechanisms (inheritance/logical composition)
+ GM2.8 |           - | «getAverage("Number of When Clauses per Mapping", qvto)» | «avgWhen» | Average number of when clauses (QVT-R and QVT-O)
+ GM2.9 | «getValue("Number of Inner Classes", java)+getValue("Number of Member Variables", java)» | «getValue("Number of Intermediate Classes", qvto)+getValue("Number of Intermediate Properties", qvto)» | «avgVars*noRelations» | Number of intermediate structures
+GM2.10 |           - | «getAverage("Number of Distinct Phases per Mapping", qvto)» |           - | Average distinct phases per rule (QVT-O)
+----------------------------------------------------
+  M1.1 | «getAverage("Number of Parameters per Method", java)» | «getAverage("Number of Parameters per Operation", qvto)» | «avgDomains» | Average number of domains
+  M1.2 | «getAverage("Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)", java)» | «getAverage("Number of Distinct Calls from Operations to Operations per Operation (Operation Fan-Out)", qvto)» | «avgRelFanOut» | Average fan-out
+  M1.3 | «getAverage("Method Dependency Depth", java)» | «getAverage("Rule Dependency Depth", qvto)» | «avgRelationDependencyDepth» | Average rule dependency depth
+  M1.4 | «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", java)» | «getAverage("Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)", qvto)» | «avgNWWPC» | Average number of explicit internal scheduling calls
+----------------------------------------------------
+  M9.1 | «getValue("Source lines of Code", java)» | «getValue("Source lines of Code", qvto)» | «sloc» | Lines of Code
+  M9.2 | 1 | 1 | «noStarts» | Number of starts
+  M9.3 | «getValue("Number of Methods", java)» | «getValue("Number of Operations", qvto)» | «noRelations» | Number of rules
+  M9.4 | 1 | 1 | «noTopLevelRelations» | Number of top-level rules
+  M9.5 | «getAverage("Number of Parameters per Method", java)» | «getAverage("Number of Parameters per Mapping", qvto)» | «avgDomains» | Average number of domains
+  M9.6 | «getAverage("Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)", java)» | «getAverage("Number of Distinct Calls from Operations to Operations per Operation (Operation Fan-Out)", qvto)» | «avgRelFanOut» | Average fan-out
+  M9.7 | «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", java)» | «getAverage("Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)", qvto)» | «avgNWWPC» | Average number of explicit internal scheduling calls
+----------------------------------------------------
+ M11.1 | «getValue("Source lines of Code", java)» | «getValue("Source lines of Code", qvto)» | «sloc» | Lines of Code
+ M11.2 | 1 | 1 | «noStarts» | Number of starts
+ M11.3 | «getValue("Number of Methods", java)» | «getValue("Number of Operations", qvto)» | «noRelations» | Number of rules
+ M11.4 | 1 | 1 | «noTopLevelRelations» | Number of top-level rules
+ M11.5 | «getAverage("Number of Subobjects per Method", java)» | «getAverage("Number of Subobjects per Operation", qvto)» | «avgSizeOfDomainPattern» | Average size of domain pattern
+ M11.6 | «getAverage("Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)", java)» | «getAverage("Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)", qvto)» | «avgNWWPC» | Average number of explicit internal scheduling calls
+----------------------------------------------------
+«ENDFILE»
+«ENDDEFINE»

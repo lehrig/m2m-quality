@@ -1,0 +1,209 @@
+library MappingMetrics; 
+
+import Utilities;
+
+modeltype JAVA uses "http://www.eclipse.org/MoDisco/Java/0.2.incubation/java"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+
+------------------------
+// Utility queries
+
+query AllAbstractMethods(_class : JAVA::ClassDeclaration) : Set(JAVA::AbstractMethodDeclaration) { 
+	return _class.bodyDeclarations[JAVA::AbstractMethodDeclaration];
+}
+
+query AllMethods(_class : JAVA::ClassDeclaration) : Set(JAVA::MethodDeclaration) { 
+	return _class.bodyDeclarations[JAVA::MethodDeclaration];
+}
+
+query AllConstructors(_class : JAVA::ClassDeclaration) : Set(JAVA::ConstructorDeclaration) { 
+	return _class.bodyDeclarations[JAVA::ConstructorDeclaration];
+}
+
+query AllStatements(method : JAVA::AbstractMethodDeclaration) : Set(JAVA::Statement) { 
+	var statements := method.body.statements;
+	
+	return statements
+			->iterate(
+				statement : JAVA::Statement ;
+				acc : Set(JAVA::Statement) = statements |
+				acc->union(
+					AllSubStatements(statement)
+				)
+			);
+}
+
+query AllSubStatements(statement : JAVA::Statement) : Set(JAVA::Statement) { 
+	var subStatements : Set(JAVA::Statement) := statement.allSubobjects()[JAVA::Statement];
+	return subStatements
+			->iterate(
+				subStatement : JAVA::Statement;
+				acc : Set(JAVA::Statement) = subStatements |
+				acc->union(
+					AllSubStatements(subStatement)
+				)
+			);
+}
+
+------------------------
+// Metrics
+
+query NumMethods(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Methods"; 
+	var methods := AllMethods(_class);
+	var value := methods->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumConstructors(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Constructors"; 
+	var constructors := AllConstructors(_class);
+	var value := constructors->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumAbstractMethods(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of Abstract Methods"; 
+	var methods := AllAbstractMethods(_class);
+	var value := methods->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumSubobjectsPerMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Method";
+	var methods := AllMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::MethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(method)
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsPerConstructor(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Constructor";
+	var constructors := AllConstructors(_class);
+	var value := constructors->iterate(	
+						_constructor : JAVA::ConstructorDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(_constructor)
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsPerAbstractMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Abstract Method";
+	var methods := AllAbstractMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(method)
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumParamsPerMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Method"; 
+	var methods := AllMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::MethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							method
+							.parameters
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumParamsPerConstructor(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Constructor"; 
+	var constructors := AllConstructors(_class);
+	var value := constructors->iterate(	
+						_constructor : JAVA::ConstructorDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							_constructor
+							.parameters
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumParamsPerAbstractMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Parameters per Abstract Method"; 
+	var methods := AllAbstractMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							method
+							.parameters
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumIfClauses(_class : JAVA::ClassDeclaration) : SimpleMetric { 
+	var name := "Number of If Clauses";
+	var methods := AllAbstractMethods(_class);
+	var value := methods
+					->iterate(	
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Integer = 0 |
+						acc + AllStatements(method)[JAVA::IfStatement]->size()
+					);
+	return getNewSimpleMetric(name, value);
+}
+
+query NumIfClausesPerMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of If Clauses per Method"; 
+	var methods := AllMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::MethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(method)[JAVA::IfStatement]->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumIfClausesPerConstructor(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of If Clauses per Constructor"; 
+	var constructors := AllConstructors(_class);
+	var value := constructors->iterate(	
+						_constructor : JAVA::MethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(_constructor)[JAVA::IfStatement]->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumIfClausesPerAbstractMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of If Clauses per Abstract Method"; 
+	var methods := AllAbstractMethods(_class);
+	var value := methods->iterate(	
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllStatements(method)[JAVA::IfStatement]->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}

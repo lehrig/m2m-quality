@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Results
+Bundle-SymbolicName: de.upb.m2m.quality.casestudies.results;singleton:=true
+Bundle-Version: 1.0.0.qualifier

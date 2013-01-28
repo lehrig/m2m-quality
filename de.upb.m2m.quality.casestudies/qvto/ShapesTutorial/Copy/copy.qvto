@@ -1,0 +1,25 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation copies a "source" shapes model to a "target" shapes
+ * model, thus being a pure 1:1 mapping relation.
+ *
+ * Implementation time: 10 Minutes.
+ *
+ * @see MediniQVT Plugin "Copy" Rule (original scenario)
+ * @see http://www.eclipse.org/forums/index.php/m/629023/ (deepclone infos)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Copy(in source:SHAPES, out target:SHAPES) {
+
+	/**
+	 * Entry point.
+	 */
+	main() {
+		source.rootObjects()->deepclone();
+	}
+}

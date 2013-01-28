@@ -1,0 +1,157 @@
+library DependencyMetrics; 
+
+import Utilities;
+
+modeltype JAVA uses "http://www.eclipse.org/MoDisco/Java/0.2.incubation/java"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+	
+
+------------------------
+// Utility queries
+
+query AllAbstractMethods(_class : JAVA::ClassDeclaration) : Set(JAVA::AbstractMethodDeclaration) { 
+	return _class.bodyDeclarations[JAVA::AbstractMethodDeclaration];
+}
+
+query AllMethods(_class : JAVA::ClassDeclaration) : Set(JAVA::MethodDeclaration) { 
+	return _class.bodyDeclarations[JAVA::MethodDeclaration];
+}
+
+query AllConstructors(_class : JAVA::ClassDeclaration) : Set(JAVA::ConstructorDeclaration) { 
+	return _class.bodyDeclarations[JAVA::ConstructorDeclaration];
+}
+
+query AllStatements(method : JAVA::MethodDeclaration) : Set(JAVA::Statement) { 
+	var statements := method.body.statements;
+	
+	return statements
+			->iterate(
+				statement : JAVA::Statement ;
+				acc : Set(JAVA::Statement) = statements |
+				acc->union(
+					AllSubStatements(statement)
+				)
+			);
+}
+
+query AllSubStatements(statement : JAVA::Statement) : Set(JAVA::Statement) { 
+	var subStatements : Set(JAVA::Statement) := statement.allSubobjects()[JAVA::Statement];
+	return subStatements
+			->iterate(
+				subStatement : JAVA::Statement;
+				acc : Set(JAVA::Statement) = subStatements |
+				acc->union(
+					AllSubStatements(subStatement)
+				)
+			);
+}
+
+query AllInvocations(method : JAVA::AbstractMethodDeclaration, invokeMethods : Set(JAVA::AbstractMethodDeclaration)) : Set(JAVA::AbstractMethodInvocation) {
+	var statements := method.body.statements;
+	var methodInvocations := method.allSubobjectsOfKind(JAVA::AbstractMethodInvocation);
+	var invocedMethods := methodInvocations[JAVA::AbstractMethodInvocation]->method;
+	var allInvocations := methodInvocations[JAVA::AbstractMethodInvocation]->select(invocation | invokeMethods->includes(invocation.method));
+	return allInvocations;
+}
+
+query GetDepth(startMethod : JAVA::AbstractMethodDeclaration, endMethod : JAVA::AbstractMethodDeclaration, depth : Integer, visited : Set(JAVA::AbstractMethodDeclaration), invokeMethods : Set(JAVA::AbstractMethodDeclaration)) : Integer {
+	if startMethod = endMethod then {
+		return depth;
+	} endif;
+	
+	// which unvisited operations are called?
+	var methods := AllInvocations(startMethod, invokeMethods)
+						->method[JAVA::AbstractMethodDeclaration];
+	methods := methods->select(
+								method : JAVA::AbstractMethodDeclaration |
+								visited->excludes(method)
+							);
+	if methods->size() = 0 then {
+		return 9999999 // infinity ;)
+	} endif;
+	
+	// recursion
+	var depthList := methods
+						->iterate( 
+							method :JAVA::AbstractMethodDeclaration;
+							acc : Sequence(Integer) = Sequence{} |
+							acc->append(
+								GetDepth(method, endMethod, depth+1, visited->including(startMethod), invokeMethods)
+							)
+						);
+						
+	// find minimum in depth List
+	return getIntSeqMinimum(depthList);
+}
+
+------------------------
+// Metrics
+
+query MethodDependencyDepth(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Method Dependency Depth";
+	var methods := AllAbstractMethods(_class);
+	var entry := methods->any(method | method.name="main");
+	
+	// check whether main does not call methods
+	var entryCalls := AllInvocations(entry, methods);
+	if entryCalls->size()=0 then {
+		return getNewAggregatedIntegerMetric(name, Sequence{0})
+	} endif;		
+
+	// filter methods calling other methods (within the transformation class) to create set of leafs
+	var leafs := methods->select(
+							method |
+							AllInvocations(method, methods)
+							->method[JAVA::AbstractMethodDeclaration]
+							->intersection(methods)
+							->size()=0
+						);
+
+	// assure that there are leafs over
+	if leafs->size() = 0 then {
+		return getNewAggregatedIntegerMetric(name, Sequence{-1});
+	} endif;
+	
+	// calculate depth
+	var value := leafs->iterate(	
+						leaf : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							GetDepth(entry, leaf, 0, Set{}, methods)
+						) 
+					);
+	
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Method "Set" Fan-Out
+query NumDistinctCallsFromMethodsToMethodsPerMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)";
+	var methods := AllAbstractMethods(_class);
+	var value := methods->iterate(
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllInvocations(method, methods)
+							->method[JAVA::AbstractMethodDeclaration]
+							->asSet()->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+//Method "Bag" Fan-Out
+query NumCallsFromMethodsToMethodsPerMethod(_class : JAVA::ClassDeclaration) : AggregatedIntegerMetric { 
+	var name := "Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)";
+	var methods := AllAbstractMethods(_class);
+	var value := methods->iterate(
+						method : JAVA::AbstractMethodDeclaration;
+						acc : Sequence(Integer) = Sequence{} |
+						acc->append(
+							AllInvocations(method, methods)
+							->method[JAVA::AbstractMethodDeclaration]
+							->size()
+						) 
+					);
+	return getNewAggregatedIntegerMetric(name, value);
+}

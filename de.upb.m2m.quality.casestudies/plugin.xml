@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://m2m.upb.de/Shapes/1.0"
+            class="de.upb.m2m.quality.casestudies.Shapes.ShapesPackage"
+            genModel="metamodel/ShapesTutorial/Shapes.genmodel"/>
+      <package
+            class="de.upb.m2m.quality.casestudies.SimpleRDBMS.SimpleRDBMSPackage"
+            genModel="metamodel/UML2RDBMS/SimpleRDBMS.genmodel"
+            uri="http://m2m.upb.de/SimpleRDBMS/1.0">
+      </package>
+      <package
+            class="de.upb.m2m.quality.casestudies.SimpleUML.SimpleUMLPackage"
+            genModel="metamodel/UML2RDBMS/SimpleUML.genmodel"
+            uri="http://m2m.upb.de/SimpleUML/1.0">
+      </package>
+   </extension>
+
+</plugin>

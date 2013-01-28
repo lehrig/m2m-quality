@@ -1,0 +1,195 @@
+import OperationMetrics;
+import MappingMetrics;
+import HelperMetrics;
+import MiscellaneousMetrics;
+import DependencyMetrics;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+transformation QVTo2Metrics(in qvtoModel:QVTO, out metricModel:METRICS);
+
+main() {
+	qvtoModel.objects()[QVTO::expressions::OperationalTransformation]->map qvto2metrics();
+}
+
+mapping QVTO::expressions::OperationalTransformation::qvto2metrics() : METRICS::Metrics {
+	TrafoName := self.name; allModules := OrderedSet { self };
+	getAllModules(self, result);
+
+	------------------------
+	//Miscellaneous Metrics
+	SimpleMetrics += NumLOCs();
+	SimpleMetrics += NumBLOCs();
+	SimpleMetrics += NumCLOCs();
+	SimpleMetrics += NumSLOCs();
+	
+	SimpleMetrics += NumModules(allModules); 
+	SimpleMetrics += NumLibraryModules(allModules); 
+	SimpleMetrics += NumOperationalTransformationModules(allModules);
+	
+	//SimpleMetrics += NumUnusedModules(allModules); 
+	//SimpleMetrics += NumUnusedLibraryModules(allModules); 
+	//SimpleMetrics += NumUnusedOperationalTransformationModules(allModules);
+	SimpleMetrics += NumInputModels(allModules);
+	SimpleMetrics += NumOutputModels(allModules);
+	
+	AggregatedIntegerMetrics += NumInputModelsPerTransformationModule(allModules);
+	AggregatedIntegerMetrics += NumOutputModelsPerTransformationModule(allModules);
+	
+	SimpleMetrics += NumMetaModels(allModules);
+	AggregatedIntegerMetrics += NumMetaModelsPerModule(allModules);
+	
+	AggregatedIntegerMetrics += NumSubobjectsPerModule(allModules);
+	
+	SimpleMetrics += NumIntermediateClasses(allModules);
+	SimpleMetrics += NumIntermediateProperties(allModules);
+	AggregatedIntegerMetrics += NumIntermediateClassesPerTransformationModule(allModules);
+	AggregatedIntegerMetrics += NumIntermediatePropertiesPerTransformationModule(allModules);
+	
+	SimpleMetrics += NumOwnedVariables(allModules);
+	SimpleMetrics += NumVariablesWithSameNameNotType(allModules);
+	
+	------------------------
+	//Operation	 Metrics
+	AggregatedIntegerMetrics += NumSubobjectsPerOperation(allModules);
+	SimpleMetrics += NumOperations(allModules);
+	AggregatedIntegerMetrics += NumParamsPerOperation(allModules);
+	
+	------------------------
+	//Mapping Metrics
+	SimpleMetrics += NumMappings(allModules);
+	SimpleMetrics += NumMappingsWithCondition(allModules);
+	
+	AggregatedIntegerMetrics += NumMappingsPerModule(allModules);
+	
+	AggregatedIntegerMetrics += NumSubobjectsPerMapping(allModules);
+	SimpleMetrics += NumSubobjectsOfEntryOperation(allModules);
+	
+	AggregatedIntegerMetrics += NumParamsPerMapping(allModules);
+	//AggregatedIntegerMetrics += NumUnusedParamsPerMapping(allModules);
+	
+	AggregatedIntegerMetrics += NumInParamsPerMapping(allModules);
+	AggregatedIntegerMetrics += NumInOutParamsPerMapping(allModules);
+	AggregatedIntegerMetrics += NumOutParamsPerMapping(allModules);
+	
+	//SimpleMetrics += NumOverloadedMappings(allModules);
+	AggregatedIntegerMetrics += NumMappingsPerMappingName(allModules);
+	
+	//SimpleMetrics += NumUnusedMappings(allModules);
+	
+	//SimpleMetrics += NumAbstractMappings(allModules);
+	
+	SimpleMetrics += NumWhenClauses(allModules);
+	SimpleMetrics += NumWhereClauses(allModules);
+	AggregatedIntegerMetrics += NumWhenClausesPerMapping(allModules);
+	AggregatedIntegerMetrics += NumWhereClausesPerMapping(allModules);
+	
+	AggregatedIntegerMetrics += NumMappingsPerDisjunction(allModules); 
+	SimpleMetrics += NumMappingInheritances(allModules);
+	SimpleMetrics += NumMappingMerges(allModules);
+	SimpleMetrics += NumMappingDisjunctions(allModules);
+	
+	AggregatedIntegerMetrics += NumDistinctPhasesPerMapping(allModules); 
+	
+	AggregatedIntegerMetrics += NumVariablesPerMapping(allModules); 
+	//AggregatedIntegerMetrics += NumUnusedVariablesPerMapping(allModules);
+	//AggregatedIntegerMetrics += NumOpsOnCollectionsPerMapping(allModules);
+	//AggregatedIntegerMetrics += CyclomaticComplexityPerMapping(allModules);
+	
+	------------------------
+	//Helper & Query Metrics
+	SimpleMetrics += NumHelpers(allModules);
+	
+	AggregatedIntegerMetrics += NumHelpersPerModule(allModules);
+	AggregatedIntegerMetrics += NumSubobjectsPerHelper(allModules);
+	
+	SimpleMetrics += NumUnusedHelpers(allModules);
+	
+	SimpleMetrics += NumOverloadedHelpers(allModules);
+	AggregatedIntegerMetrics += NumHelpersPerHelperName(allModules);
+	
+	AggregatedIntegerMetrics += NumParamsPerHelper(allModules);
+	AggregatedIntegerMetrics += NumUnusedParamsPerHelper(allModules);
+	
+	AggregatedIntegerMetrics += NumInParamsPerHelper(allModules); 
+	AggregatedIntegerMetrics += NumInOutParamsPerHelper(allModules);
+	AggregatedIntegerMetrics += NumOutParamsPerHelper(allModules);
+	
+	AggregatedIntegerMetrics += NumVariablesPerHelper(allModules);
+	//AggregatedIntegerMetrics += NumUnusedVariablesPerHelper(allModules);
+	//AggregatedIntegerMetrics += NumOpsOnCollectionsPerHelper(allModules);
+	//AggregatedIntegerMetrics += CyclomaticComplexityPerHelper(allModules);
+	
+	------------------------
+	//Dependency Metrics
+	AggregatedIntegerMetrics += RuleDependencyDepth(allModules);
+	
+	AggregatedIntegerMetrics += NumImportedModulePerModule(allModules);
+	AggregatedIntegerMetrics += NumTimesModuleImported(allModules);
+	
+	AggregatedIntegerMetrics += NumCallsFromMappingsInOtherModulesPerModule(allModules);
+	AggregatedIntegerMetrics += NumCallsFromHelpersInOtherModulesPerModule(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsFromOtherModulesPerModule(allModules);//Module "Set" Fan-In
+	AggregatedIntegerMetrics += NumCallsFromOtherModulesPerModule(allModules);//Module "Bag" Fan-In
+	
+	AggregatedIntegerMetrics += NumCallsToMappingsInOtherModulesPerModule(allModules);
+	AggregatedIntegerMetrics += NumCallsToHelpersInOtherModulesPerModule(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsToOtherModulesPerModule(allModules);//Module "Set" Fan-Out
+	AggregatedIntegerMetrics += NumCallsToOtherModulesPerModule(allModules);//Module "Bag" Fan-Out
+	
+	AggregatedIntegerMetrics += NumCallsFromMappingsToMappingsPerMapping(allModules);
+	AggregatedIntegerMetrics += NumCallsFromMappingsToHelpersPerMapping(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsFromMappingsToMappingsOrHelpersPerMapping(allModules);//Mapping "Set" Fan-Out
+	AggregatedIntegerMetrics += NumCallsFromMappingsToMappingsOrHelpersPerMapping(allModules);//Mapping "Bag" Fan-Out
+	
+	AggregatedIntegerMetrics += NumCallsToMappingsFromMappingsPerMapping(allModules);
+	AggregatedIntegerMetrics += NumCallsToMappingsFromHelpersPerMapping(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsToMappingsPerMapping(allModules);//Mapping "Set" Fan-In
+	AggregatedIntegerMetrics += NumCallsToMappingsPerMapping(allModules);//Mapping "Bag" Fan-In
+	
+	AggregatedIntegerMetrics += NumCallsFromHelpersToHelpersPerHelper(allModules);
+	AggregatedIntegerMetrics += NumCallsFromHelpersToMappingsPerHelper(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsFromHelpersToMappingsOrHelpersPerHelper(allModules);//Helper "Set" Fan-Out
+	AggregatedIntegerMetrics += NumCallsFromHelpersToMappingsOrHelpersPerHelper(allModules);//Helper "Bag" Fan-Out
+	
+	AggregatedIntegerMetrics += NumCallsToHelpersFromMappingsPerHelper(allModules);
+	AggregatedIntegerMetrics += NumCallsToHelpersFromHelpersPerHelper(allModules);
+	AggregatedIntegerMetrics += NumDistinctCallsToHelpersPerHelper(allModules);//Helper "Set" Fan-In
+	AggregatedIntegerMetrics += NumCallsToHelpersPerHelper(allModules);//Helper "Bag" Fan-In
+	
+	SimpleMetrics += NumCallsToLog(allModules);
+	AggregatedIntegerMetrics += NumCallsToLogPerModule(allModules);
+	AggregatedIntegerMetrics += NumCallsToLogPerMapping(allModules);
+	AggregatedIntegerMetrics += NumCallsToLogPerHelper(allModules);
+	
+	SimpleMetrics += NumCallsToAssert(allModules);
+	AggregatedIntegerMetrics += NumCallsToAssertPerModule(allModules);
+	AggregatedIntegerMetrics += NumCallsToAssertPerMapping(allModules);
+	AggregatedIntegerMetrics += NumCallsToAssertPerHelper(allModules);
+	
+	SimpleMetrics += NumCallsToResolve(allModules);
+	AggregatedIntegerMetrics += NumCallsToResolvePerModule(allModules);
+	AggregatedIntegerMetrics += NumCallsToResolvePerMapping(allModules);
+	AggregatedIntegerMetrics += NumCallsToResolvePerHelper(allModules);
+	
+	AggregatedIntegerMetrics += NumDistinctCallsFromOperationsToOperationsPerOperation(allModules);
+	AggregatedIntegerMetrics += NumCallsFromOperationsToOperationsPerOperation(allModules);
+}
+
+intermediate property METRICS::Metrics::allModules : OrderedSet(QVTO::expressions::Module);
+
+helper getAllModules(trans : QVTO::expressions::Module, m : METRICS::Metrics) {
+	if (trans.moduleImport.importedModule <> null) then {
+		trans.moduleImport.importedModule->forEach(mdl) {
+			m.allModules += mdl.oclAsType(QVTO::expressions::Module);
+		
+			//recursively get imported modules
+			getAllModules(mdl.oclAsType(QVTO::expressions::Module), m);
+		};
+	} endif;
+	
+	return;
+}
+			
+

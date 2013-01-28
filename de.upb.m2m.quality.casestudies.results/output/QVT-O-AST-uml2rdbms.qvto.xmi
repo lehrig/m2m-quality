@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtoperational.expr:OperationalTransformation xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eimpocl="http://www.eclipse.org/qvt/1.0/ImperativeOCL"
+    xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore" xmlns:qvtoperational.expr="http://www.eclipse.org/qvt/1.0.0/Operational/Expressions" name="Uml2Rdb"
+    instanceClassName="org.eclipse.m2m.internal.qvt.oml.evaluator.TransformationInstance"
+    eSuperTypes="http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Transformation"
+    nsPrefix="Uml2Rdb" entry="#//main" usedModelType="#//UML #//RDBMS #//_INTERMEDIATE"
+    intermediateClass="#//_INTERMEDIATE.1/LeafAttribute" intermediateProperty="#//leafAttributes">
+  <xmi:Extension extender="http://www.eclipse.org/qvt/1.0.0/Operational/Expressions/debugInfo">
+    <sourceURI>uml2rdbms.qvto</sourceURI>
+    <offsets>0,10c5,1f8,92,32,60,5,58,7,51,1,22,0,15,0,d,0,3,17,b,11,27,0,1a,0,12,0,3,1c,b,-7d,12,26,6,11e,3c,5,37,20,14,-1b,18,0,c,0,2,.,.,e,9,d,14,.,.,.,.,98d,e1,1e,10,1a,a9,5,a2,7,9b,3,13,0,7,b,8,15,7,18,56,3,13,0,7,b,8,17,8,1d,8,-8e,5,-988,123,61,b0,0,b0,0,b0,0,18,0,8,.,.,d,b,0,3,10,3e,0,9,.,.,2e,10,-20,1d,0,13,0,3,.,.,15,7,b,10,.,.,.,.,22,43,0,9,.,.,34,f,-26,23,0,13,0,3,.,.,15,d,11,f,.,.,.,.,-fa,9,20,a,14,1f,4,1b,0,b,0,3,18,2,115,233,10d,123,0,123,0,123,0,18,0,8,.,.,d,b,0,3,f,36,0,a,.,.,14,22,-5,3,17,f,0,b,0,3,d,2,7,cd,0,a,.,.,f,be,0,be,18,1f,0,8,.,.,d,12,0,b,0,3,d,5,b,14,0,8,.,.,d,7,d,63,0,7,.,.,c,57,0,57,17,1e,0,8,.,.,d,11,0,b,0,3,d,4,c,13,0,9,.,.,e,5,.,.,.,.,-19e,50,0,12,0,3,2e,22,0,18,-17,10,0,3,17,18,.,.,13,1,3,1,.,.,-16,22,.,.,.,.,-a8,7,1b,9,12,18,0,b,0,3,d,b,234,203,26,f,11,e,1cb,0,0,0,0,0,-18e,32,.,.,5,2d,3,7,0,4,6,1,8,b,0,3,12,4,10,151,0,5,d,144,3,2d,0,b,0,3,19,13,57,5a,11,43,0,43,16,9,0,3,.,.,6,3,5,18,0,3,.,.,6,12,0,5,7,b,0,3,d,6,0,3,.,.,6,0,.,.,47,2f,0,25,-34,2c,0,1f,0,b,0,3,17,7,1d,25,.,.,13,f,0,b,0,3,d,2,4,0,.,.,-24,2f,.,.,.,.,-1bd,b,43,16,234,1a8,21,f,186,0,0,0,0,0,-14b,82,.,.,41,41,0,31,0,22,-14,12,0,3,14,22,.,.,1c,5,.,.,32,75,.,.,3e,37,0,27,0,18,-10,e,0,3,10,18,.,.,12,5,.,.,2e,39,0,5,a,2f,0,1f,0,a,13,b,-17e,7,2c,16,1b8,ce,30,f,23,78,0,78,0,78,0,1c,0,8,.,.,d,f,0,5,7,8,0,3,d,15,0,8,.,.,d,8,0,3,d,3d,0,8,.,.,d,30,.,.,17,18,0,10,0,8,0,3,-aa,c,3b,a,1e6,195,8b,107,0,107,0,107,0,2c,0,e,.,.,18,14,-5,3,1e,d6,0,a,.,.,f,c7,0,c7,18,62,0,8,.,.,d,55,0,4e,0,30,0,2a,0,1b,0,15,0,d,0,3,19,2,6,b,0,3,f,2,6,1a,0,12,0,3,1c,5,b,14,0,8,.,.,d,7,d,28,0,e,.,.,13,15,0,5,.,.,-120,2e,0,5,19,15,-f,d,0,3,.,.,-5a,d,1f,9,12,12,0,3,184,f2,40,ae,0,ae,0,ae,0,5b,0,8,.,.,d,4e,0,30,0,2a,0,1b,0,15,0,d,0,3,19,2,6,b,0,3,f,2,6,1a,0,12,0,3,1f,4e,0,c,.,.,25,29,0,1e,0,15,-14,12,0,3,.,.,39,3,.,.,-e2,d,24,e,-e75,4d,-155,3f,41,45,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,b6,5a,24,a,f,a,f,15,.,.,-157,9,b,e</offsets>
+    <lineBreaks>7f,33,1,74,48,75,8c,9f,af,ae,be,c7,c2,116,c3,133,c4,169,120,16b,121,19f,164,1dc,165,1e5,198,1e7,199,205,1ce,22e,1d0,24b,220,2a1,222,2a2,269,2d0,28c,2d2,2b9,2fd,2f3,324,30f,35e,334,383,34e,3a4,374,3bf,37a,3c4,37d,3c5,3bc,40e,3d8,417,414,423,44a,45f,45a,4a9,461,4df,498,4e9,49b,4eb,49c,529,4d7,578,4de,5a8,519,5c8,51d,5f9,54a,619,54e,657,551,659,552,69a,5a4,6bb,5be,6fc,5c0,6fd,5f6,739,61b,748,624,76b,636,776,648,782,652,784,653,7c2,685,7df,687,818,6b8,83d,720,857,74e,85c,750,85d,775,89c,7d5,8ef</lineBreaks>
+  </xmi:Extension>
+  <eOperations xsi:type="qvtoperational.expr:Helper" name="isPersistent" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean">
+    <body>
+      <content xsi:type="eimpocl:ReturnExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean">
+        <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+            referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/and">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlKind">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                  referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlSource">
+                <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                    referredVariable="#//isPersistent/self"/>
+              </source>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                stringSymbol="Persistent"/>
+          </source>
+          <argument xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlKind">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                  referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlDestination">
+                <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                    referredVariable="#//isPersistent/self"/>
+              </source>
+            </source>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                stringSymbol="Persistent"/>
+          </argument>
+        </value>
+      </content>
+    </body>
+    <context name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+        representedParameter="#//isPersistent/self"/>
+    <result name="result" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+        representedParameter="#//isPersistent/result" kind="out"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:EntryOperation" name="main" eType="ocl.ecore:VoidType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclVoid">
+    <body>
+      <content xsi:type="eimpocl:ImperativeIterateExp" name="xcollect" eType="#//Bag(RdbmsSchema)">
+        <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//Set(UmlPackage)">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="#//Set(Element)" referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model/objects">
+            <source xsi:type="ocl.ecore:VariableExp" name="uml" eType="#//UML" referredVariable="#//uml"/>
+          </source>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+          <condition xsi:type="ocl.ecore:TypeExp" eType="#//UmlPackage" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"/>
+        </source>
+        <body xsi:type="qvtoperational.expr:MappingCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+            referredOperation="#//packageToSchema">
+          <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+              referredVariable="#//main/@body/@content.0/temp2"/>
+        </body>
+        <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"/>
+      </content>
+    </body>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:Helper" name="primitiveTypeToSqlType"
+      eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+    <eParameters xsi:type="qvtoperational.expr:VarParameter" name="typename" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//primitiveTypeToSqlType/typename"/>
+    <body>
+      <content xsi:type="eimpocl:ReturnExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+        <value xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+          <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+            <source xsi:type="ocl.ecore:VariableExp" name="typename" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredVariable="#//primitiveTypeToSqlType/typename"/>
+            <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                stringSymbol="INTEGER"/>
+          </condition>
+          <thenExpression xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              stringSymbol="NUMBER"/>
+          <elseExpression xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+            <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+              <source xsi:type="ocl.ecore:VariableExp" name="typename" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredVariable="#//primitiveTypeToSqlType/typename"/>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  stringSymbol="BOOLEAN"/>
+            </condition>
+            <thenExpression xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                stringSymbol="BOOLEAN"/>
+            <elseExpression xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                stringSymbol="VARCHAR"/>
+          </elseExpression>
+        </value>
+      </content>
+    </body>
+    <result name="result" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//primitiveTypeToSqlType/result" kind="out"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="packageToSchema"
+      eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema">
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+          extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+          referredObject="#//packageToSchema/result">
+        <body>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+                  referredVariable="#//packageToSchema/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+                  referredVariable="#//packageToSchema/self"/>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsTable)"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsTable)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema/rdbmsTable">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+                  referredVariable="#//packageToSchema/result"/>
+            </left>
+            <value xsi:type="eimpocl:ImperativeIterateExp" name="xcollect" eType="#//Sequence(RdbmsTable)">
+              <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//OrderedSet(UmlClass)">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(UmlPackageElement)"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage/umlOwnedElement">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+                      referredVariable="#//packageToSchema/self"/>
+                </source>
+                <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackageElement"/>
+                <condition xsi:type="ocl.ecore:TypeExp" eType="#//UmlClass" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+              </source>
+              <body xsi:type="qvtoperational.expr:MappingCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredOperation="#//class2table">
+                <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                    referredVariable="#//packageToSchema/@body/@content.0/@body/@content.1/xcollect/temp2"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsTable)"
+              isReset="false">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsTable)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema/rdbmsTable">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+                  referredVariable="#//packageToSchema/result"/>
+            </left>
+            <value xsi:type="eimpocl:ImperativeIterateExp" name="xcollect" eType="#//Sequence(RdbmsTable)">
+              <source xsi:type="eimpocl:ImperativeIterateExp" name="xselect" eType="#//OrderedSet(UmlAssociation)">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(UmlPackageElement)"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage/umlOwnedElement">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+                      referredVariable="#//packageToSchema/self"/>
+                </source>
+                <iterator xsi:type="ocl.ecore:Variable" name="temp3" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackageElement"/>
+                <condition xsi:type="ocl.ecore:TypeExp" eType="#//UmlAssociation"
+                    referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"/>
+              </source>
+              <body xsi:type="qvtoperational.expr:MappingCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredOperation="#//asso2table">
+                <source xsi:type="ocl.ecore:VariableExp" name="temp4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                    referredVariable="#//packageToSchema/@body/@content.0/@body/@content.2/xcollect/temp4"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"/>
+            </value>
+          </content>
+        </body>
+      </content>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+        representedParameter="#//packageToSchema/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"
+        representedParameter="#//packageToSchema/result" kind="out" extent="#//rdbms"/>
+    <when xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+        referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean_Class/not">
+      <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+          referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/startsWith">
+        <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+            referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+          <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"
+              referredVariable="#//packageToSchema/self"/>
+        </source>
+        <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+            stringSymbol="_"/>
+      </source>
+    </when>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="class2table"
+      eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable">
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+          extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+          referredObject="#//class2table/result">
+        <body>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredVariable="#//class2table/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                  referredVariable="#//class2table/self"/>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsColumn)"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsColumn)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsColumn">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredVariable="#//class2table/result"/>
+            </left>
+            <value xsi:type="qvtoperational.expr:MappingCallExp" eType="#//OrderedSet(RdbmsColumn)"
+                referredOperation="#//class2Columns">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                  referredVariable="#//class2table/self"/>
+              <argument xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                      referredVariable="#//class2table/self"/>
+                </source>
+                <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    stringSymbol="_"/>
+              </argument>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsColumn)"
+              isReset="false">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsColumn)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsColumn">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredVariable="#//class2table/result"/>
+            </left>
+            <value xsi:type="qvtoperational.expr:ObjectExp" name="$temp_1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                referredObject="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@variable.0">
+              <body>
+                <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                    <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                      <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                          referredVariable="#//class2table/self"/>
+                    </source>
+                    <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        stringSymbol="_tid"/>
+                  </value>
+                </content>
+                <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn/rdbmsType">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      stringSymbol="NUMBER"/>
+                </content>
+                <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsKey)"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsKey)"
+                      referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn/rdbmsKey">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="qvtoperational.expr:ObjectExp" name="$temp_2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+                      extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+                      referredObject="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@content.2/$temp_2/@body/@variable.0">
+                    <body>
+                      <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                          isReset="true">
+                        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                            referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+                          <source xsi:type="ocl.ecore:VariableExp" name="$temp_2"
+                              eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+                              referredVariable="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@content.2/$temp_2/@body/@variable.0"/>
+                        </left>
+                        <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                            referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                          <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                              referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                            <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                                referredVariable="#//class2table/self"/>
+                          </source>
+                          <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                              stringSymbol="_pk"/>
+                        </value>
+                      </content>
+                      <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                          isReset="true">
+                        <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                            referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey/rdbmsOwner">
+                          <source xsi:type="ocl.ecore:VariableExp" name="$temp_2"
+                              eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+                              referredVariable="#//class2table/@body/@content.0/@body/@content.2/$temp_1/@body/@content.2/$temp_2/@body/@variable.0"/>
+                        </left>
+                        <value xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                            referredVariable="#//class2table/result"/>
+                      </content>
+                      <variable name="$temp_2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"/>
+                    </body>
+                  </value>
+                </content>
+                <variable name="$temp_1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+              </body>
+            </value>
+          </content>
+        </body>
+      </content>
+      <initSection xsi:type="eimpocl:AssignExp" eType="#//Sequence(LeafAttribute)"
+          isReset="true">
+        <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//Sequence(LeafAttribute)"
+            referredProperty="#//leafAttributes">
+          <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+              referredVariable="#//class2table/self"/>
+        </left>
+        <value xsi:type="ocl.ecore:IteratorExp" name="collect" eType="#//Sequence(LeafAttribute)">
+          <source xsi:type="eimpocl:ImperativeIterateExp" name="xcollect" eType="#//Sequence(Sequence(LeafAttribute))">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(UmlAttribute)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass/umlAttribute">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                  referredVariable="#//class2table/self"/>
+            </source>
+            <body xsi:type="qvtoperational.expr:MappingCallExp" eType="#//Sequence(LeafAttribute)"
+                referredOperation="#//attr2LeafAttrs">
+              <source xsi:type="ocl.ecore:VariableExp" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                  referredVariable="#//class2table/@body/@initSection.0/collect/xcollect/temp1"/>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  stringSymbol=""/>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  stringSymbol=""/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"/>
+          </source>
+          <body xsi:type="ocl.ecore:OperationCallExp" eType="#//Sequence(LeafAttribute)"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/flatten">
+            <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="#//Sequence(LeafAttribute)"
+                referredVariable="#//class2table/@body/@initSection.0/collect/temp2"/>
+          </body>
+          <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="#//Sequence(LeafAttribute)"/>
+        </value>
+      </initSection>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+        representedParameter="#//class2table/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+        representedParameter="#//class2table/result" kind="out" extent="#//rdbms"/>
+    <when xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+        referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+      <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+          referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlKind">
+        <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+            referredVariable="#//class2table/self"/>
+      </source>
+      <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+          stringSymbol="Persistent"/>
+    </when>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="attr2LeafAttrs"
+      eType="#//Sequence(LeafAttribute)">
+    <eParameters xsi:type="qvtoperational.expr:MappingParameter" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//attr2LeafAttrs/prefix" extent="#//uml"/>
+    <eParameters xsi:type="qvtoperational.expr:MappingParameter" name="pkind" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//attr2LeafAttrs/pkind" extent="#//uml"/>
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="#//Sequence(LeafAttribute)"
+          extent="#//rdbms" referredObject="#//attr2LeafAttrs/result">
+        <body/>
+      </content>
+      <initSection xsi:type="eimpocl:VariableInitExp" name="k" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+        <referredVariable name="k" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+          <initExpression xsi:type="ocl.ecore:IfExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String">
+            <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/=">
+              <source xsi:type="ocl.ecore:VariableExp" name="pkind" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredVariable="#//attr2LeafAttrs/pkind"/>
+              <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  stringSymbol=""/>
+            </condition>
+            <thenExpression xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlKind">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                  referredVariable="#//attr2LeafAttrs/self"/>
+            </thenExpression>
+            <elseExpression xsi:type="ocl.ecore:VariableExp" name="pkind" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredVariable="#//attr2LeafAttrs/pkind"/>
+          </initExpression>
+        </referredVariable>
+      </initSection>
+      <initSection xsi:type="eimpocl:AssignExp" eType="#//Sequence(LeafAttribute)"
+          isReset="true">
+        <left xsi:type="ocl.ecore:VariableExp" name="result" eType="#//Sequence(LeafAttribute)"
+            referredVariable="#//attr2LeafAttrs/result"/>
+        <value xsi:type="ocl.ecore:IfExp" eType="#//Sequence(LeafAttribute)">
+          <condition xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclIsKindOf">
+            <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClassifier"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute/umlType">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                  referredVariable="#//attr2LeafAttrs/self"/>
+            </source>
+            <argument xsi:type="ocl.ecore:TypeExp" eType="#//UmlPrimitiveDataType"
+                referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPrimitiveDataType"/>
+          </condition>
+          <thenExpression xsi:type="ocl.ecore:CollectionLiteralExp" eType="#//Sequence(LeafAttribute)"
+              kind="Sequence">
+            <part xsi:type="ocl.ecore:CollectionItem" eType="#//_INTERMEDIATE.1/LeafAttribute">
+              <item xsi:type="qvtoperational.expr:ObjectExp" name="$temp_3" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                  instantiatedClass="#//_INTERMEDIATE.1/LeafAttribute" referredObject="#//attr2LeafAttrs/@body/@initSection.1/@value.0/@thenExpression/@part.0/$temp_3/@body/@variable.0">
+                <body>
+                  <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                      isReset="true">
+                    <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                        referredProperty="#//_INTERMEDIATE.1/LeafAttribute/attr">
+                      <source xsi:type="ocl.ecore:VariableExp" name="$temp_3" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                          referredVariable="#//attr2LeafAttrs/@body/@initSection.1/@value.0/@thenExpression/@part.0/$temp_3/@body/@variable.0"/>
+                    </left>
+                    <value xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                        referredVariable="#//attr2LeafAttrs/self"/>
+                  </content>
+                  <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      isReset="true">
+                    <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredProperty="#//_INTERMEDIATE.1/LeafAttribute/name">
+                      <source xsi:type="ocl.ecore:VariableExp" name="$temp_3" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                          referredVariable="#//attr2LeafAttrs/@body/@initSection.1/@value.0/@thenExpression/@part.0/$temp_3/@body/@variable.0"/>
+                    </left>
+                    <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                      <source xsi:type="ocl.ecore:VariableExp" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                          referredVariable="#//attr2LeafAttrs/prefix"/>
+                      <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                          referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                        <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                            referredVariable="#//attr2LeafAttrs/self"/>
+                      </argument>
+                    </value>
+                  </content>
+                  <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      isReset="true">
+                    <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredProperty="#//_INTERMEDIATE.1/LeafAttribute/kind">
+                      <source xsi:type="ocl.ecore:VariableExp" name="$temp_3" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                          referredVariable="#//attr2LeafAttrs/@body/@initSection.1/@value.0/@thenExpression/@part.0/$temp_3/@body/@variable.0"/>
+                    </left>
+                    <value xsi:type="ocl.ecore:VariableExp" name="k" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredVariable="#//attr2LeafAttrs/@body/@initSection.0/k"/>
+                  </content>
+                  <variable name="$temp_3" eType="#//_INTERMEDIATE.1/LeafAttribute"/>
+                </body>
+              </item>
+            </part>
+          </thenExpression>
+          <elseExpression xsi:type="ocl.ecore:IteratorExp" name="collect" eType="#//Sequence(LeafAttribute)">
+            <source xsi:type="eimpocl:ImperativeIterateExp" name="xcollect" eType="#//Sequence(Sequence(LeafAttribute))">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(UmlAttribute)"
+                  referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass/umlAttribute">
+                <source xsi:type="ocl.ecore:OperationCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                    referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny_Class/oclAsType">
+                  <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClassifier"
+                      referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute/umlType">
+                    <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                        referredVariable="#//attr2LeafAttrs/self"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:TypeExp" eType="#//UmlClass" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+                </source>
+              </source>
+              <body xsi:type="qvtoperational.expr:MappingCallExp" eType="#//Sequence(LeafAttribute)"
+                  referredOperation="#//attr2LeafAttrs">
+                <source xsi:type="ocl.ecore:VariableExp" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                    referredVariable="#//attr2LeafAttrs/@body/@initSection.1/@value.0/collect/xcollect/temp1"/>
+                <argument xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                  <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                    <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                        referredVariable="#//attr2LeafAttrs/self"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      stringSymbol="_"/>
+                </argument>
+                <argument xsi:type="ocl.ecore:VariableExp" name="k" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredVariable="#//attr2LeafAttrs/@body/@initSection.0/k"/>
+              </body>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"/>
+            </source>
+            <body xsi:type="ocl.ecore:OperationCallExp" eType="#//Sequence(LeafAttribute)"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/flatten">
+              <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="#//Sequence(LeafAttribute)"
+                  referredVariable="#//attr2LeafAttrs/@body/@initSection.1/@value.0/collect/temp2"/>
+            </body>
+            <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="#//Sequence(LeafAttribute)"/>
+          </elseExpression>
+        </value>
+      </initSection>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+        representedParameter="#//attr2LeafAttrs/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="#//Sequence(LeafAttribute)"
+        representedParameter="#//attr2LeafAttrs/result" kind="out" extent="#//rdbms"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="class2Columns"
+      eType="#//OrderedSet(RdbmsColumn)">
+    <eParameters xsi:type="qvtoperational.expr:MappingParameter" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//class2Columns/prefix" extent="#//uml"/>
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="#//OrderedSet(RdbmsColumn)"
+          extent="#//rdbms" referredObject="#//class2Columns/result">
+        <body/>
+      </content>
+      <initSection xsi:type="eimpocl:VariableInitExp" name="selfColumns" eType="#//OrderedSet(RdbmsColumn)">
+        <referredVariable name="selfColumns" eType="#//OrderedSet(RdbmsColumn)">
+          <initExpression xsi:type="ocl.ecore:OperationCallExp" eType="#//OrderedSet(RdbmsColumn)"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/asOrderedSet">
+            <source xsi:type="ocl.ecore:OperationCallExp" eType="#//Sequence(RdbmsColumn)"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/flatten">
+              <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="#//Sequence(RdbmsColumn)">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//Sequence(LeafAttribute)"
+                    referredProperty="#//leafAttributes">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                      referredVariable="#//class2Columns/self"/>
+                </source>
+                <body xsi:type="qvtoperational.expr:MappingCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                    referredOperation="#//leafAttr2OrdinaryColumn">
+                  <source xsi:type="ocl.ecore:VariableExp" name="temp1" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                      referredVariable="#//class2Columns/@body/@initSection.0/selfColumns/@initExpression/@source/collect/temp1"/>
+                  <argument xsi:type="ocl.ecore:VariableExp" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredVariable="#//class2Columns/prefix"/>
+                </body>
+                <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="#//_INTERMEDIATE.1/LeafAttribute"/>
+              </source>
+            </source>
+          </initExpression>
+        </referredVariable>
+      </initSection>
+      <initSection xsi:type="eimpocl:VariableInitExp" name="superColumns" eType="#//OrderedSet(RdbmsColumn)">
+        <referredVariable name="superColumns" eType="#//OrderedSet(RdbmsColumn)">
+          <initExpression xsi:type="ocl.ecore:OperationCallExp" eType="#//OrderedSet(RdbmsColumn)"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/asOrderedSet">
+            <source xsi:type="ocl.ecore:OperationCallExp" eType="#//Sequence(RdbmsColumn)"
+                referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)_Class/flatten">
+              <source xsi:type="ocl.ecore:IteratorExp" name="collect" eType="#//Sequence(RdbmsColumn)">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(UmlClass)"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass/umlGeneral">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                      referredVariable="#//class2Columns/self"/>
+                </source>
+                <body xsi:type="qvtoperational.expr:MappingCallExp" eType="#//OrderedSet(RdbmsColumn)"
+                    referredOperation="#//class2Columns">
+                  <source xsi:type="ocl.ecore:VariableExp" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                      referredVariable="#//class2Columns/@body/@initSection.1/superColumns/@initExpression/@source/collect/temp2"/>
+                  <argument xsi:type="ocl.ecore:VariableExp" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredVariable="#//class2Columns/prefix"/>
+                </body>
+                <iterator xsi:type="ocl.ecore:Variable" name="temp2" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+              </source>
+            </source>
+          </initExpression>
+        </referredVariable>
+      </initSection>
+      <initSection xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsColumn)"
+          isReset="true">
+        <left xsi:type="ocl.ecore:VariableExp" name="result" eType="#//OrderedSet(RdbmsColumn)"
+            referredVariable="#//class2Columns/result"/>
+        <value xsi:type="ocl.ecore:OperationCallExp" eType="#//OrderedSet(RdbmsColumn)"
+            referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Set(T)_Class/asOrderedSet">
+          <source xsi:type="ocl.ecore:OperationCallExp" eType="#//Set(RdbmsColumn)"
+              referredOperation="ecore:EOperation http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)_Class/union.1">
+            <source xsi:type="ocl.ecore:VariableExp" name="selfColumns" eType="#//OrderedSet(RdbmsColumn)"
+                referredVariable="#//class2Columns/@body/@initSection.0/selfColumns"/>
+            <argument xsi:type="ocl.ecore:VariableExp" name="superColumns" eType="#//OrderedSet(RdbmsColumn)"
+                referredVariable="#//class2Columns/@body/@initSection.1/superColumns"/>
+          </source>
+        </value>
+      </initSection>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+        representedParameter="#//class2Columns/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="#//OrderedSet(RdbmsColumn)"
+        representedParameter="#//class2Columns/result" kind="out" extent="#//rdbms"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="leafAttr2OrdinaryColumn"
+      eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn">
+    <eParameters xsi:type="qvtoperational.expr:MappingParameter" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+        representedParameter="#//leafAttr2OrdinaryColumn/prefix" extent="#//uml"/>
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+          extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+          referredObject="#//leafAttr2OrdinaryColumn/result">
+        <body>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                  referredVariable="#//leafAttr2OrdinaryColumn/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+              <source xsi:type="ocl.ecore:VariableExp" name="prefix" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredVariable="#//leafAttr2OrdinaryColumn/prefix"/>
+              <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredProperty="#//_INTERMEDIATE.1/LeafAttribute/name">
+                <source xsi:type="ocl.ecore:VariableExp" name="self" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                    referredVariable="#//leafAttr2OrdinaryColumn/self"/>
+              </argument>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsKind">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                  referredVariable="#//leafAttr2OrdinaryColumn/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="#//_INTERMEDIATE.1/LeafAttribute/kind">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                  referredVariable="#//leafAttr2OrdinaryColumn/self"/>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn/rdbmsType">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                  referredVariable="#//leafAttr2OrdinaryColumn/result"/>
+            </left>
+            <value xsi:type="qvtoperational.expr:ImperativeCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredOperation="#//primitiveTypeToSqlType">
+              <source xsi:type="ocl.ecore:VariableExp" name="this" eType="#/" referredVariable="#//this"/>
+              <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClassifier"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute/umlType">
+                  <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"
+                      referredProperty="#//_INTERMEDIATE.1/LeafAttribute/attr">
+                    <source xsi:type="ocl.ecore:VariableExp" name="self" eType="#//_INTERMEDIATE.1/LeafAttribute"
+                        referredVariable="#//leafAttr2OrdinaryColumn/self"/>
+                  </source>
+                </source>
+              </argument>
+            </value>
+          </content>
+        </body>
+      </content>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="#//_INTERMEDIATE.1/LeafAttribute"
+        representedParameter="#//leafAttr2OrdinaryColumn/self"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+        representedParameter="#//leafAttr2OrdinaryColumn/result" kind="out" extent="#//rdbms"/>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="asso2table" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable">
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+          extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+          referredObject="#//asso2table/result">
+        <body>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsForeignKey)"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsForeignKey)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsForeignKey">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredVariable="#//asso2table/result"/>
+            </left>
+            <value xsi:type="qvtoperational.expr:MappingCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+                referredOperation="#//asso2ForeignKey">
+              <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                  referredVariable="#//asso2table/self"/>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsColumn)"
+              isReset="false">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsColumn)"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsColumn">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                  referredVariable="#//asso2table/result"/>
+            </left>
+            <value xsi:type="qvtoperational.expr:ObjectExp" name="$temp_4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                referredObject="#//asso2table/@body/@content.0/@body/@content.1/$temp_4/@body/@variable.0">
+              <body>
+                <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//asso2table/@body/@content.0/@body/@content.1/$temp_4/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                    <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                      <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                          referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                        <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                            referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                          <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                              referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                            <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                              <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                                  referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlSource">
+                                <source xsi:type="ocl.ecore:VariableExp" name="self"
+                                    eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                                    referredVariable="#//asso2table/self"/>
+                              </source>
+                            </source>
+                            <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                                stringSymbol="_"/>
+                          </source>
+                          <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                              referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                            <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                                referredVariable="#//asso2table/self"/>
+                          </argument>
+                        </source>
+                        <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                            stringSymbol="_"/>
+                      </source>
+                      <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                          referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                        <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                            referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlDestination">
+                          <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                              referredVariable="#//asso2table/self"/>
+                        </source>
+                      </argument>
+                    </source>
+                    <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        stringSymbol="_tid"/>
+                  </value>
+                </content>
+                <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn/rdbmsType">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//asso2table/@body/@content.0/@body/@content.1/$temp_4/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      stringSymbol="NUMBER"/>
+                </content>
+                <content xsi:type="eimpocl:AssignExp" eType="#//OrderedSet(RdbmsForeignKey)"
+                    isReset="true">
+                  <left xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsForeignKey)"
+                      referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn/rdbmsForeignKey">
+                    <source xsi:type="ocl.ecore:VariableExp" name="$temp_4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"
+                        referredVariable="#//asso2table/@body/@content.0/@body/@content.1/$temp_4/@body/@variable.0"/>
+                  </left>
+                  <value xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsForeignKey)"
+                      referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsForeignKey">
+                    <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                        referredVariable="#//asso2table/result"/>
+                  </value>
+                </content>
+                <variable name="$temp_4" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+              </body>
+            </value>
+          </content>
+        </body>
+      </content>
+      <initSection xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+          isReset="true">
+        <left xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+            referredVariable="#//asso2table/result"/>
+        <value xsi:type="qvtoperational.expr:ResolveExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+            one="true">
+          <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+              referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlSource">
+            <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                referredVariable="#//asso2table/self"/>
+          </source>
+          <target name="RdbmsTable" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"/>
+        </value>
+      </initSection>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+        representedParameter="#//asso2table/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+        representedParameter="#//asso2table/result" kind="out" extent="#//rdbms"/>
+    <when xsi:type="qvtoperational.expr:ImperativeCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+        referredOperation="#//isPersistent">
+      <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+          referredVariable="#//asso2table/self"/>
+    </when>
+  </eOperations>
+  <eOperations xsi:type="qvtoperational.expr:MappingOperation" name="asso2ForeignKey"
+      eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey">
+    <body xsi:type="qvtoperational.expr:MappingBody">
+      <content xsi:type="qvtoperational.expr:ObjectExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+          extent="#//rdbms" instantiatedClass="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+          referredObject="#//asso2ForeignKey/result">
+        <body>
+          <content xsi:type="eimpocl:AssignExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsModelElement/rdbmsName">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+                  referredVariable="#//asso2ForeignKey/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+              <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                  <source xsi:type="ocl.ecore:OperationCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredOperation="ecore:EOperation http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//String/+">
+                    <source xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                      <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                          referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlSource">
+                        <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                            referredVariable="#//asso2ForeignKey/self"/>
+                      </source>
+                    </source>
+                    <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                        stringSymbol="_"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                      referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                    <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                        referredVariable="#//asso2ForeignKey/self"/>
+                  </argument>
+                </source>
+                <argument xsi:type="ocl.ecore:StringLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                    stringSymbol="_"/>
+              </source>
+              <argument xsi:type="ocl.ecore:PropertyCallExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"
+                  referredProperty="ecore:EAttribute platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlModelElement/umlName">
+                <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                    referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlDestination">
+                  <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                      referredVariable="#//asso2ForeignKey/self"/>
+                </source>
+              </argument>
+            </value>
+          </content>
+          <content xsi:type="eimpocl:AssignExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+              isReset="true">
+            <left xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"
+                referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey/rdbmsRefersTo">
+              <source xsi:type="ocl.ecore:VariableExp" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+                  referredVariable="#//asso2ForeignKey/result"/>
+            </left>
+            <value xsi:type="ocl.ecore:IteratorExp" name="any" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey">
+              <source xsi:type="ocl.ecore:PropertyCallExp" eType="#//OrderedSet(RdbmsKey)"
+                  referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable/rdbmsKey">
+                <source xsi:type="qvtoperational.expr:ResolveExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"
+                    one="true">
+                  <source xsi:type="ocl.ecore:PropertyCallExp" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"
+                      referredProperty="ecore:EReference platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation/umlDestination">
+                    <source xsi:type="ocl.ecore:VariableExp" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+                        referredVariable="#//asso2ForeignKey/self"/>
+                  </source>
+                  <target name="RdbmsTable" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"/>
+                </source>
+              </source>
+              <body xsi:type="ocl.ecore:BooleanLiteralExp" eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"
+                  booleanSymbol="true"/>
+              <iterator xsi:type="ocl.ecore:Variable" name="temp1" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"/>
+            </value>
+          </content>
+        </body>
+      </content>
+    </body>
+    <context xsi:type="qvtoperational.expr:MappingParameter" name="self" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"
+        representedParameter="#//asso2ForeignKey/self" extent="#//uml"/>
+    <result xsi:type="qvtoperational.expr:MappingParameter" name="result" eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"
+        representedParameter="#//asso2ForeignKey/result" kind="out" extent="#//rdbms"/>
+  </eOperations>
+  <eStructuralFeatures xsi:type="qvtoperational.expr:ContextualProperty" name="leafAttributes"
+      eType="#//Sequence(LeafAttribute)" context="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+  <eClassifiers xsi:type="qvtoperational.expr:ModelType" name="UML" instanceClassName="org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance"
+      eSuperTypes="http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model" metamodel="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#/"/>
+  <eClassifiers xsi:type="qvtoperational.expr:ModelType" name="RDBMS" instanceClassName="org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance"
+      eSuperTypes="http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Model" metamodel="platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#/"/>
+  <eClassifiers xsi:type="qvtoperational.expr:ModelType" name="_INTERMEDIATE" metamodel="#//_INTERMEDIATE.1"/>
+  <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(LeafAttribute)" instanceClassName="java.util.List"
+      elementType="#//_INTERMEDIATE.1/LeafAttribute"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(RdbmsColumn)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+  <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Element)" instanceClassName="java.util.Set"
+      elementType="ecore:EClass http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib#//Element"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="UmlPackage" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"/>
+  <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(UmlPackage)" instanceClassName="java.util.Set"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackage"/>
+  <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(RdbmsSchema)" instanceClassName="org.eclipse.ocl.util.Bag"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsSchema"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(UmlPackageElement)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPackageElement"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="UmlClass" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(UmlClass)" instanceClassName="java.util.LinkedHashSet"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlClass"/>
+  <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(RdbmsTable)" instanceClassName="java.util.List"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(RdbmsTable)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsTable"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="UmlAssociation" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(UmlAssociation)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAssociation"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(UmlAttribute)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"/>
+  <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(Sequence(LeafAttribute))"
+      instanceClassName="java.util.List" elementType="#//Sequence(LeafAttribute)"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(RdbmsKey)" instanceClassName="java.util.LinkedHashSet"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsKey"/>
+  <eClassifiers xsi:type="ocl.ecore:TypeType" name="UmlPrimitiveDataType" referredType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlPrimitiveDataType"/>
+  <eClassifiers xsi:type="ocl.ecore:SequenceType" name="Sequence(RdbmsColumn)" instanceClassName="java.util.List"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+  <eClassifiers xsi:type="ocl.ecore:BagType" name="Bag(RdbmsColumn)" instanceClassName="org.eclipse.ocl.util.Bag"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+  <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(RdbmsColumn)" instanceClassName="java.util.Set"
+      elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsColumn"/>
+  <eClassifiers xsi:type="ocl.ecore:OrderedSetType" name="OrderedSet(RdbmsForeignKey)"
+      instanceClassName="java.util.LinkedHashSet" elementType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleRDBMS.ecore#//RdbmsForeignKey"/>
+  <eSubpackages name="_INTERMEDIATE" nsURI="http://www.eclipse.org/qvt/1.0.0/Operational/Expressions/_INTERMEDIATE"
+      nsPrefix="_intermediate">
+    <eClassifiers xsi:type="ecore:EClass" name="LeafAttribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+          eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" ordered="false"
+          eType="ocl.ecore:PrimitiveType http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attr" ordered="false"
+          eType="ecore:EClass platform:/resource/de.upb.m2m.quality.casestudies/metamodel/UML2RDBMS/SimpleUML.ecore#//UmlAttribute"/>
+    </eClassifiers>
+  </eSubpackages>
+  <ownedVariable name="this" eType="#/"/>
+  <modelParameter name="uml" eType="#//UML" representedParameter="#//uml"/>
+  <modelParameter name="rdbms" eType="#//RDBMS" representedParameter="#//rdbms" kind="out"/>
+</qvtoperational.expr:OperationalTransformation>

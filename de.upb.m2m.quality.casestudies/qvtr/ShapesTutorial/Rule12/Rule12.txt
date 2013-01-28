@@ -1,0 +1,5 @@
+Write a copy transformation, which copies the names of the model elements as usual but with folling exceptions for the given name patterns:
+string1*string2 -> string2*string1
+string1*string1 -> string1^2
+
+(string1 and string2 are string variables, '*' and '^' are string constants)

@@ -1,0 +1,73 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies refinement that transforms each circle to a 
+ * square-arrow-circle combination.
+ * 
+ * Implementation time: 15 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule10" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule10(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every circle, create a 
+	 * square-arrow-circle combination for it, and delete it finally.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var circles = copy[RootBlock].allSubobjectsOfKind(Circle)[Circle];
+		circles
+			->forEach(circle) {
+				var newSquare := new Square(circle);
+				var newCircle := new Circle(circle);
+				new Arrow(circle, newSquare, newCircle);
+				target.removeElement(circle);
+			}
+	}
+	
+	/**
+	 * Constructor for creating a new square by using information from a given
+	 * circle.
+	 * @param circle The circle to be used as a template
+	 */
+	constructor Square::Square(circle : Circle) {
+		name := circle.name+" square";
+		block := circle.block;
+		inArrow := circle.inArrow;
+	}
+	
+	/**
+	 * Constructor for creating a new circle by using information from a given
+	 * circle.
+	 * @param circle The circle to be used as a template
+	 */
+	constructor Circle::Circle(circle : Circle) {
+		name := circle.name+" circle";
+		block := circle.block;
+		outArrow := circle.outArrow;
+	}
+	
+	/**
+	 * Constructor for creating a new arrow between a given square and a circle.
+	 * Another given circle provides information for the name and block of the 
+	 * new arrow.
+	 * @param circle The circle to be used for name and block calculation
+	 * @param sourceSquare The square to be connected from
+	 * @param targetCircle The circle to be connected to
+	 */
+	constructor Arrow::Arrow(
+						circle : Circle, 
+						sourceSquare : Square,
+						targetCircle : Circle ) {
+		name := circle.name+" arrow";
+		block := circle.block;
+		result.source := sourceSquare;
+		result.target := targetCircle;
+	}
+}

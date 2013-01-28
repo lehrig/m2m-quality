@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ASCII"?>
+<QVTMetrics:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:QVTMetrics="http://m2m.upb.de/QVTMetrics/1.0" xsi:schemaLocation="http://m2m.upb.de/QVTMetrics/1.0 bundleentry://2721.fwk3975755/metamodel/QVTMetrics.ecore" name="uml2rdbms" noStarts="1" noWhen="2" noWhere="6" noRelations="8" noTopLevelRelations="3" noMetamodels="2" noOclQueries="1" avgWhen="0.625" avgWhere="1.625" avgEnforcedDomains="1.0" avgSizeOfDomainPattern="2.9" avgDomains="2.5" avgVars="2.375" avgRelFanOut="0.75" avgValOut="1.5" avgFanIn="0.8888888888888888" avgVarBindingRate="0.6632440476190476" avgRelationDependencyDepth="2.0" noLeafRelations="2" avgNWWPC="1.5" avgNWWP="2.25" loc="239" sloc="178" bloc="54" cloc="7">
+  <relations name="PackageToSchema" noEnforcedDomains="2" noDomains="2" noVars="1" noBoundVars="1" noUnboundVars="2" varBindingRate="0.3333333333333333" avgSizeOfDomainPattern="2.0">
+    <domainPattern sizeOfDomainPattern="2"/>
+    <domainPattern sizeOfDomainPattern="2"/>
+  </relations>
+  <relations name="ClassToTable" noEnforcedDomains="2" noWhen="1" noWhere="3" noDomains="2" noVars="2" valOut="5" fanOut="3" noBoundVars="7" noUnboundVars="1" varBindingRate="0.875" avgSizeOfDomainPattern="6.0" nwwp="4" nwwpc="3">
+    <domainPattern sizeOfDomainPattern="4"/>
+    <domainPattern sizeOfDomainPattern="8"/>
+  </relations>
+  <relations name="ClassToPkey" noEnforcedDomains="2" noDomains="2" noVars="1" fanIn="1" noBoundVars="1" noUnboundVars="2" varBindingRate="0.3333333333333333" avgSizeOfDomainPattern="2.0">
+    <domainPattern sizeOfDomainPattern="2"/>
+    <domainPattern sizeOfDomainPattern="2"/>
+  </relations>
+  <relations name="AttributeToColumn" noWhere="3" noDomains="3" noVars="1" fanIn="3" noBoundVars="3" varBindingRate="1.0" avgSizeOfDomainPattern="0.6666666666666666" nwwp="3" nwwpc="3">
+    <domainPattern sizeOfDomainPattern="1"/>
+    <domainPattern sizeOfDomainPattern="1"/>
+    <domainPattern/>
+  </relations>
+  <relations name="PrimitiveAttributeToColumn" noWhere="2" noDomains="3" noVars="5" fanIn="1" noBoundVars="5" noUnboundVars="5" varBindingRate="0.5" avgSizeOfDomainPattern="3.0" isLeaf="true" depthOfLeaf="3" nwwp="2">
+    <domainPattern sizeOfDomainPattern="5"/>
+    <domainPattern sizeOfDomainPattern="4"/>
+    <domainPattern/>
+  </relations>
+  <relations name="ComplexAttributeToColumn" noWhere="2" noDomains="3" noVars="3" fanIn="1" noBoundVars="5" noUnboundVars="2" varBindingRate="0.7142857142857143" avgSizeOfDomainPattern="1.6666666666666667" nwwp="2" nwwpc="1">
+    <domainPattern sizeOfDomainPattern="4"/>
+    <domainPattern sizeOfDomainPattern="1"/>
+    <domainPattern/>
+  </relations>
+  <relations name="SuperAttributeToColumn" noWhere="1" noDomains="3" noVars="1" fanIn="1" noBoundVars="3" noUnboundVars="1" varBindingRate="0.75" avgSizeOfDomainPattern="1.0" nwwp="1" nwwpc="1">
+    <domainPattern sizeOfDomainPattern="2"/>
+    <domainPattern sizeOfDomainPattern="1"/>
+    <domainPattern/>
+  </relations>
+  <relations name="AssocToFKey" noEnforcedDomains="2" noWhen="4" noWhere="2" noDomains="2" noVars="5" valOut="7" fanOut="3" noBoundVars="12" noUnboundVars="3" varBindingRate="0.8" avgSizeOfDomainPattern="9.5" isLeaf="true" depthOfLeaf="1" nwwp="6" nwwpc="4">
+    <domainPattern sizeOfDomainPattern="9"/>
+    <domainPattern sizeOfDomainPattern="10"/>
+  </relations>
+  <functions name="PrimitiveTypeToSqlType" fanIn="1"/>
+</QVTMetrics:Transformation>

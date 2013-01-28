@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:semantics.bridge="urn:semantics.bridge.ecore" xmlns:semantics.model.expressions="urn:semantics.model.expressions.ecore" xmlns:semanticsQvt.model.qvtrelation="urn:semanticsQvt.model.qvtrelation.ecore" xmlns:semanticsQvt.model.qvttemplate="urn:semanticsQvt.model.qvttemplate.ecore" xsi:schemaLocation="urn:semantics.bridge.ecore urn:semantics.ecore#//bridge urn:semantics.model.expressions.ecore urn:semantics.ecore#//expressions">
+  <semanticsQvt.model.qvtrelation:RelationalTransformation name="r10">
+    <modelParameter name="source"/>
+    <modelParameter name="target"/>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="ArrowSource2ArrowSource" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="sourceArrow" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.0/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.0/@variable.0" refferedClass="/1">
+            <part>
+              <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="sourceArrowSource" type="/1" bindsTo="/0/@rule.0/@variable.2" refferedClass="/1"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="targetArrow" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.0/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.0/@variable.1" refferedClass="/1">
+            <part>
+              <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="targetArrowSource" type="/1" bindsTo="/0/@rule.0/@variable.3" refferedClass="/1"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="sourceArrow" variableExps="/0/@rule.0/@when/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="targetArrow" variableExps="/0/@rule.0/@when/@predicate.0/@contitionExpression/@argument.1" type="/1"/>
+      <variable name="sourceArrowSource" variableExps="/0/@rule.0/@when/@predicate.1/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="targetArrowSource" variableExps="/0/@rule.0/@when/@predicate.1/@contitionExpression/@argument.1" type="/1"/>
+      <when>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="Source2Target" referredRelation="/0/@rule.7">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.0/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.0/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="markerForOutgoingArrows" referredRelation="/0/@rule.4">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.0/@variable.2"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.0/@variable.3"/>
+          </contitionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="ArrowTarget2ArrowTarget" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="sourceArrow" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.1/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.1/@variable.0" refferedClass="/1">
+            <part>
+              <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="sourceArrowTarget" type="/1" bindsTo="/0/@rule.1/@variable.2" refferedClass="/1"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="targetArrow" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.1/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.1/@variable.1" refferedClass="/1">
+            <part>
+              <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="targetArrowTarget" type="/1" bindsTo="/0/@rule.1/@variable.3" refferedClass="/1"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="sourceArrow" variableExps="/0/@rule.1/@when/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="targetArrow" variableExps="/0/@rule.1/@when/@predicate.0/@contitionExpression/@argument.1" type="/1"/>
+      <variable name="sourceArrowTarget" variableExps="/0/@rule.1/@when/@predicate.1/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="targetArrowTarget" variableExps="/0/@rule.1/@when/@predicate.1/@contitionExpression/@argument.1" type="/1"/>
+      <when>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="Source2Target" referredRelation="/0/@rule.7">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.1/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.1/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="markerForIncomingArrows" referredRelation="/0/@rule.5">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.1/@variable.2"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.1/@variable.3"/>
+          </contitionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="ModelElementName2ModelElementName" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="sourceModelElement" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.2/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.2/@variable.0" refferedClass="/1">
+            <part>
+              <value xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.2/@variable.2"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="targetModelElement" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.2/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.2/@variable.1" refferedClass="/1">
+            <part>
+              <value xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.2/@variable.2"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="sourceModelElement" variableExps="/0/@rule.2/@when/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="targetModelElement" variableExps="/0/@rule.2/@when/@predicate.0/@contitionExpression/@argument.1" type="/1"/>
+      <variable name="varName" variableExps="/0/@rule.2/@domain.0/@pattern/@templateExpression/@part.0/@value /0/@rule.2/@domain.1/@pattern/@templateExpression/@part.0/@value"/>
+      <when>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="Source2Target" referredRelation="/0/@rule.7">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.2/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.2/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="MapCircle" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.3/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.3/@variable.0" refferedClass="/1">
+            <part>
+              <value xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.3/@variable.2"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="square" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.3/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.3/@variable.1" refferedClass="/1">
+            <part>
+              <value xsi:type="semantics.model.expressions:OperationCallExp">
+                <source xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.3/@variable.2"/>
+                <arguments xsi:type="semantics.model.expressions:StringLiteralExp" stringSymbol=" square"/>
+              </value>
+            </part>
+            <part>
+              <value xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.3"/>
+            </part>
+            <part>
+              <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="a" type="/1" bindsTo="/0/@rule.3/@variable.4" refferedClass="/1">
+                <part>
+                  <value xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" name="circle" type="/1" bindsTo="/0/@rule.3/@variable.5" refferedClass="/1">
+                    <part>
+                      <value xsi:type="semantics.model.expressions:OperationCallExp">
+                        <source xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.3/@variable.2"/>
+                        <arguments xsi:type="semantics.model.expressions:StringLiteralExp" stringSymbol=" circle"/>
+                      </value>
+                    </part>
+                    <part>
+                      <value xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.3"/>
+                    </part>
+                  </value>
+                </part>
+                <part>
+                  <value xsi:type="semantics.model.expressions:OperationCallExp">
+                    <source xsi:type="semantics.model.expressions:VariableExp" referredVariable="/0/@rule.3/@variable.2"/>
+                    <arguments xsi:type="semantics.model.expressions:StringLiteralExp" stringSymbol=" arrow"/>
+                  </value>
+                </part>
+                <part>
+                  <value xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.3"/>
+                </part>
+              </value>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <where>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="markerForOutgoingArrows" referredRelation="/0/@rule.4">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.5"/>
+          </contitionExpression>
+        </predicate>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="markerForIncomingArrows" referredRelation="/0/@rule.5">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+      </where>
+      <variable name="s" variableExps="/0/@rule.3/@where/@predicate.0/@contitionExpression/@argument.0 /0/@rule.3/@where/@predicate.1/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="square" variableExps="/0/@rule.3/@where/@predicate.1/@contitionExpression/@argument.1" type="/1"/>
+      <variable name="n" variableExps="/0/@rule.3/@domain.0/@pattern/@templateExpression/@part.0/@value /0/@rule.3/@domain.1/@pattern/@templateExpression/@part.0/@value/@source /0/@rule.3/@domain.1/@pattern/@templateExpression/@part.2/@value/@part.0/@value/@part.0/@value/@source /0/@rule.3/@domain.1/@pattern/@templateExpression/@part.2/@value/@part.1/@value/@source"/>
+      <variable name="root" variableExps="/0/@rule.3/@domain.1/@pattern/@templateExpression/@part.1/@value /0/@rule.3/@domain.1/@pattern/@templateExpression/@part.2/@value/@part.0/@value/@part.1/@value /0/@rule.3/@domain.1/@pattern/@templateExpression/@part.2/@value/@part.2/@value /0/@rule.3/@when/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="a" type="/1"/>
+      <variable name="circle" variableExps="/0/@rule.3/@where/@predicate.0/@contitionExpression/@argument.1" type="/1"/>
+      <when>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="MarkRootBlock" referredRelation="/0/@rule.9">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.3/@variable.3"/>
+          </contitionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="markerForOutgoingArrows">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.4/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.4/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="t" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.4/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.4/@variable.1" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <variable name="s" type="/1"/>
+      <variable name="t" type="/1"/>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="markerForIncomingArrows">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.5/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.5/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="t" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.5/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.5/@variable.1" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <variable name="s" type="/1"/>
+      <variable name="t" type="/1"/>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="MapArrow" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.6/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.6/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="t" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.6/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.6/@variable.1" refferedClass="/1">
+            <part>
+              <value xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.6/@variable.2"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <where>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="Source2Target" referredRelation="/0/@rule.7">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.6/@variable.0"/>
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.6/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+      </where>
+      <variable name="s" variableExps="/0/@rule.6/@where/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <variable name="t" variableExps="/0/@rule.6/@where/@predicate.0/@contitionExpression/@argument.1" type="/1"/>
+      <variable name="root" variableExps="/0/@rule.6/@domain.1/@pattern/@templateExpression/@part.0/@value /0/@rule.6/@when/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+      <when>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="MarkRootBlock" referredRelation="/0/@rule.9">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.6/@variable.2"/>
+          </contitionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="Source2Target">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.7/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.7/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="t" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.7/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.7/@variable.1" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <variable name="s" type="/1"/>
+      <variable name="t" type="/1"/>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="MapRootBlock" isTopLevel="true">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="s" isEnforcable="true" typedModel="/0/@modelParameter.0" rootVariable="/0/@rule.8/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.8/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="t" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.8/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.8/@variable.1" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <where>
+        <predicate>
+          <contitionExpression xsi:type="semanticsQvt.model.qvtrelation:RelationCallExp" name="MarkRootBlock" referredRelation="/0/@rule.9">
+            <argument xsi:type="semantics.model.expressions:VariableExp" type="/1" referredVariable="/0/@rule.8/@variable.1"/>
+          </contitionExpression>
+        </predicate>
+      </where>
+      <variable name="s" type="/1"/>
+      <variable name="t" variableExps="/0/@rule.8/@where/@predicate.0/@contitionExpression/@argument.0" type="/1"/>
+    </rule>
+    <rule xsi:type="semanticsQvt.model.qvtrelation:Relation" name="MarkRootBlock">
+      <domain xsi:type="semanticsQvt.model.qvtrelation:RelationDomain" name="root" isEnforcable="true" typedModel="/0/@modelParameter.1" rootVariable="/0/@rule.9/@variable.0">
+        <pattern>
+          <templateExpression xsi:type="semanticsQvt.model.qvttemplate:ObjectTemplateExp" type="/1" bindsTo="/0/@rule.9/@variable.0" refferedClass="/1"/>
+        </pattern>
+      </domain>
+      <variable name="root" type="/1"/>
+    </rule>
+  </semanticsQvt.model.qvtrelation:RelationalTransformation>
+  <semantics.bridge:DataType name="Shapes::RootBlock"/>
+</xmi:XMI>

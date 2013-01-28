@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Shapes="http://m2m.upb.de/Shapes/1.0" xmlns:trace="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore">
+  <traceRecords>
+    <mappingOperation name="root2root" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//root2root"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="RootBlock">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#/"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RootBlock">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2circle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.19"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.19"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="forkCircle2Block" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//forkCircle2Block"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.14"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.14"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="forkCircle2Block" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//forkCircle2Block"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.0"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.0"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2circle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.1"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.1"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="joinCircle2Block" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//joinCircle2Block"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.3"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Block">
+        <value modelElement="//@traceRecords.9/@result/@result.0/@value/@intermediateElement">
+          <intermediateElement xsi:type="Shapes:Block" name="tmp"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.3"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value modelElement="//@traceRecords.9/@result/@result.0/@value/@intermediateElement"/>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="joinCircle2Block" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//joinCircle2Block"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.4"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Block">
+        <value modelElement="//@traceRecords.11/@result/@result.0/@value/@intermediateElement">
+          <intermediateElement xsi:type="Shapes:Block" name="tmp"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.4"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value modelElement="//@traceRecords.11/@result/@result.0/@value/@intermediateElement"/>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2finalCircle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2finalCircle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.17"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.17"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#/"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2circle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.7"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.7"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2circle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.8"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.8"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.0/@modelElement.2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2circle" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2circle"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.12"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="circle2shape" package="Rule8" module="Rule8">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/ShapesTutorial/Rule8/r8.qvtox#//circle2shape"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Circle">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/source.shapes#//@modelElement.12"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="root" type="Block">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1"/>
+        </value>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Shape">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/ShapesTutorial/Rule8/target.shapes#//@modelElement.1/@modelElement.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+</trace:Trace>

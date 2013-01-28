@@ -1,0 +1,45 @@
+«IMPORT QualityMetrics»
+
+«EXTENSION template::QualityMetricsExtensions»
+
+«DEFINE main FOR Metrics»
+«FILE "QVTO-"+TrafoName+".txt"-»
+-------------------------------------------------
+Automatically measureable metrics for QVT-O
+-------------------------------------------------
+GM2.6: «getValue("Number of Modules", this)-1» (Number of included modules (classes/compilation units/libraries))
+GM2.7: «getValue("Number of Mapping Inhertiances", this)
+	   +getValue("Number of Mapping Merges", this)
+	   +getValue("Number of Mapping Disjunctions", this)» (Number of applied reuse mechanisms (inheritance/logical composition))
+GM2.8: «getAverage("Number of When Clauses per Mapping", this)» (Average number of when clauses (QVT-R and QVT-O))
+GM2.9: «getValue("Number of Intermediate Classes", this)+getValue("Number of Intermediate Properties", this)» (Number of intermediate structures)
+GM2.10: «getAverage("Number of Distinct Phases per Mapping", this)» (Average distinct phases per rule (QVT-O))
+-------------------------------------------------
+M1.1: «getAverage("Number of Parameters per Mapping", this)» (Average number of domains)
+M1.2: «getAverage("Number of Distinct Calls from Mappings to Mappings or Helpers per Mapping (Mapping Fan-Out)", this)
+	  +getAverage("Number of Distinct Calls from Helpers to Mappings or Helpers per Helper (Helper Fan-Out)", this)» (Average fan-out)
+M1.3: «getAverage("Rule Dependency Depth", this)» (Average rule dependency depth)
+M1.4: «getAverage("Number of Calls from Mappings to Mappings or Helpers per Mapping (Mapping Bag Fan-Out)", this)
+	  +getAverage("Number of Calls from Helpers to Mappings or Helpers per Helper (Helper Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+M9.1: «getValue("Source lines of Code", this)»  (Lines of Code)
+M9.2: 1 (Number of starts)
+M9.3: «getValue("Number of Mappings", this)+getValue("Number of Helpers", this)+1» (Number of rules)
+M9.4: 1 (Number of top-level rules)
+M9.5: «getAverage("Number of Parameters per Mapping", this)» (Average number of domains)
+M9.6: «getAverage("Number of Distinct Calls from Mappings to Mappings or Helpers per Mapping (Mapping Fan-Out)", this)
+	  +getAverage("Number of Distinct Calls from Helpers to Mappings or Helpers per Helper (Helper Fan-Out)", this)» (Average fan-out)
+M9.7: «getAverage("Number of Calls from Mappings to Mappings or Helpers per Mapping (Mapping Bag Fan-Out)", this)
+	  +getAverage("Number of Calls from Helpers to Mappings or Helpers per Helper (Helper Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+M11.1: «getValue("Source lines of Code", this)»  (Lines of Code)
+M11.2: 1 (Number of starts)
+M11.3: «getValue("Number of Mappings", this)+getValue("Number of Helpers", this)+1» (Number of rules)
+M11.4: 1 (Number of top-level rules)
+M11.5: «getAverage("Number of Subobjects per Helper", this)
+       +getAverage("Number of Subobjects per Mapping", this)» (Average size of domain pattern)
+M11.6: «getAverage("Number of Calls from Mappings to Mappings or Helpers per Mapping (Mapping Bag Fan-Out)", this)
+	   +getAverage("Number of Calls from Helpers to Mappings or Helpers per Helper (Helper Bag Fan-Out)", this)» (Average number of explicit internal scheduling calls)
+-------------------------------------------------
+«ENDFILE»
+«ENDDEFINE»

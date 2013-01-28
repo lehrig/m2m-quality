@@ -1,0 +1,92 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation implements a forward as well as a backward 
+ * transformation. The execution direction can be set within a run-dialog
+ * under "properties". The boolean variable "backwards" is used as a 
+ * configuration property within the transformation.
+ *
+ * User edits are _not_ preserved (in contrast to MediniQVT's original scenario 
+ * "Rule9"). If this is needed, one has to use a trace model as third input to
+ * the transformation and check its trace records for already mapped elements.
+ * Alternatively, one may use blackbox operations which handle the logics of
+ * the trace record handling.
+ * 
+ * Implementation time: 135 Minutes (due to trying several approaches for
+ * supporting user edits in a brief and concise way - sadly without success)
+ *
+ * @see MediniQVT Plugin "Rule9" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule9(inout source:SHAPES, inout target:SHAPES) {
+	
+	/**
+	 * Indicates whether to transform forward, i.e., from source to target
+	 * (false) or backward, i.e., from target to source (true).
+	 */
+	configuration property backwards : Boolean;
+	
+	/**
+	 * Entry point. Determines the transformation direction, deletes the
+	 * respective target model and creates it anew.
+	 */
+	main() {
+		if(backwards) then {
+			source->removeElement(source.rootObjects()![RootBlock]);
+			target.rootObjects()[RootBlock]->map backward();
+		} 
+		else {
+			target->removeElement(target.rootObjects()![RootBlock]);
+			source.rootObjects()[RootBlock]->map forward();
+		} endif;
+	}
+	
+	/**
+	 * Mapping from target to source.
+	 */
+	mapping RootBlock::backward() : RootBlock@source{
+		self->modelElement[Shape]->map shape2shape();
+	}
+	
+	/**
+	 * Mapping from source to target.
+	 */
+	mapping inout RootBlock::forward() : RootBlock@target{
+		self->modelElement[Shape]->map shape2shape();
+	}
+	
+	/**
+	 * Either maps squares to squares or circles to circles.
+	 */
+	mapping Shape::shape2shape() : Shape 
+		disjuncts 	Square::square2square,
+					Circle::circle2circle{}
+	
+	/**
+	 * Abstract mapping for shape initialization.
+	 */
+	abstract mapping Shape::abstractShape2shape() : Shape {
+		name := self.name;
+		block := self.block.resolveone(Block);
+		inArrow := self.inArrow.resolve(Arrow);
+		outArrow := self.outArrow.resolve(Arrow);
+	}
+		
+	/**
+	 * Maps squares to squares.
+	 */			
+	mapping Square::square2square() : Square 
+		inherits Shape::abstractShape2shape {
+	}
+	
+	/**
+	 * Maps circles to circles.
+	 */
+	mapping Circle::circle2circle() : Circle
+		inherits Shape::abstractShape2shape {
+	}	
+}

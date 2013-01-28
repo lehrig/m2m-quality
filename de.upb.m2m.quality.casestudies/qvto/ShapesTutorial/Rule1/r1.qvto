@@ -1,0 +1,43 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation copies a shapes model to another shapes model while
+ * replacing circles by squares.
+ * 
+ * Implementation time: 40 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule1" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule1(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then select every circle and replace 
+	 * it by a square.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		var circles = copy[RootBlock].allSubobjectsOfKind(Circle);
+		circles[Circle]
+			->forEach(circle) {
+				new Square(circle);
+				target.removeElement(circle);
+			}
+	}
+	
+	/**
+	 * Constructor for creating a new square by using information from a given
+	 * circle.
+	 * @param circle The circle to be used as a template
+	 */
+	constructor Square::Square(circle : Circle) {
+		name := circle.name;
+		block := circle.block;
+		inArrow := circle.inArrow;
+		outArrow := circle.outArrow;
+	}
+}

@@ -1,0 +1,51 @@
+modeltype SHAPES uses Shapes('http://m2m.upb.de/Shapes/1.0');
+
+/**
+ * This transformation specifies a hierarchical flattening that moves every 
+ * shape from inner blocks to the root block of a given shapes model.
+ * 
+ * Implementation time: 30 Minutes.
+ *
+ * @see MediniQVT Plugin "Rule2" (original scenario)
+ * @version 0.1
+ * @author Sebastian Lehrig (lehrig@mail.upb.de)
+ *
+ * @param source Source shapes model
+ * @param target Target shapes model
+ */
+transformation Rule2(in source:SHAPES, out target:SHAPES) {
+	
+	/**
+	 * Entry point. First copy the model, then get the root block and
+	 * iteratively move model elements contained in subblocks to the root block.
+	 * Subblocks are deleted afterwards and subsubblocks become subblocks such
+	 * that this process can be repeated for the whole containment hierarchy.
+	 */
+	main() {
+		var copy := source.rootObjects()[RootBlock]->deepclone();
+		
+		// get root
+		assert(copy[RootBlock]->size()=1)
+		with log ("There can only be one root block!");
+		var root := copy[RootBlock]->any(true);
+		
+		var subBlocks := root.subobjectsOfKind(Block)[Block];
+		while(subBlocks->size() > 0) {
+			subBlocks->forEach(subBlock) {
+				// get contained elements of block
+				var modelElements := subBlock->modelElement;
+				
+				// move model elements to root block
+				modelElements->forEach(modelElement) {
+					modelElement.block := root
+				};
+				
+				// delete subBlock
+				target.removeElement(subBlock);
+				
+				// check for nested subBlocks
+				subBlocks := root.subobjectsOfKind(Block)[Block];
+			}
+		}
+	}
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ASCII"?>
+<QualityMetrics:Metrics xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:QualityMetrics="http://m2m.upb.de/QualityMetrics/1.0" TrafoName="Uml2Rdb">
+  <SimpleMetrics Metric="Lines of Code" Value="128"/>
+  <SimpleMetrics Metric="Blank lines of Code" Value="16"/>
+  <SimpleMetrics Metric="Comment lines of Code" Value="15"/>
+  <SimpleMetrics Metric="Source lines of Code" Value="97"/>
+  <SimpleMetrics Metric="Number of Modules" Value="1"/>
+  <SimpleMetrics Metric="Number of Library Modules"/>
+  <SimpleMetrics Metric="Number of Operational Transformation Modules" Value="1"/>
+  <SimpleMetrics Metric="Number of Input Models"/>
+  <SimpleMetrics Metric="Number of Output Models"/>
+  <SimpleMetrics Metric="Number of Metamodels" Value="3"/>
+  <SimpleMetrics Metric="Number of Intermediate Classes" Value="1"/>
+  <SimpleMetrics Metric="Number of Intermediate Properties" Value="1"/>
+  <SimpleMetrics Metric="Number of Owned Variables" Value="1"/>
+  <SimpleMetrics Metric="Number of Variables with same Name and different Type"/>
+  <SimpleMetrics Metric="Number of Operations" Value="10"/>
+  <SimpleMetrics Metric="Number of Mappings" Value="7"/>
+  <SimpleMetrics Metric="Number of Mappings with Condition" Value="3"/>
+  <SimpleMetrics Metric="Number of Subobjects of Entry Operation" Value="2"/>
+  <SimpleMetrics Metric="Number of When Clauses" Value="3"/>
+  <SimpleMetrics Metric="Number of Where Clauses"/>
+  <SimpleMetrics Metric="Number of Mapping Inhertiances"/>
+  <SimpleMetrics Metric="Number of Mapping Merges"/>
+  <SimpleMetrics Metric="Number of Mapping Disjunctions"/>
+  <SimpleMetrics Metric="Number of Helpers" Value="2"/>
+  <SimpleMetrics Metric="Number of Unused Helpers"/>
+  <SimpleMetrics Metric="Number of Overloaded Helpers"/>
+  <SimpleMetrics Metric="Number of Calls to Log"/>
+  <SimpleMetrics Metric="Number of Calls to Assert"/>
+  <SimpleMetrics Metric="Number of Calls to Resolve" Value="2"/>
+  <AggregatedIntegerMetrics Metric="Number of Input Models per Transformation Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Output Models per Transformation Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Metamodels per Module" Minimum="3" Maximum="3" Median="3" Average="3.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Module" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Intermediate Classes per Transformation Module" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Intermediate Properties per Transformation Module" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Operation" Minimum="2" Maximum="6" Median="5" Average="4.5" StandardDeviation="1.0801234"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Operation" Maximum="2" Average="0.6363636" StandardDeviation="0.80903983"/>
+  <AggregatedIntegerMetrics Metric="Number of Mappings per Module" Minimum="7" Maximum="7" Median="7" Average="7.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Mapping" Minimum="4" Maximum="6" Median="5" Average="5.0" StandardDeviation="0.57735026"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Mapping" Maximum="2" Average="0.75" StandardDeviation="0.8864053"/>
+  <AggregatedIntegerMetrics Metric="Number of IN Parameters per Mapping" Maximum="2" Average="0.5714286" StandardDeviation="0.7867958"/>
+  <AggregatedIntegerMetrics Metric="Number of INOUT Parameters per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of OUT Parameters per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Mappings per Mapping Name" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of When Clauses per Mapping" Maximum="1" Average="0.42857143" StandardDeviation="0.5345225"/>
+  <AggregatedIntegerMetrics Metric="Number of Where Clauses per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Mappings per Disjunction"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Phases per Mapping" Minimum="1" Maximum="2" Median="2" Average="1.5714285" StandardDeviation="0.5345225"/>
+  <AggregatedIntegerMetrics Metric="Number of Variables per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Helpers per Module" Minimum="2" Maximum="2" Median="2" Average="2.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Helper" Minimum="4" Maximum="4" Median="4" Average="4.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Helpers per Helper Name" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Helper" Maximum="1" Average="0.5" StandardDeviation="0.70710677"/>
+  <AggregatedIntegerMetrics Metric="Number of Unused Parameters per Helper" Maximum="1" Average="0.5" StandardDeviation="0.70710677"/>
+  <AggregatedIntegerMetrics Metric="Number of Helper parameters with IN direction per Helper" Maximum="1" Average="0.5" StandardDeviation="0.70710677"/>
+  <AggregatedIntegerMetrics Metric="Number of Helper parameters with INOUT direction per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Helper parameters with OUT direction per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Variables per Helper"/>
+  <AggregatedIntegerMetrics Metric="Rule Dependency Depth" Minimum="3" Maximum="5" Median="3" Average="3.6666667" StandardDeviation="1.1547005"/>
+  <AggregatedIntegerMetrics Metric="Number of Imported Modules per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Times a Module is Imported"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Mappings in other Modules per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Helpers in other Modules per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls from other Modules per Module (Module Fan-In)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from other Modules per Module (Module Bag Fan-In)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Mappings in other Modules per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Helpers in other Modules per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls to other Modules per Module (Module Fan-Out)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to other Modules per Module (Module Bag Fan-Out)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Mappings to Mappings per Mapping" Maximum="2" Median="1" Average="1.1428572" StandardDeviation="0.8997354"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Mappings to Helpers per Mapping" Maximum="1" Average="0.2857143" StandardDeviation="0.48795003"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls from Mappings to Mappings or Helpers per Mapping (Mapping Fan-Out)" Maximum="2" Median="2" Average="1.4285715" StandardDeviation="0.7867958"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Mappings to Mappings or Helpers per Mapping (Mapping Bag Fan-Out)" Maximum="2" Median="2" Average="1.4285715" StandardDeviation="0.7867958"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Mappings from Mappings per Mapping" Maximum="2" Median="1" Average="1.1428572" StandardDeviation="0.69006556"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Mappings from Helpers per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls to Mappings per Mapping (Mapping Fan-In)" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Mappings per Mapping (Mapping Bag Fan-In)" Minimum="1" Maximum="2" Median="1" Average="1.2857143" StandardDeviation="0.48795003"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Helpers to Helpers per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Helpers to Mappings per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls from Helpers to Mappings or Helpers per Helper (Helper Fan-Out)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Helpers to Mappings or Helpers per Helper (Helper Bag Fan-Out)"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Helpers from Mappings per Helper" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Helpers from Helpers per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls to Helpers per Helper (Helper Fan-In)" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Helpers per Helper (Helper Bag Fan-In)" Minimum="1" Maximum="1" Median="1" Average="1.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Log per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Log per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Log per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Assert per Module"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Assert per Mapping"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Assert per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Resolve per Module" Minimum="2" Maximum="2" Median="2" Average="2.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Resolve per Mapping" Maximum="1" Average="0.2857143" StandardDeviation="0.48795003"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls to Resolve per Helper"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls from Operations to Operations per Operation (Operation Fan-Out)" Maximum="5" Median="2" Average="2.2" StandardDeviation="1.6865481"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Operations to Operations per Operation (Operation Bag Fan-Out)" Maximum="5" Median="2" Average="2.2" StandardDeviation="1.6865481"/>
+</QualityMetrics:Metrics>

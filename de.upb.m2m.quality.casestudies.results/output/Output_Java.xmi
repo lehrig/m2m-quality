@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<QualityMetrics:Metrics xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:QualityMetrics="http://m2m.upb.de/QualityMetrics/1.0" TrafoName="UML2RDBMS">
+  <SimpleMetrics Metric="Lines of Code" Value="507"/>
+  <SimpleMetrics Metric="Blank lines of Code" Value="66"/>
+  <SimpleMetrics Metric="Comment lines of Code" Value="185"/>
+  <SimpleMetrics Metric="Source lines of Code" Value="256"/>
+  <SimpleMetrics Metric="Number of Imports" Value="29"/>
+  <SimpleMetrics Metric="Number of Inner Classes" Value="1"/>
+  <SimpleMetrics Metric="Number of Member Variables" Value="8"/>
+  <SimpleMetrics Metric="Number of Methods" Value="13"/>
+  <SimpleMetrics Metric="Number of Constructors" Value="1"/>
+  <SimpleMetrics Metric="Number of Abstract Methods" Value="14"/>
+  <SimpleMetrics Metric="Number of If Clauses" Value="14"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Method" Minimum="4" Maximum="29" Median="12" Average="13.076923" StandardDeviation="8.067027"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Constructor" Minimum="3" Maximum="3" Median="3" Average="3.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Subobjects per Abstract Method" Minimum="3" Maximum="29" Median="10" Average="12.357142" StandardDeviation="8.205132"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Method" Maximum="3" Median="1" Average="1.0769231" StandardDeviation="0.8623165"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Constructor" Minimum="2" Maximum="2" Median="2" Average="2.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Parameters per Abstract Method" Maximum="3" Median="1" Average="1.1428572" StandardDeviation="0.8644378"/>
+  <AggregatedIntegerMetrics Metric="Number of If Clauses per Method" Maximum="4" Median="1" Average="1.0769231" StandardDeviation="1.1875422"/>
+  <AggregatedIntegerMetrics Metric="Number of If Clauses per Constructor"/>
+  <AggregatedIntegerMetrics Metric="Number of If Clauses per Abstract Method" Maximum="4" Median="1" Average="1.0" StandardDeviation="1.1766968"/>
+  <AggregatedIntegerMetrics Metric="Method Dependency Depth" Minimum="1" Maximum="6" Median="2" Average="3.0" StandardDeviation="2.0"/>
+  <AggregatedIntegerMetrics Metric="Number of Distinct Calls from Methods to Methods per Method (Method Fan-Out)" Maximum="3" Median="1" Average="1.0714285" StandardDeviation="0.99724895"/>
+  <AggregatedIntegerMetrics Metric="Number of Calls from Methods to Methods per Method (Method Bag Fan-Out)" Maximum="3" Median="1" Average="1.0714285" StandardDeviation="0.99724895"/>
+</QualityMetrics:Metrics>

@@ -1,0 +1,160 @@
+library Utilities; 
+
+import de.upb.m2m.quality.languages.java.MetricsBlackboxUnit;
+
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+query NumLOCsBB() : Integer { 
+	return getMetricLOC();
+}
+
+query NumBLOCsBB() : Integer { 
+	return getMetricBLOC();
+}
+
+query NumCLOCsBB() : Integer { 
+	return getMetricCLOC();
+}
+
+query NumSLOCsBB() : Integer { 
+	return getMetricSLOC();
+}
+
+query getPackageSequenceBB(): Sequence(String) { 
+	return getPackageSequence();
+}
+
+query getClassNameBB(): String { 
+	return getClassName();
+}
+
+helper getNewSimpleMetric(name : String, value : Integer): SimpleMetric { 
+	var m : SimpleMetric := object SimpleMetric{};
+	
+	m.Metric := name;
+	m.Value := value;
+	
+	return m;
+}
+
+helper getNewAggregatedIntegerMetric(name : String, intseq : Sequence(Integer)) : AggregatedIntegerMetric {
+	var m : AggregatedIntegerMetric;
+	m := object AggregatedIntegerMetric{};
+	m.Metric := name;
+	
+	if ( intseq->size() > 0 ) then {
+		m.Minimum := getIntSeqMinimum(intseq);
+		m.Maximum := getIntSeqMaximum(intseq);
+		m.Average := getIntSeqAverage(intseq);
+		m.Median := getIntSeqMedian(intseq);
+		m.StandardDeviation := getIntSeqStdDev(intseq);
+	} endif;
+	
+	return m;
+}
+
+helper getIntSeqMinimum(intseq: Sequence(Integer)): Integer { 
+	let sortedintseq : Sequence(Integer) = intseq->sortedBy(i|i) 
+	in	if	sortedintseq->notEmpty()
+		then return sortedintseq->first()//.oclAsType(Integer)
+		else {
+			log("Error: invoked getIntSeqMinimum() on an empty integer sequence");
+		} endif;
+	return null;
+}
+
+helper getIntSeqMaximum(intseq: Sequence(Integer)): Integer { 
+	let sortedintseq : Sequence(Integer) = intseq->sortedBy(i|i) 
+	in	if	sortedintseq ->notEmpty()
+		then return sortedintseq->last()//.oclAsType(Integer)
+		else {log("Error: invoked getIntSeqMaximum() on an empty integer sequence");}
+		endif;
+	return null;
+}
+
+helper getRealSeqMaximum(realseq: Sequence(Real)): Real { 
+	let sortedrealseq : Sequence(Real) = realseq->sortedBy(i|i) 
+	in	if	sortedrealseq->notEmpty()
+		then return sortedrealseq->last()//.oclAsType(Real)
+		else {log("Error: invoked getRealSeqMaximum() on an empty integer sequence");}
+		endif;
+	return null;
+}
+
+helper getIntSeqMedian(intseq: Sequence(Integer)): Integer {
+	let sortedintseq : Sequence(Integer) = intseq->sortedBy(i|i)
+	in	if (sortedintseq->notEmpty()) then { 
+			var len : Integer := sortedintseq->size();
+			if ( len.mod(2) = 0 ) then {
+				return sortedintseq->at(sortedintseq->size().div(2))
+			} 
+			else {
+				return sortedintseq->at((sortedintseq->size().div (2)) + 1)
+			} endif;
+		}
+		else {
+			log("Error: invoked getIntSeqMedian() on an empty integer sequence");
+		} endif;
+		
+	return null;
+}
+
+helper getRealSeqMedian(realseq: Sequence(Real)): Real {
+	let sortedrealseq : Sequence(Real) = realseq->sortedBy(i|i)
+	in	if	sortedrealseq->notEmpty() then 
+			if	sortedrealseq->size().mod(2) = 0 then
+				return sortedrealseq->at(sortedrealseq->size().div(2))
+			else 
+				return sortedrealseq->at((sortedrealseq->size().div(2)) + 1)
+			endif 
+		else
+			log("Error: invoked getRealSeqMedian() on an empty real sequence")
+		endif;
+	return null;
+}
+
+helper getIntSeqAverage(intseq: Sequence(Integer)): Real { 
+	if	intseq->notEmpty() then 
+		return getRound(intseq->sum() / intseq->size()) 
+	else
+		return 0
+	endif;
+	
+	return 0;
+}
+
+helper getRealSeqAverage(realseq: Sequence(Real)): Real {
+	if	realseq->notEmpty() then 
+		return getRound(realseq->sum() / realseq->size()) 
+	else 
+		return 0
+	endif; 
+	
+	return 0;
+}
+
+helper getIntSeqStdDev(intseq: Sequence(Integer)) : Real { 
+	let avg: Real = getIntSeqAverage(intseq) in	
+		if	intseq->size() > 1 then
+			return getSqrt((intseq->collect(i | (i - avg) * (i - avg))->sum() / (intseq->size() - 1)))
+		else 
+			return 0
+		endif;
+	return 0;
+}
+
+helper getRealSeqStdDev(realseq: Sequence(Real)): Real { 
+	let avg: Real = getRealSeqAverage(realseq) in
+		if	realseq ->size() > 1 then 
+			return getSqrt((realseq->collect(i | (i - avg) * (i - avg))->sum()/ (realseq->size() - 1)))
+		else 
+			return 0
+		endif; 
+	return 0;
+}
+
+helper getStringOccurrenceCount(names: Sequence(String)): Sequence(Integer) = 
+	let uniquenames: Sequence(String) = names->asSet()	-- Remove duplicates
+											->asSequence() -- Restore ordering (needed?)
+	in uniquenames->collect(i | names->count(i) );
+

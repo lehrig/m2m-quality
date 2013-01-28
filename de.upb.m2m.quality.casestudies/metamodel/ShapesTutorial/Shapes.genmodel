@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.upb.m2m.quality.casestudies/src"
+    modelPluginID="de.upb.m2m.quality.casestudies" modelName="Shapes" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>Shapes.ecore</foreignModel>
+  <genPackages prefix="Shapes" basePackage="de.upb.m2m.quality.casestudies" disposableProviderFactory="true"
+      ecorePackage="Shapes.ecore#/">
+    <genClasses image="false" ecoreClass="Shapes.ecore#//ModelElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Shapes.ecore#//ModelElement/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Shapes.ecore#//ModelElement/block"/>
+    </genClasses>
+    <genClasses ecoreClass="Shapes.ecore#//Arrow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Shapes.ecore#//Arrow/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Shapes.ecore#//Arrow/target"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Shapes.ecore#//Shape">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Shapes.ecore#//Shape/inArrow"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Shapes.ecore#//Shape/outArrow"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Shapes.ecore#//SimpleShape"/>
+    <genClasses ecoreClass="Shapes.ecore#//Square"/>
+    <genClasses ecoreClass="Shapes.ecore#//Triangle"/>
+    <genClasses ecoreClass="Shapes.ecore#//Circle"/>
+    <genClasses ecoreClass="Shapes.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Shapes.ecore#//Block/modelElement"/>
+    </genClasses>
+    <genClasses ecoreClass="Shapes.ecore#//RootBlock"/>
+  </genPackages>
+</genmodel:GenModel>

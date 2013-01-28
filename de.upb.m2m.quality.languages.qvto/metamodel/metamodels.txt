@@ -1,0 +1,5 @@
+Source of the metamodels:
+- ImperativeOCL.ecore : org.eclipse.m2m.qvt.oml.ecore.imperativeocl
+- QVTOperationalCST.ecore : org.eclipse.m2m.qvt.oml.cst.parser
+- QualityMetrics.ecore : http://www.win.tue.nl/~mamstel/ATL/ATL_Metrics_Tool.zip
+						( http://www.win.tue.nl/~mamstel/experiments.html )

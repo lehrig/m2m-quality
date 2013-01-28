@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trace="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore">
+  <traceRecords>
+    <mappingOperation name="packageToSchema" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//packageToSchema"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlPackage">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXZ9wKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsSchema">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#/"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXZ9waS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXZ9waS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Library_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection"/>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="attr2LeafAttrs" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//attr2LeafAttrs"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAttribute">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuxqS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="author_"/>
+      </parameters>
+      <parameters name="pkind" type="String">
+        <value/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Sequence(LeafAttribute)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="extent:/8#/0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="attr2LeafAttrs" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//attr2LeafAttrs"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAttribute">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwaS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+      <parameters name="pkind" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Sequence(LeafAttribute)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="extent:/8#/0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="leafAttr2OrdinaryColumn" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//leafAttr2OrdinaryColumn"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="LeafAttribute">
+        <value>
+          <modelElement href="extent:/8#/0"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Medium_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsColumn">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.1/@rdbmsColumn.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Medium_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.1/@rdbmsColumn.0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwqS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.2"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="leafAttr2OrdinaryColumn" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//leafAttr2OrdinaryColumn"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="LeafAttribute">
+        <value>
+          <modelElement href="extent:/8#/0"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="DVD_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsColumn">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.2/@rdbmsColumn.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="DVD_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.2/@rdbmsColumn.0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwqS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="DVD_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.2/@rdbmsColumn.0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="attr2LeafAttrs" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//attr2LeafAttrs"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAttribute">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuxKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+      <parameters name="pkind" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Sequence(LeafAttribute)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="extent:/8#/1"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuw6S6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="leafAttr2OrdinaryColumn" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//leafAttr2OrdinaryColumn"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="LeafAttribute">
+        <value>
+          <modelElement href="extent:/8#/1"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Book_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsColumn">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3/@rdbmsColumn.1"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="leafAttr2OrdinaryColumn" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//leafAttr2OrdinaryColumn"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="LeafAttribute">
+        <value>
+          <modelElement href="extent:/8#/0"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Book_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsColumn">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3/@rdbmsColumn.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuwKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Book_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3/@rdbmsColumn.0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuw6S6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Book_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3/@rdbmsColumn.0"/>
+          </collection>
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.3/@rdbmsColumn.1"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="attr2LeafAttrs" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//attr2LeafAttrs"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAttribute">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuxqS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+      <parameters name="pkind" type="String">
+        <value primitiveValue=""/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="Sequence(LeafAttribute)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="extent:/8#/2"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuxaS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.4"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="leafAttr2OrdinaryColumn" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//leafAttr2OrdinaryColumn"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="LeafAttribute">
+        <value>
+          <modelElement href="extent:/8#/2"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Author_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsColumn">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.4/@rdbmsColumn.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="class2Columns" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//class2Columns"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlClass">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuxaS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters>
+      <parameters name="prefix" type="String">
+        <value primitiveValue="Author_"/>
+      </parameters>
+    </parameters>
+    <result>
+      <result kind="OUT" name="result" type="OrderedSet(RdbmsColumn)">
+        <value collectionType="OclCollection">
+          <collection>
+            <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.4/@rdbmsColumn.0"/>
+          </collection>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="asso2table" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//asso2table"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAssociation">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuyKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsTable">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="asso2ForeignKey" package="Uml2Rdb" module="Uml2Rdb">
+      <runtimeMappingOperation href="platform:/resource/de.upb.m2m.quality.casestudies/qvto/UML2RDBMS/uml2rdbms.qvtox#//asso2ForeignKey"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="UmlAssociation">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleUML.xmi#_pXjuyKS6EduN8Krm-aC8vQ"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="RdbmsForeignKey">
+        <value>
+          <modelElement href="platform:/resource/de.upb.m2m.quality.casestudies/model/UML2RDBMS/simpleRDBMS.xmi#//@rdbmsTable.0/@rdbmsForeignKey.0"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+</trace:Trace>

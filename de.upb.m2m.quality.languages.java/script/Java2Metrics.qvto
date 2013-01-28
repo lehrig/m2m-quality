@@ -1,0 +1,91 @@
+import MiscellaneousMetrics;
+import MethodMetrics;
+import DependencyMetrics;
+import Utilities;
+
+modeltype JAVA uses "http://www.eclipse.org/MoDisco/Java/0.2.incubation/java"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+transformation Java2Metrics(in javaModel:JAVA, out metricModel:METRICS);
+
+main() {
+	var models := javaModel.objects()[JAVA::Model];
+	assert fatal ( models->size() = 1 ) 
+	with log ("Transformation only supports exactly one Model (and not "+models->size().toString()+")!");
+	var model := models->any(true);
+	var classDeclaration := getClassDeclaration(model.ownedElements);	
+	
+	classDeclaration.map class2metrics();
+}
+
+mapping JAVA::ClassDeclaration::class2metrics() : METRICS::Metrics {
+	TrafoName := self.name;
+
+	------------------------
+	//Miscellaneous Metrics
+	SimpleMetrics += NumLOCs();
+	SimpleMetrics += NumBLOCs();
+	SimpleMetrics += NumCLOCs();
+	SimpleMetrics += NumSLOCs();
+	
+	SimpleMetrics += NumImports(self); 
+	
+	SimpleMetrics += NumInnerClasses(self);
+	SimpleMetrics += NumMemberVariables(self);
+	
+	------------------------
+	//Method Metrics
+	SimpleMetrics += NumMethods(self);
+	SimpleMetrics += NumConstructors(self);
+	SimpleMetrics += NumAbstractMethods(self);
+	
+	AggregatedIntegerMetrics += NumSubobjectsPerMethod(self);
+	AggregatedIntegerMetrics += NumSubobjectsPerConstructor(self);
+	AggregatedIntegerMetrics += NumSubobjectsPerAbstractMethod(self);
+	
+	AggregatedIntegerMetrics += NumParamsPerMethod(self);
+	AggregatedIntegerMetrics += NumParamsPerConstructor(self);
+	AggregatedIntegerMetrics += NumParamsPerAbstractMethod(self);
+	
+	
+	SimpleMetrics += NumIfClauses(self);
+	AggregatedIntegerMetrics += NumIfClausesPerMethod(self);
+	AggregatedIntegerMetrics += NumIfClausesPerConstructor(self);
+	AggregatedIntegerMetrics += NumIfClausesPerAbstractMethod(self);
+	
+	------------------------
+	//Dependency Metrics
+	AggregatedIntegerMetrics += MethodDependencyDepth(self);
+	
+	AggregatedIntegerMetrics += NumDistinctCallsFromMethodsToMethodsPerMethod(self);//Method "Set" Fan-Out
+	AggregatedIntegerMetrics += NumCallsFromMethodsToMethodsPerMethod(self);//Method "Bag" Fan-Out
+}
+
+/**
+ * Recursively get ClassDeclaration from the lowest Package in Package hierarchy.
+ */
+query getClassDeclaration(packages : Set(JAVA::Package)) : JAVA::ClassDeclaration {
+	// find correct package
+	var packageSequence := getPackageSequenceBB();
+	var currentPackages := packages;
+	var package : JAVA::Package;
+	packageSequence->forEach(pName){
+		assert fatal (currentPackages.name->includes(pName))
+		with log ("Transformation cannot find subpackage '"+pName+"' for current Package '"+package.name+"'.");
+		
+		var foundPackage := currentPackages->select(p | p.name = pName);
+		assert fatal (foundPackage->size()=1)
+		with log ("Dublicate entries for package '"+pName+"'.");
+		
+		package :=  foundPackage->any(true);
+		currentPackages := package->ownedPackages->asSet();
+	};
+	
+	// find correct class
+	var className := getClassNameBB();
+	var classes := package.ownedElements[JAVA::ClassDeclaration];
+	assert fatal (classes.name->includes(className))
+	with log ("Class '"+className+"' not found!");
+	
+	return classes->selectOne(c | c.name = className);
+}

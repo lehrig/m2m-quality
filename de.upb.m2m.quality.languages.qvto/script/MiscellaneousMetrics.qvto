@@ -1,0 +1,220 @@
+library MiscellaneousMetrics; 
+
+import Utilities;
+
+modeltype QVTO uses "http://www.eclipse.org/QVT/1.0.0/Operational"; 
+modeltype METRICS uses QualityMetrics('http://m2m.upb.de/QualityMetrics/1.0');
+
+------------------------
+// Metrics
+
+
+query NumLOCs() : SimpleMetric { 
+	var name := "Lines of Code"; 
+	var value := NumLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumBLOCs() : SimpleMetric { 
+	var name := "Blank lines of Code"; 
+	var value := NumBLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumCLOCs() : SimpleMetric { 
+	var name := "Comment lines of Code"; 
+	var value := NumCLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumSLOCs() : SimpleMetric { 
+	var name := "Source lines of Code"; 
+	var value := NumSLOCsBB();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Modules"; 
+	var value := transModules->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumLibraryModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Library Modules"; 
+	var value := transModules[QVTO::expressions::Library]->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumOperationalTransformationModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Operational Transformation Modules"; 
+	var value := transModules[QVTO::expressions::OperationalTransformation]->size();
+	return getNewSimpleMetric(name, value);
+}
+
+// TODO Not implemented!
+/*
+query NumUnusedModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Unused Modules"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}
+
+query NumUnusedLibraryModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Unused Library Modules"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}
+
+query NumUnusedOperationalTransformationModules(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Unused Operational Transformation Modules"; 
+	var value := ;
+	return getNewSimpleMetric(name, value);
+}*/
+
+query NumInputModels(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Input Models"; 
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->modelParameter[QVTO::expressions::VarParameter]
+					->select(QVTO::expressions::DirectionKind::_in)
+					->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumOutputModels(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Output Models"; 
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->modelParameter[QVTO::expressions::VarParameter]
+					->select(QVTO::expressions::DirectionKind::_out)
+					->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumInputModelsPerTransformationModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Input Models per Transformation Module";
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->iterate(	module : QVTO::expressions::OperationalTransformation;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module.modelParameter[QVTO::expressions::VarParameter]
+									->select(QVTO::expressions::DirectionKind::_in)
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOutputModelsPerTransformationModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Output Models per Transformation Module";
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->iterate(	module : QVTO::expressions::OperationalTransformation;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module.modelParameter[QVTO::expressions::VarParameter]
+									->select(QVTO::expressions::DirectionKind::_out)
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumMetaModels(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Metamodels"; 
+	var value := transModules
+					->usedModelType
+					->_metamodel
+					->asSet()
+					->size();							
+	return getNewSimpleMetric(name, value);
+}
+
+query NumMetaModelsPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Metamodels per Module";
+	var value := transModules
+					->iterate(	module : QVTO::expressions::Module;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module
+									->usedModelType
+									->_metamodel
+									->asSet()
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumSubobjectsPerModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Subobjects per Module";
+	var value := transModules
+					->iterate(	module : QVTO::expressions::Module;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module
+									->subobjects()
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumIntermediateClasses(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Intermediate Classes"; 
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->intermediateClass
+					->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumIntermediateProperties(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Intermediate Properties"; 
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->intermediateProperty
+					->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumIntermediateClassesPerTransformationModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Intermediate Classes per Transformation Module";
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->iterate(	module : QVTO::expressions::OperationalTransformation;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module
+									->intermediateClass
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumIntermediatePropertiesPerTransformationModule(transModules : OrderedSet(QVTO::expressions::Module)) : AggregatedIntegerMetric { 
+	var name := "Number of Intermediate Properties per Transformation Module";
+	var value := transModules[QVTO::expressions::OperationalTransformation]
+					->iterate(	module : QVTO::expressions::OperationalTransformation;
+								acc : Sequence(Integer) = Sequence{} |
+								acc->append(
+									module
+									->intermediateProperty
+									->size()
+								) );
+	return getNewAggregatedIntegerMetric(name, value);
+}
+
+query NumOwnedVariables(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Owned Variables"; 
+	var allVariables := transModules->ownedVariable;
+	var value := allVariables->size();
+	return getNewSimpleMetric(name, value);
+}
+
+query NumVariablesWithSameNameNotType(transModules : OrderedSet(QVTO::expressions::Module)) : SimpleMetric { 
+	var name := "Number of Variables with same Name and different Type"; 
+	var allVariables := transModules->ownedVariable;
+	var value := allVariables
+					->select(
+						variable : ocl::ecore::Variable |
+						allVariables
+						->excluding(variable)
+						->select( 
+							variable2 : ocl::ecore::Variable |
+							(variable2.name = variable.name) and
+							not (variable2.eType = variable.eType)
+						)->size()>0
+					)->size();
+	return getNewSimpleMetric(name, value);
+}

@@ -1,0 +1,31 @@
+----------------------------------------------------
+Automatically measureable metrics of the GQM Plan
+----------------------------------------------------
+ ID    | Java        | QVT-O       | QVT-R       | Description
+----------------------------------------------------
+ GM2.6 |       23,00 |        0,00 |        0,00 | Number of included modules (classes/compilation units/libraries)
+ GM2.7 |        0,00 |        0,00 |        0,00 | Number of applied reuse mechanisms (inheritance/logical composition)
+ GM2.8 |           - |        0,00 |        1,15 | Average number of when clauses (QVT-R and QVT-O)
+ GM2.9 |        8,00 |        0,00 |        3,00 | Number of intermediate structures
+GM2.10 |           - |        1,33 |           - | Average distinct phases per rule (QVT-O)
+----------------------------------------------------
+  M1.1 |        0,78 |        0,67 |        2,00 | Average number of domains
+  M1.2 |        0,90 |        1,60 |        0,62 | Average fan-out
+  M1.3 |        2,40 |        2,50 |        0,82 | Average rule dependency depth
+  M1.4 |        1,00 |        1,60 |        0,69 | Average number of explicit internal scheduling calls
+----------------------------------------------------
+  M9.1 |      162,00 |       49,00 |      153,00 | Lines of Code
+  M9.2 |        1,00 |        1,00 |        4,00 | Number of starts
+  M9.3 |        9,00 |        5,00 |       13,00 | Number of rules
+  M9.4 |        1,00 |        1,00 |       11,00 | Number of top-level rules
+  M9.5 |        0,78 |        0,50 |        2,00 | Average number of domains
+  M9.6 |        0,90 |        1,60 |        0,62 | Average fan-out
+  M9.7 |        1,00 |        1,60 |        0,69 | Average number of explicit internal scheduling calls
+----------------------------------------------------
+ M11.1 |      162,00 |       49,00 |      153,00 | Lines of Code
+ M11.2 |        1,00 |        1,00 |        4,00 | Number of starts
+ M11.3 |        9,00 |        5,00 |       13,00 | Number of rules
+ M11.4 |        1,00 |        1,00 |       11,00 | Number of top-level rules
+ M11.5 |       11,67 |        3,80 |        1,62 | Average size of domain pattern
+ M11.6 |        1,00 |        1,60 |        0,69 | Average number of explicit internal scheduling calls
+----------------------------------------------------
