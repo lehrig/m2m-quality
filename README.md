@@ -12,5 +12,5 @@ Currently, we provide the following:
 The following figure provides a high-level overview of our conceptual framework. A description of it can be found in the Master's thesis ["Assessing the Quality of Model-to-Model Transformations Based on Scenarios"](http://www.hni.uni-paderborn.de/en/publications/publikationen/?tx_hnippview_pi1%5Bpublikation%5D=6924) by Sebastian Lehrig.
 
 <p align='center'>
-<img src='https://github.com/lehrig/m2m-quality/tree/master/Downloads/M2MQuality.png' />
+<img src='https://github.com/lehrig/m2m-quality/blob/master/Downloads/M2MQuality.png?raw=true' />
 </p>
